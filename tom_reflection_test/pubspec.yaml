@@ -1,0 +1,16 @@
+name: tom_reflection_test
+description: Tests for the tom_reflection standalone reflection generator.
+version: 1.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  tom_reflection: ^1.0.0
+
+dev_dependencies:
+  build_runner: ^2.10.4
+  tom_reflection_generator: ^1.0.0
+  lints: ^6.0.0
+  test: ^1.25.6
