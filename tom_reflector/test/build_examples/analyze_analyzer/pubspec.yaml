@@ -1,5 +1,5 @@
 name: analyze_analyzer
-description: Example of using tom_analyzer to analyze the dart analyzer package.
+description: Example of using tom_reflector to analyze the dart analyzer package.
 version: 1.0.0
 publish_to: none
 
@@ -11,8 +11,8 @@ dependencies:
   path: ^1.9.1
   yaml: ^3.1.3
   tom_d4rt_ast:
-    path: ../../../../tom_d4rt_ast
-  tom_analyzer:
+    path: ../../../../../d4rt/tom_d4rt_ast
+  tom_reflector:
     path: ../../../
 
 dev_dependencies:

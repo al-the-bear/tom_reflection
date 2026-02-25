@@ -1,5 +1,5 @@
 name: reflect_analyzer
-description: Example of using tom_analyzer to generate reflection code for the dart analyzer package.
+description: Example of using tom_reflector to generate reflection code for the dart analyzer package.
 version: 1.0.0
 publish_to: none
 
@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   analyzer: ^8.4.1
-  tom_analyzer:
+  tom_reflector:
     path: ../../../
 
 dev_dependencies:

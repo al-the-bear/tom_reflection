@@ -1,5 +1,5 @@
 name: analyze_tom_core_server
-description: Example of using tom_analyzer to analyze tom_core_server with all dependencies.
+description: Example of using tom_reflector to analyze tom_core_server with all dependencies.
 version: 1.0.0
 publish_to: none
 
@@ -8,18 +8,18 @@ environment:
 
 dependencies:
   tom_core_server:
-    path: ../../../../../../core/tom_core_server
+    path: ../../../../../core/tom_core_server
   tom_core_kernel:
-    path: ../../../../../../core/tom_core_kernel
+    path: ../../../../../core/tom_core_kernel
   tom_basics:
-    path: ../../../../tom_basics
+    path: ../../../../../basics/tom_basics
   tom_basics_console:
   tom_crypto:
-    path: ../../../../../tom_module_basics/tom_crypto
+    path: ../../../../../basics/tom_crypto
   tom_reflection:
-    path: ../../../../../tom_module_reflection/tom_reflection
+    path: ../../../../tom_reflection
   mysql_client: ^0.0.27
-  tom_analyzer:
+  tom_reflector:
     path: ../../../
   yaml: ^3.1.3
 
@@ -30,8 +30,8 @@ dev_dependencies:
 
 dependency_overrides:
   tom_basics:
-    path: ../../../../tom_basics
+    path: ../../../../../basics/tom_basics
   tom_reflection:
-    path: ../../../../../tom_module_reflection/tom_reflection
+    path: ../../../../tom_reflection
   tom_crypto:
-    path: ../../../../../tom_module_basics/tom_crypto
+    path: ../../../../../basics/tom_crypto

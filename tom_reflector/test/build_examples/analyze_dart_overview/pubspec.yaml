@@ -1,5 +1,5 @@
 name: analyze_dart_overview
-description: Example of using tom_analyzer to analyze dart_overview with build_runner.
+description: Example of using tom_reflector to analyze dart_overview with build_runner.
 version: 1.0.0
 publish_to: none
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   dart_overview:
     path: ../../dart_overview
-  tom_analyzer:
+  tom_reflector:
     path: ../../../
   yaml: ^3.1.3
 

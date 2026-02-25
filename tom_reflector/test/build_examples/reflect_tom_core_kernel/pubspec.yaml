@@ -1,5 +1,5 @@
 name: reflect_tom_core_kernel
-description: Example of using tom_analyzer to generate reflection code for tom_core_kernel.
+description: Example of using tom_reflector to generate reflection code for tom_core_kernel.
 version: 1.0.0
 publish_to: none
 
@@ -8,14 +8,14 @@ environment:
 
 dependencies:
   tom_core_kernel:
-    path: ../../../../../../core/tom_core_kernel
+    path: ../../../../../core/tom_core_kernel
   tom_basics:
-    path: ../../../../tom_basics
+    path: ../../../../../basics/tom_basics
   tom_crypto:
-    path: ../../../../../tom_module_basics/tom_crypto
+    path: ../../../../../basics/tom_crypto
   tom_reflection:
-    path: ../../../../../tom_module_reflection/tom_reflection
-  tom_analyzer:
+    path: ../../../../tom_reflection
+  tom_reflector:
     path: ../../../
 
 dev_dependencies:
@@ -25,8 +25,8 @@ dev_dependencies:
 
 dependency_overrides:
   tom_basics:
-    path: ../../../../tom_basics
+    path: ../../../../../basics/tom_basics
   tom_reflection:
-    path: ../../../../../tom_module_reflection/tom_reflection
+    path: ../../../../tom_reflection
   tom_crypto:
-    path: ../../../../../tom_module_basics/tom_crypto
+    path: ../../../../../basics/tom_crypto
