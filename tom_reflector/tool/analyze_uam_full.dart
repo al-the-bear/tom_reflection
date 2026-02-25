@@ -4,8 +4,8 @@
 /// For tabular output: dart run tool/analyze_uam_full.dart --tabular
 library;
 
-import 'package:tom_analyzer/src/reflection/generator/entry_point_analyzer.dart';
-import 'package:tom_analyzer/src/reflection/generator/reflection_config.dart';
+import 'package:tom_reflector/src/reflection/generator/entry_point_analyzer.dart';
+import 'package:tom_reflector/src/reflection/generator/reflection_config.dart';
 
 void main(List<String> args) async {
   final tabularMode = args.contains('--tabular');

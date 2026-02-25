@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
-import 'package:tom_analyzer/src/reflection/generator/reflection_generator.dart';
+import 'package:tom_reflector/src/reflection/generator/reflection_generator.dart';
 
 /// Performance tests for reflection code generation.
 ///

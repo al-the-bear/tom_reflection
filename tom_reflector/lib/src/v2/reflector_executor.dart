@@ -10,8 +10,8 @@ import 'package:path/path.dart' as p;
 import 'package:tom_build_base/tom_build_base.dart' show TomBuildConfig, hasTomBuildConfig;
 import 'package:tom_build_base/tom_build_base_v2.dart';
 
-import 'package:tom_analyzer/tom_analyzer.dart';
-import 'package:tom_analyzer/src/reflection/generator/generator.dart' as gen;
+import 'package:tom_reflector/tom_reflector.dart';
+import 'package:tom_reflector/src/reflection/generator/generator.dart' as gen;
 
 const _toolKey = 'tom_reflector';
 

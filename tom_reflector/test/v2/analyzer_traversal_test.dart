@@ -10,10 +10,10 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 import 'package:tom_build_base/tom_build_base_v2.dart';
-import 'package:tom_analyzer/src/v2/analyzer_tool.dart';
-import 'package:tom_analyzer/src/v2/analyzer_executor.dart';
-import 'package:tom_analyzer/src/v2/reflector_tool.dart';
-import 'package:tom_analyzer/src/v2/reflector_executor.dart';
+import 'package:tom_reflector/src/v2/analyzer_tool.dart';
+import 'package:tom_reflector/src/v2/analyzer_executor.dart';
+import 'package:tom_reflector/src/v2/reflector_tool.dart';
+import 'package:tom_reflector/src/v2/reflector_executor.dart';
 
 // =============================================================================
 // Test Helpers

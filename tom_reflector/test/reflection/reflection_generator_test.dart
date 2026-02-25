@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'package:tom_analyzer/src/reflection/generator/reflection_generator.dart';
-import 'package:tom_analyzer/src/reflection/generator/reflection_config.dart';
+import 'package:tom_reflector/src/reflection/generator/reflection_generator.dart';
+import 'package:tom_reflector/src/reflection/generator/reflection_config.dart';
 
 void main() {
   group('ReflectionGenerator', () {

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-import 'package:tom_analyzer/tom_analyzer.dart' as ta;
+import 'package:tom_reflector/tom_reflector.dart' as ta;
 import 'package:dart_overview/classes/declarations/run_declarations.dart' as lib0;
 import 'package:dart_overview/enums/basics/run_basics.dart' as lib1;
 import 'package:dart_overview/generics/generic_classes/run_generic_classes.dart' as lib2;

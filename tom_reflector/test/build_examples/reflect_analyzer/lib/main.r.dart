@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-import 'package:tom_analyzer/tom_analyzer.dart' as ta;
+import 'package:tom_reflector/tom_reflector.dart' as ta;
 import 'package:analyzer/dart/analysis/results.dart' as lib0;
 import 'package:analyzer/dart/ast/ast.dart' as lib1;
 import 'package:analyzer/dart/ast/visitor.dart' as lib2;

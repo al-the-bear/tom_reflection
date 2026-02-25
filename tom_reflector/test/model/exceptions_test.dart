@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:tom_analyzer/tom_analyzer.dart';
+import 'package:tom_reflector/tom_reflector.dart';
 
 void main() {
   test('ElementNotFoundException formats message', () {

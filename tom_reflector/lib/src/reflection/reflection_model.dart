@@ -1,4 +1,4 @@
-import 'package:tom_analyzer_model/tom_analyzer_model.dart';
+import 'package:tom_reflector_model/tom_reflector_model.dart';
 
 /// Bridge model between static analysis and reflection output.
 class ReflectionModel {

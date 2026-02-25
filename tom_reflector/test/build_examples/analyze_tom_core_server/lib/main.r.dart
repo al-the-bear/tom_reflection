@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-import 'package:tom_analyzer/tom_analyzer.dart' as ta;
+import 'package:tom_reflector/tom_reflector.dart' as ta;
 import 'package:analyze_tom_core_server/main.dart' as lib0;
 import 'package:mysql_client/mysql_client.dart' as lib1;
 import 'package:tom_basics/tom_basics.dart' as lib2;

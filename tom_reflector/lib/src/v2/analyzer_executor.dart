@@ -9,7 +9,7 @@ import 'package:path/path.dart' as p;
 import 'package:tom_build_base/tom_build_base.dart' show TomBuildConfig, hasTomBuildConfig;
 import 'package:tom_build_base/tom_build_base_v2.dart';
 
-import 'package:tom_analyzer/tom_analyzer.dart';
+import 'package:tom_reflector/tom_reflector.dart';
 
 const _toolKey = 'tom_analyzer';
 

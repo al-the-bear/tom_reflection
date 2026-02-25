@@ -4,7 +4,7 @@ description: >
   specify which operations to support. This is a fork of the 'reflectable' package
   with modifications to better suit the Tom framework's needs and some bug fixes.
 version: 1.0.2
-repository: https://github.com/al-the-bear/tom_module_reflection
+repository: https://github.com/al-the-bear/tom_reflection
 
 environment:
   sdk: ^3.9.0

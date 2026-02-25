@@ -4,7 +4,7 @@ import 'package:analyzer/dart/analysis/results.dart' as analysis_results;
 import 'package:analyzer/dart/element/element.dart' as analyzer_elements;
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
-import 'package:tom_analyzer/tom_analyzer.dart';
+import 'package:tom_reflector/tom_reflector.dart';
 
 Future<void> compareAnalyzerToJson({
   required String rootPath,

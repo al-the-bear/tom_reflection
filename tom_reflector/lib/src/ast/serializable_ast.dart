@@ -10,7 +10,7 @@
 /// **Build time (with analyzer):**
 /// ```dart
 /// import 'package:analyzer/dart/analysis/utilities.dart';
-/// import 'package:tom_analyzer/ast.dart';
+/// import 'package:tom_reflector/ast.dart';
 ///
 /// final parseResult = parseString(content: sourceCode);
 /// final serializableAst = AstConverter.convert(parseResult.unit);
@@ -19,7 +19,7 @@
 ///
 /// **Runtime (without analyzer):**
 /// ```dart
-/// import 'package:tom_analyzer/ast.dart';
+/// import 'package:tom_reflector/ast.dart';
 ///
 /// final ast = SCompilationUnit.fromJson(json);
 /// final result = ast.accept(MyInterpreterVisitor());

@@ -185,7 +185,7 @@ class ReflectionGenerator {
 
   void _writeImports(StringBuffer buffer, ReflectionAnalysisResult result) {
     // Runtime import
-    buffer.writeln("import 'package:tom_analyzer/reflection_runtime.dart' as r;");
+    buffer.writeln("import 'package:tom_reflector/reflection_runtime.dart' as r;");
     buffer.writeln();
 
     // Collect all library URIs that need imports

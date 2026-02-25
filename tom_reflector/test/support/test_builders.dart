@@ -1,5 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:tom_analyzer/tom_analyzer.dart';
+import 'package:tom_reflector/tom_reflector.dart';
 
 class MockAnalysisResult extends Mock implements AnalysisResult {}
 

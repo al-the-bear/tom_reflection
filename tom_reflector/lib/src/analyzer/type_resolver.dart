@@ -4,7 +4,7 @@ import 'package:analyzer/dart/element/element.dart' as analyzer;
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart' as analyzer_types;
 
-import 'package:tom_analyzer_model/tom_analyzer_model.dart';
+import 'package:tom_reflector_model/tom_reflector_model.dart';
 
 /// Resolves analyzer Dart types into model [TypeReference] values.
 class TypeResolver {

@@ -7,7 +7,7 @@ library;
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
-import 'package:tom_analyzer/tom_analyzer.dart';
+import 'package:tom_reflector/tom_reflector.dart';
 
 void main() async {
   print('=== Source Extraction Test ===');

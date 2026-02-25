@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
-import 'package:tom_analyzer/src/reflection/generator/reflection_generator.dart';
-import 'package:tom_analyzer/src/reflection/generator/reflection_config.dart';
-import 'package:tom_analyzer/src/reflection/generator/entry_point_analyzer.dart';
+import 'package:tom_reflector/src/reflection/generator/reflection_generator.dart';
+import 'package:tom_reflector/src/reflection/generator/reflection_config.dart';
+import 'package:tom_reflector/src/reflection/generator/entry_point_analyzer.dart';
 
 /// Integration tests for ReflectionGenerator code generation.
 ///
@@ -34,7 +34,7 @@ void main() {
       test('generates runtime import', () async {
         final code = await generator.generateFromResult(emptyResult);
 
-        expect(code, contains("import 'package:tom_analyzer/reflection_runtime.dart'"));
+        expect(code, contains("import 'package:tom_reflector/reflection_runtime.dart'"));
       });
 
       test('generates bit flag constants', () async {

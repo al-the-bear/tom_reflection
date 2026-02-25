@@ -1,5 +1,5 @@
-name: tom_analyzer_model
-description: Object model and serialization for tom_analyzer code analysis results.
+name: tom_reflector_model
+description: Object model and serialization for tom_reflector code analysis results.
 version: 1.0.0
 publish_to: none
 

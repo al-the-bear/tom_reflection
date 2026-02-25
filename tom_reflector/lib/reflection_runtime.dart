@@ -13,7 +13,7 @@
 /// Import this library in generated `.r.dart` files:
 ///
 /// ```dart
-/// import 'package:tom_analyzer/reflection_runtime.dart' as r;
+/// import 'package:tom_reflector/reflection_runtime.dart' as r;
 /// ```
 ///
 /// The generated code uses the `r.` prefix for all runtime types.

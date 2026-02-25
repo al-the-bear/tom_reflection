@@ -1,5 +1,5 @@
-import 'package:tom_analyzer/tom_analyzer.dart';
-import 'package:tom_analyzer/src/reflection/reflection_generator.dart' as rg;
+import 'package:tom_reflector/tom_reflector.dart';
+import 'package:tom_reflector/src/reflection/reflection_generator.dart' as rg;
 
 void main() async {
   // Test inherited member collection

@@ -1,4 +1,4 @@
-import 'package:tom_analyzer_model/tom_analyzer_model.dart';
+import 'package:tom_reflector_model/tom_reflector_model.dart';
 
 import 'reflection_model.dart';
 
@@ -126,7 +126,7 @@ class ReflectionGenerator {
 
     buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
     buffer.writeln('// coverage:ignore-file');
-    buffer.writeln("import 'package:tom_analyzer/tom_analyzer.dart' as ta;");
+    buffer.writeln("import 'package:tom_reflector/tom_reflector.dart' as ta;");
     for (final entry in importAliases.entries) {
       buffer.writeln("import '${entry.key}' as ${entry.value};");
     }

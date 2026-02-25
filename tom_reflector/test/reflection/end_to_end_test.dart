@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
-import 'package:tom_analyzer/src/reflection/generator/reflection_generator.dart';
-import 'package:tom_analyzer/src/reflection/generator/entry_point_analyzer.dart';
+import 'package:tom_reflector/src/reflection/generator/reflection_generator.dart';
+import 'package:tom_reflector/src/reflection/generator/entry_point_analyzer.dart';
 
 /// End-to-end tests for reflection code generation with sample projects.
 ///

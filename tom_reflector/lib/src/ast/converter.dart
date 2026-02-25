@@ -13,7 +13,7 @@ import 'package:tom_d4rt_ast/tom_d4rt_ast.dart';
 /// Usage:
 /// ```dart
 /// import 'package:analyzer/dart/analysis/utilities.dart';
-/// import 'package:tom_analyzer/ast.dart';
+/// import 'package:tom_reflector/ast.dart';
 ///
 /// final parseResult = parseString(content: sourceCode);
 /// final converter = AstConverter();

@@ -4,7 +4,7 @@
 /// found in a generated reflection file.
 library;
 
-import 'package:tom_analyzer/reflection_runtime.dart';
+import 'package:tom_reflector/reflection_runtime.dart';
 
 /// Print a cross-reference of the ReflectionAPI's content.
 ///

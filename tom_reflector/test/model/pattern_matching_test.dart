@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:tom_analyzer/tom_analyzer.dart';
+import 'package:tom_reflector/tom_reflector.dart';
 
 import '../support/test_builders.dart';
 

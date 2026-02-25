@@ -5,8 +5,8 @@
 library;
 
 import 'package:analyzer/dart/element/element.dart';
-import 'package:tom_analyzer/src/reflection/generator/entry_point_analyzer.dart';
-import 'package:tom_analyzer/src/reflection/generator/reflection_config.dart';
+import 'package:tom_reflector/src/reflection/generator/entry_point_analyzer.dart';
+import 'package:tom_reflector/src/reflection/generator/reflection_config.dart';
 
 void main(List<String> args) async {
   final baseDir = '/Users/alexiskyaw/Desktop/Code/tom2';

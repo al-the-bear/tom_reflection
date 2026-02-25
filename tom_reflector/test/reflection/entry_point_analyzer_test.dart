@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:tom_analyzer/src/reflection/generator/generator.dart';
+import 'package:tom_reflector/src/reflection/generator/generator.dart';
 
 void main() {
   group('ReflectionAnalysisResult', () {

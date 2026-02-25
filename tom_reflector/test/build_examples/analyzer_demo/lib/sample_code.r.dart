@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-import 'package:tom_analyzer/tom_analyzer.dart' as ta;
+import 'package:tom_reflector/tom_reflector.dart' as ta;
 import 'package:analyzer_demo/sample_code.dart' as lib0;
 
 final _classes = <String, ta.ClassDescriptor>{

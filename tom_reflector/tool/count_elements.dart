@@ -1,4 +1,4 @@
-import 'package:tom_analyzer/tom_analyzer.dart';
+import 'package:tom_reflector/tom_reflector.dart';
 
 void main() async {
   final analyzer = TomAnalyzer();

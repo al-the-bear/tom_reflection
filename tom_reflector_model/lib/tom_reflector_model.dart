@@ -1,7 +1,7 @@
-/// Tom Analyzer Model - Object model and serialization for code analysis results.
+/// Tom Reflector Model - Object model and serialization for code analysis results.
 ///
 /// This package contains the data model classes, serialization/deserialization
-/// logic, and configuration for tom_analyzer analysis results. It has no
+/// logic, and configuration for tom_reflector analysis results. It has no
 /// dependency on the Dart analyzer package.
 library;
 
