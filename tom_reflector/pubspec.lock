@@ -699,9 +699,10 @@ packages:
   tom_build_base:
     dependency: "direct main"
     description:
-      path: "../../basics/tom_build_base"
-      relative: true
-    source: path
+      name: tom_build_base
+      sha256: "2d97fb52aa88b0b0dd1e75c4b0563fef9796b41430b066ef9e7f73f4015e78ab"
+      url: "https://pub.dev"
+    source: hosted
     version: "2.5.2"
   tom_d4rt_ast:
     dependency: "direct main"
