@@ -15,10 +15,14 @@ class JsonSerializer {
 }
 
 class _JsonWriter {
+  /// The analysed package's root, as an absolute path, or `null` when it
+  /// cannot be determined. Every path in the output is written relative to it.
+  String? _root;
+
   Map<String, dynamic> toMap(AnalysisResult result) {
+    _root = result.rootPackage.rootPath;
     return {
       'id': result.id,
-      'timestamp': result.timestamp.toIso8601String(),
       'dartSdkVersion': result.dartSdkVersion,
       'analyzerVersion': result.analyzerVersion,
       'schemaVersion': result.schemaVersion,
@@ -27,8 +31,47 @@ class _JsonWriter {
       'libraries': result.libraries.values.map(_library).toList(),
       'files': result.files.values.map(_file).toList(),
       'errors': result.errors.map(_error).toList(),
-      'metadata': result.metadata,
+      // Metadata is free-form, and the analyzer puts the barrel's location in
+      // it, so it needs the same treatment as the typed path fields.
+      'metadata': result.metadata.map(
+        (key, value) =>
+            MapEntry(key, value is String ? _relative(value) : value),
+      ),
     };
+  }
+
+  /// [path] with the analysed root removed, so the output says where a file is
+  /// in the package rather than where the package was on one machine.
+  ///
+  /// This is what makes the artifact diffable. An absolute path is the
+  /// identity of the machine that ran the analysis, so a tracked snapshot
+  /// regenerated anywhere else produces a whole-file diff carrying no content
+  /// — which means it is never regenerated, and goes stale without anything
+  /// failing. The `file://` scheme goes with it: a location inside a package
+  /// is not a URL.
+  ///
+  /// A dependency's source is outside the root and cannot be relative to it,
+  /// but it is not machine-specific either: everything before the pub cache is
+  /// the reader's home directory and everything after it is the package,
+  /// version and file. The prefix is replaced by a `pub-cache:` marker, which
+  /// keeps the part that identifies the source and drops the part that
+  /// identifies the machine.
+  ///
+  /// Anything else — an SDK path, a sibling checkout — is left alone. Those
+  /// genuinely differ between hosts, and inventing a relative form for them
+  /// would make the artifact look portable while not being it.
+  String _relative(String path) {
+    final root = _root;
+    if (root != null && root.isNotEmpty) {
+      for (final prefix in ['file://$root/', '$root/']) {
+        if (path.startsWith(prefix)) return path.substring(prefix.length);
+      }
+      if (path == root) return '.';
+    }
+    const cache = '/.pub-cache/';
+    final at = path.indexOf(cache);
+    if (at >= 0) return 'pub-cache:${path.substring(at + cache.length)}';
+    return path;
   }
 
   Map<String, dynamic> _package(PackageInfo pkg) {
@@ -36,7 +79,7 @@ class _JsonWriter {
       'id': pkg.id,
       'name': pkg.name,
       'version': pkg.version,
-      'rootPath': pkg.rootPath,
+      'rootPath': _relative(pkg.rootPath),
       'isRoot': pkg.isRoot,
       'libraries': pkg.libraries.map((l) => l.id).toList(),
       'dependencies': pkg.dependencies.keys.toList(),
@@ -48,7 +91,7 @@ class _JsonWriter {
     return {
       'id': lib.id,
       'name': lib.name,
-      'uri': lib.uri.toString(),
+      'uri': _relative(lib.uri.toString()),
       'packageId': lib.package.id,
       'mainSourceFileId': lib.mainSourceFile.id,
       'partFileIds': lib.partFiles.map((f) => f.id).toList(),
@@ -73,14 +116,13 @@ class _JsonWriter {
   Map<String, dynamic> _file(FileInfo file) {
     return {
       'id': file.id,
-      'path': file.path,
+      'path': _relative(file.path),
       'packageId': file.package.id,
       'libraryId': file.library?.id,
       'isPart': file.isPart,
       'partOfDirective': file.partOfDirective,
       'lines': file.lines,
       'contentHash': file.contentHash,
-      'modified': file.modified.toIso8601String(),
     };
   }
 
@@ -104,7 +146,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'libraryId': info.library.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -117,7 +159,9 @@ class _JsonWriter {
       'isBase': info.isBase,
       'isInterface': info.isInterface,
       'isMixin': info.isMixin,
-      'superclass': info.superclass != null ? _typeReference(info.superclass!) : null,
+      'superclass': info.superclass != null
+          ? _typeReference(info.superclass!)
+          : null,
       'interfaces': info.interfaces.map(_typeReference).toList(),
       'mixins': info.mixins.map(_typeReference).toList(),
       'typeParameters': info.typeParameters.map(_typeParameter).toList(),
@@ -133,7 +177,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'libraryId': info.library.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -155,7 +199,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'libraryId': info.library.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -176,7 +220,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'libraryId': info.library.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -196,7 +240,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'libraryId': info.library.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -220,7 +264,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'libraryId': info.library.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -236,7 +280,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'libraryId': info.library.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -257,7 +301,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'libraryId': info.library.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -279,7 +323,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'declaringTypeId': info.declaringType?.id,
       'owningLibraryId': info.owningLibrary?.id,
       'sourceFileId': info.sourceFile.id,
@@ -302,7 +346,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'declaringTypeId': info.declaringType?.id,
       'owningLibraryId': info.owningLibrary?.id,
       'sourceFileId': info.sourceFile.id,
@@ -326,7 +370,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'declaringTypeId': info.declaringType.id,
       'sourceFileId': info.sourceFile.id,
       'location': _location(info.location),
@@ -348,7 +392,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'declaringTypeId': info.declaringType?.id,
       'owningLibraryId': info.owningLibrary?.id,
       'sourceFileId': info.sourceFile.id,
@@ -369,7 +413,7 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'declaringTypeId': info.declaringType?.id,
       'owningLibraryId': info.owningLibrary?.id,
       'sourceFileId': info.sourceFile.id,
@@ -399,10 +443,14 @@ class _JsonWriter {
   Map<String, dynamic> _annotation(AnnotationInfo info) {
     return {
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'constructorName': info.constructorName,
-      'namedArguments': info.namedArguments.map((key, value) => MapEntry(key, value.value)),
-      'positionalArguments': info.positionalArguments.map((value) => value.value).toList(),
+      'namedArguments': info.namedArguments.map(
+        (key, value) => MapEntry(key, value.value),
+      ),
+      'positionalArguments': info.positionalArguments
+          .map((value) => value.value)
+          .toList(),
     };
   }
 
@@ -410,13 +458,15 @@ class _JsonWriter {
     return {
       'id': info.id,
       'name': info.name,
-      'qualifiedName': info.qualifiedName,
+      'qualifiedName': _relative(info.qualifiedName),
       'typeArguments': info.typeArguments.map(_typeReference).toList(),
       'isNullable': info.isNullable,
       'isDynamic': info.isDynamic,
       'isVoid': info.isVoid,
       'isFunction': info.isFunction,
-      'functionType': info.functionType != null ? _functionType(info.functionType!) : null,
+      'functionType': info.functionType != null
+          ? _functionType(info.functionType!)
+          : null,
       'definitionLibraryId': info.definitionLibrary?.id,
       'isTypeParameter': info.isTypeParameter,
       'typeParameterBound': info.typeParameterBound != null
@@ -440,7 +490,9 @@ class _JsonWriter {
       'id': info.id,
       'name': info.name,
       'bound': info.bound != null ? _typeReference(info.bound!) : null,
-      'defaultType': info.defaultType != null ? _typeReference(info.defaultType!) : null,
+      'defaultType': info.defaultType != null
+          ? _typeReference(info.defaultType!)
+          : null,
       'variance': info.variance?.name,
     };
   }
