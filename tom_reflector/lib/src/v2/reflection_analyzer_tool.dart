@@ -2,8 +2,7 @@
 ///
 /// `reflection_analyzer` emits a JSON/YAML dump of a package's public API
 /// surface (the `tom_reflector_model` `AnalysisResult`, including doc comments)
-/// using the Dart analyzer. It is the producer behind the website's
-/// `doc/analyzer_analysis.json` reference dumps.
+/// using the Dart analyzer, to wherever `--output` names.
 ///
 /// It shares the analysis engine with `tom_analyzer` but, unlike that tool,
 /// does not require a per-package `tom_analyzer:` buildkit block: it defaults
@@ -46,7 +45,7 @@ Barrel resolution (first match wins):
   3. lib/<package-name>.dart (the conventional public barrel)
 
 Typical use (from a package directory):
-  reflection_analyzer --output doc/analyzer_analysis.json --format json
+  reflection_analyzer --output ../../ztmp/api.json --format json
 
 Related:
   For reflection mirror-code generation, use tom_reflector:

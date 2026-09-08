@@ -1,20 +1,30 @@
-import 'dart:io';
-
 import 'package:analyzer/dart/analysis/results.dart' as analysis_results;
 import 'package:analyzer/dart/element/element.dart' as analyzer_elements;
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 import 'package:tom_reflector/tom_reflector.dart';
 
+/// Analyzes [barrelPath], carries the result through JSON, and requires every
+/// element the analyzer finds in [packageName] to have survived the trip.
+///
+/// The JSON is produced here rather than read from a committed dump. A dump on
+/// disk can only be checked for being *current*, and the check for that is this
+/// same comparison — so the file existed to be verified by the only test that
+/// read it, and neither could say anything about the analyzer. Producing it
+/// in-process asks the question that is actually worth asking: whether a real
+/// package survives `analyze -> encode -> decode` intact.
 Future<void> compareAnalyzerToJson({
   required String rootPath,
   required String barrelPath,
-  required String jsonPath,
   required String packageName,
 }) async {
-  final jsonFile = File(jsonPath);
-  final content = jsonFile.readAsStringSync();
-  final analysisResult = JsonDeserializer.decode(content);
+  final analyzed = await TomAnalyzer().analyzeBarrel(
+    barrelPath: barrelPath,
+    workspaceRoot: rootPath,
+  );
+  final analysisResult = JsonDeserializer.decode(
+    JsonSerializer.encode(analyzed),
+  );
 
   final contextBuilder = AnalyzerContextBuilder();
   final collection = contextBuilder.build(
@@ -26,16 +36,31 @@ Future<void> compareAnalyzerToJson({
   final session = context.currentSession;
   final analyzedFiles = context.contextRoot.analyzedFiles();
 
-  final classNames = analysisResult.allClasses.map((c) => c.qualifiedName).toSet();
+  final classNames = analysisResult.allClasses
+      .map((c) => c.qualifiedName)
+      .toSet();
   final enumNames = analysisResult.allEnums.map((e) => e.qualifiedName).toSet();
-  final mixinNames = analysisResult.allMixins.map((m) => m.qualifiedName).toSet();
-  final extensionNames = analysisResult.allExtensions.map((e) => e.qualifiedName).toSet();
-  final extensionTypeNames =
-      analysisResult.allExtensionTypes.map((e) => e.qualifiedName).toSet();
-  final typeAliasNames = analysisResult.allTypeAliases.map((t) => t.qualifiedName).toSet();
-  final functionNames = analysisResult.allFunctions.map((f) => f.qualifiedName).toSet();
+  final mixinNames = analysisResult.allMixins
+      .map((m) => m.qualifiedName)
+      .toSet();
+  final extensionNames = analysisResult.allExtensions
+      .map((e) => e.qualifiedName)
+      .toSet();
+  final extensionTypeNames = analysisResult.allExtensionTypes
+      .map((e) => e.qualifiedName)
+      .toSet();
+  final typeAliasNames = analysisResult.allTypeAliases
+      .map((t) => t.qualifiedName)
+      .toSet();
+  final functionNames = analysisResult.allFunctions
+      .map((f) => f.qualifiedName)
+      .toSet();
 
-  expect(classNames, isNotEmpty, reason: 'Expected classes in analysis result.');
+  expect(
+    classNames,
+    isNotEmpty,
+    reason: 'Expected classes in analysis result.',
+  );
 
   for (final path in analyzedFiles) {
     if (!path.endsWith('.dart')) {

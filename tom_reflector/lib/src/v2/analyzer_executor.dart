@@ -145,9 +145,8 @@ Future<bool> _processProject({
 /// Executor for the `reflection_analyzer` tool.
 ///
 /// Unlike [AnalyzerExecutor], this does **not** gate on a `tom_analyzer:`
-/// buildkit config: it is invoked deliberately on a target package (e.g. by the
-/// website's `gen_api --reflect` reference command, once per package directory)
-/// and is expected to always emit a dump. When neither `--barrel` nor a
+/// buildkit config: it is invoked deliberately on a target package and is
+/// expected to always emit a dump. When neither `--barrel` nor a
 /// `tom_analyzer:` config supplies a barrel, it falls back to the package's
 /// conventional `lib/<package-name>.dart`. This lets a single shared command
 /// produce dumps across many packages without per-package configuration.

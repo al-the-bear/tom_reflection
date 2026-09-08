@@ -3,8 +3,9 @@
 /// using the Dart analyzer.
 ///
 /// Named `reflection_analyzer` to disambiguate from the other analyzers in the
-/// workspace. This is the producer the website's `gen_api --reflect` invokes
-/// (per package) to generate the `doc/analyzer_analysis.json` reference dumps.
+/// workspace. It writes wherever `--output` says and nothing here commits what
+/// it writes: a dump is a picture of one moment's API, so it is produced when
+/// something wants to read one and regenerated rather than stored.
 ///
 /// Run `reflection_analyzer --help` for usage information.
 library;

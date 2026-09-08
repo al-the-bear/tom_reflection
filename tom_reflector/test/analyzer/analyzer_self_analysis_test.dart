@@ -8,20 +8,23 @@ import '../support/analyzer_comparison.dart';
 void main() {
   group('TomAnalyzer', () {
     group('self analysis json', () {
-      test('should contain all analyzer elements from the package', () async {
-        // The former `tom_analyzer` package was folded into `tom_reflector`;
-        // the self-analysis fixture is this package's own barrel + doc dump.
-        final rootPath = _findTomReflectorRoot();
-        final barrelPath = p.join(rootPath, 'lib', 'tom_reflector.dart');
-        final jsonPath = p.join(rootPath, 'doc', 'analyzer_analysis.json');
+      // Resolving a whole package and carrying it through JSON is a
+      // half-minute of real work, and the default 30s deadline is met
+      // only on an idle machine — which is not where a suite runs.
+      test(
+        'should contain all analyzer elements from the package',
+        timeout: const Timeout(Duration(minutes: 5)),
+        () async {
+          final rootPath = _findTomReflectorRoot();
+          final barrelPath = p.join(rootPath, 'lib', 'tom_reflector.dart');
 
-        await compareAnalyzerToJson(
-          rootPath: rootPath,
-          barrelPath: barrelPath,
-          jsonPath: jsonPath,
-          packageName: 'tom_reflector',
-        );
-      });
+          await compareAnalyzerToJson(
+            rootPath: rootPath,
+            barrelPath: barrelPath,
+            packageName: 'tom_reflector',
+          );
+        },
+      );
     });
   });
 }
