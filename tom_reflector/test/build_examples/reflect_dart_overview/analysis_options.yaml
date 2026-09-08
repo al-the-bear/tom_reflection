@@ -1,0 +1,12 @@
+# Deliberately near-empty, and it has to exist.
+#
+# This is a separate project living inside `tom_reflector`'s tree, and that
+# package excludes `test/build_examples/**/*.r.dart` from its own analysis —
+# the generated barrels reference packages its pubspec does not declare. The
+# analyzer resolves options from the nearest ancestor file, so without one here
+# that exclusion reaches this project too, and `reflection_analyzer` cannot
+# build a context for `lib/main.r.dart`: regenerating `main.r.analysis.yaml`
+# fails with "Unable to find the context".
+#
+# An options file of its own is what stops the inheritance. There is nothing to
+# configure beyond that.

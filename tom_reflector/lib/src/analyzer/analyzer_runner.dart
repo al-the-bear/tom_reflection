@@ -52,7 +52,6 @@ class TomAnalyzer {
 
     final analysisResult = AnalysisResult(
       id: idGen.nextId('analysis'),
-      timestamp: DateTime.now(),
       dartSdkVersion: 'unknown',
       analyzerVersion: '8.x',
       schemaVersion: '1.0',
@@ -357,7 +356,6 @@ class TomAnalyzer {
       partOfDirective: partOfDirective,
       lines: lines,
       contentHash: hash,
-      modified: file.existsSync() ? file.lastModifiedSync() : DateTime.now(),
     );
     registry.registerFile(fileInfo);
     return fileInfo;
@@ -995,7 +993,6 @@ class _ModelRegistry {
         isPart: false,
         lines: 0,
         contentHash: '',
-        modified: DateTime.now(),
       );
 
       final libraryInfo = LibraryInfo(

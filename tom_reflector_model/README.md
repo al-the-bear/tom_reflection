@@ -64,7 +64,7 @@ gives you the model for free.
 
 | Type | Represents |
 | ---- | ---------- |
-| `AnalysisResult` | The root: `packages`, `libraries`, `files`, plus `timestamp`, `dartSdkVersion`, `analyzerVersion`, `schemaVersion`, `errors`. |
+| `AnalysisResult` | The root: `packages`, `libraries`, `files`, plus `dartSdkVersion`, `analyzerVersion`, `schemaVersion`, `errors`. |
 | `PackageInfo` | A package and its libraries. |
 | `LibraryInfo` | A library: its classes, enums, mixins, extensions, functions, variables, getters/setters. |
 | `FileInfo` | A source file (path, package). |

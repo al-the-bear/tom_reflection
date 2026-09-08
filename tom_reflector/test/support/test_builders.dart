@@ -54,7 +54,6 @@ class TestModelBuilders {
       isPart: false,
       lines: 1,
       contentHash: 'hash',
-      modified: DateTime(2026, 1, 1),
     );
   }
 

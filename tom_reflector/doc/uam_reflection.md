@@ -1,54 +1,52 @@
-# UAM Reflection Generator Results
+# UAM Reflection Run
 
-Analysis and code generation for `tom_uam_server` and all `tom_*` dependencies using `ReflectionGenerator`.
+`tool/run_uam_reflection.dart` drives `ReflectionGenerator` over `tom_uam_server`
+and every `tom_*` package it reaches. It is the largest target in the workspace,
+which is what makes it the useful one: a generator that copes with the UAM stack
+copes with anything else here.
 
-## Configuration
+## Entry points
 
-**Entry Points Analyzed:**
-- `tom_uam_server/bin/aa_server_start.dart`
-- `tom_uam_codespec/lib/tom_uam_codespec.dart`
-- `tom_core_kernel/lib/tom_core_kernel.dart`
-- `tom_reflection/lib/tom_reflection.dart`
-- `tom_basics/lib/tom_basics.dart`
-- `tom_crypto/lib/tom_crypto.dart`
+The script derives the workspace root from its own location and analyses:
 
-**Dependency Configuration:**
-- Type annotations: enabled, transitive, external, include argument types
-- Marker annotations: `tomReflection`, `TomReflectionInfo`
+- `tom_uam/tom_uam_server/bin/aa_server_start.dart`
+- `tom_uam/tom_uam_codespec/lib/tom_uam_codespec.dart`
+- `tom_ai/core/tom_core_kernel/lib/tom_core_kernel.dart`
+- `tom_ai/reflection/tom_reflection/lib/tom_reflection.dart`
+- `tom_ai/basics/tom_basics/lib/tom_basics.dart`
+- `tom_ai/basics/tom_crypto/lib/tom_crypto.dart`
 
-## Summary
+Dependency tracking is configured wide on purpose — type annotations enabled,
+transitive, external, argument types included — and the marker annotations are
+`tomReflection` and `TomReflectionInfo`.
 
-| Category | Count |
-|----------|-------|
-| Classes | 599 |
-| Enums | 3 |
-| Mixins | 0 |
-| Extensions | 0 |
-| Global Functions | 40 |
-| Global Variables | 46 |
+## Running it
 
-## Generated Code Statistics
+```bash
+cd tom_ai/reflection/tom_reflector
+dart run tool/run_uam_reflection.dart            # counts, then the tabular dump
+dart run tool/run_uam_reflection.dart --tabular  # the dump alone
+dart run tool/run_uam_reflection.dart --save     # also write the generated code
+```
 
-| Metric | Value |
-|--------|-------|
-| File size | 3.4 MB |
-| Characters | 3,560,566 |
-| Lines | 123,640 |
-| Generation time | ~23 seconds |
-| Analyzer parse time | ~1.4 seconds |
+`--save` writes `ztmp/uam_generated.r.dart` under the workspace root. That is
+scratch space, and deliberately so: the file is a few megabytes of generated
+Dart that nothing in the tree compiles, so a committed copy is a photograph of
+one run that no later run updates. Read it where it lands, or regenerate it.
 
-## Generated File
+The run prints how many classes, enums, mixins, extensions, global functions and
+global variables it found, and how large the generated source is. Those numbers
+move with the packages, so this document does not quote them — the run is the
+answer.
 
-- **Generated code**: [uam_generated.r.dart](uam_generated.r.dart)
-- **Tabular output**: [uam_reflection.txt](uam_reflection.txt)
+## What the generated code contains
 
-## Notes
+- Import prefixes for every referenced library
+- Type indices for all classes and enums
+- Invoker functions for methods, constructors, getters and setters
+- The class type list, with superclass and interface relationships
+- Field and method metadata arrays
 
-The generated `.r.dart` file contains:
-- Import prefixes for all referenced libraries
-- Type indices for all classes/enums
-- Invoker functions for methods, constructors, getters, setters
-- Class type list with superclass/interface relationships
-- Field/method metadata arrays
-
-The generated file has 3,697 analyzer issues when analyzed standalone (missing imports/context) but is designed to be included as part of a package.
+Analyzed on its own the file reports thousands of issues, because it is written
+to be included in a package rather than to stand alone; that is not a defect in
+the output.

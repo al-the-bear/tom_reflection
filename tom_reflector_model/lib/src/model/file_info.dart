@@ -10,7 +10,6 @@ class FileInfo {
   final String? partOfDirective;
   final int lines;
   final String contentHash;
-  final DateTime modified;
 
   const FileInfo({
     required this.id,
@@ -21,6 +20,5 @@ class FileInfo {
     this.partOfDirective,
     required this.lines,
     required this.contentHash,
-    required this.modified,
   });
 }

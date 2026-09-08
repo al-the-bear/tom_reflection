@@ -17,7 +17,6 @@ class AnalysisResult extends ContainerElement {
   @override
   final bool isDeprecated;
 
-  final DateTime timestamp;
   final String dartSdkVersion;
   final String analyzerVersion;
   final String schemaVersion;
@@ -30,7 +29,6 @@ class AnalysisResult extends ContainerElement {
 
   AnalysisResult({
     required this.id,
-    required this.timestamp,
     required this.dartSdkVersion,
     required this.analyzerVersion,
     required this.schemaVersion,

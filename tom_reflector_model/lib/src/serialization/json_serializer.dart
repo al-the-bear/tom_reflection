@@ -4,20 +4,32 @@ import '../model/model.dart';
 
 /// Serializes analysis results to JSON format.
 class JsonSerializer {
-  static String encode(AnalysisResult result) {
-    final map = _JsonWriter().toMap(result);
+  /// [workspaceRoot] is the enclosing multi-package tree, when the caller
+  /// knows it. Supplying it is what lets a path into a *sibling* package be
+  /// written portably; see [_JsonWriter._relative].
+  static String encode(AnalysisResult result, {String? workspaceRoot}) {
+    final map = _JsonWriter(workspaceRoot: workspaceRoot).toMap(result);
     return const JsonEncoder.withIndent('  ').convert(map);
   }
 
-  static Map<String, dynamic> toMap(AnalysisResult result) {
-    return _JsonWriter().toMap(result);
+  static Map<String, dynamic> toMap(
+    AnalysisResult result, {
+    String? workspaceRoot,
+  }) {
+    return _JsonWriter(workspaceRoot: workspaceRoot).toMap(result);
   }
 }
 
 class _JsonWriter {
+  _JsonWriter({String? workspaceRoot}) : _workspace = workspaceRoot;
+
   /// The analysed package's root, as an absolute path, or `null` when it
   /// cannot be determined. Every path in the output is written relative to it.
   String? _root;
+
+  /// The enclosing multi-package tree, as an absolute path, or `null` when the
+  /// caller did not name one.
+  final String? _workspace;
 
   Map<String, dynamic> toMap(AnalysisResult result) {
     _root = result.rootPackage.rootPath;
@@ -57,9 +69,17 @@ class _JsonWriter {
   /// keeps the part that identifies the source and drops the part that
   /// identifies the machine.
   ///
-  /// Anything else — an SDK path, a sibling checkout — is left alone. Those
-  /// genuinely differ between hosts, and inventing a relative form for them
-  /// would make the artifact look portable while not being it.
+  /// A package reached by a `path:` dependency is outside the root and outside
+  /// the cache, and what varies between hosts is only where the enclosing tree
+  /// was cloned. So when the caller has named that tree, such a path is
+  /// written against it under a `workspace:` marker. The caller has to name it
+  /// because nothing in an analysis result says where a workspace ends: a
+  /// boundary guessed from the paths themselves would put the Dart SDK inside
+  /// it on one machine and outside it on the next.
+  ///
+  /// Anything else — an SDK path, a checkout outside the tree — is left alone.
+  /// Those genuinely differ between hosts, and inventing a relative form for
+  /// them would make the artifact look portable while not being it.
   String _relative(String path) {
     final root = _root;
     if (root != null && root.isNotEmpty) {
@@ -71,6 +91,14 @@ class _JsonWriter {
     const cache = '/.pub-cache/';
     final at = path.indexOf(cache);
     if (at >= 0) return 'pub-cache:${path.substring(at + cache.length)}';
+    final workspace = _workspace;
+    if (workspace != null && workspace.isNotEmpty) {
+      for (final prefix in ['file://$workspace/', '$workspace/']) {
+        if (path.startsWith(prefix)) {
+          return 'workspace:${path.substring(prefix.length)}';
+        }
+      }
+    }
     return path;
   }
 

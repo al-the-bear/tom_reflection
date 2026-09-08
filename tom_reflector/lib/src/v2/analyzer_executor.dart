@@ -116,9 +116,11 @@ Future<bool> _processProject({
     skipReExports: config.skipReExports,
   );
 
+  // The execution root is the tree the scan was launched over, which is what
+  // makes a path into a sibling package portable in the output.
   final content = config.outputFormat == 'json'
-      ? JsonSerializer.encode(analysis)
-      : YamlSerializer.encode(analysis);
+      ? JsonSerializer.encode(analysis, workspaceRoot: executionRoot)
+      : YamlSerializer.encode(analysis, workspaceRoot: executionRoot);
 
   if (config.outputFile != null) {
     final outputFile = File(config.outputFile!);

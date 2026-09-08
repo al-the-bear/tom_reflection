@@ -51,7 +51,6 @@ void main() {
 
     final result = AnalysisResult(
       id: 'analysis_full',
-      timestamp: DateTime(2026, 1, 1),
       dartSdkVersion: '3.10.4',
       analyzerVersion: '7.7.1',
       schemaVersion: '1.0',

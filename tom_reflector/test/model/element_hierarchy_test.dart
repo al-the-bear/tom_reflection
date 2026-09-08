@@ -50,7 +50,6 @@ void main() {
   test('container elements extend base element', () {
     final analysisResult = AnalysisResult(
       id: 'analysis_1',
-      timestamp: DateTime(2026, 1, 1),
       dartSdkVersion: '3.10.4',
       analyzerVersion: '7.7.1',
       schemaVersion: '1.0',

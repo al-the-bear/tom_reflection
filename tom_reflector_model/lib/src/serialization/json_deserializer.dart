@@ -90,7 +90,6 @@ class _JsonReader {
     final rootPackage = _resolveRootPackage(packageRecords, rootPackageId);
     final analysisResult = AnalysisResult(
       id: _requireString(data['id'], 'id'),
-      timestamp: _readDateTime(data['timestamp'], 'timestamp'),
       dartSdkVersion: _requireString(data['dartSdkVersion'], 'dartSdkVersion'),
       analyzerVersion: _requireString(data['analyzerVersion'], 'analyzerVersion'),
       schemaVersion: _requireString(data['schemaVersion'], 'schemaVersion'),
@@ -185,7 +184,6 @@ class _JsonReader {
       partOfDirective: _readOptionalString(data['partOfDirective']),
       lines: _readInt(data['lines'], 'lines'),
       contentHash: _requireString(data['contentHash'], 'contentHash'),
-      modified: _readDateTime(data['modified'], 'modified'),
     );
   }
 
@@ -1117,10 +1115,6 @@ class _JsonReader {
     throw FormatException('Invalid "$field": expected int.');
   }
 
-  DateTime _readDateTime(Object? value, String field) {
-    final raw = _requireString(value, field);
-    return DateTime.parse(raw);
-  }
 }
 
 class _PackageRecord {

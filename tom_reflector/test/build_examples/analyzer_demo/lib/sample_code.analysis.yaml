@@ -1,5 +1,4 @@
 id: analysis_1
-timestamp: "2026-02-06T09:14:40.382742"
 dartSdkVersion: unknown
 analyzerVersion: 8.x
 schemaVersion: "1.0"
@@ -9,7 +8,7 @@ packages:
     id: pkg_1
     name: analyzer_demo
     version: "1.0.0"
-    rootPath: /Users/alexiskyaw/Desktop/Code/tom2/xternal/tom_module_basics/tom_analyzer/test/build_examples/analyzer_demo
+    rootPath: "."
     isRoot: true
     libraries:
       - lib_1
@@ -21,83 +20,9 @@ libraries:
   -
     id: lib_1
     name: ""
-    uri: "file:///Users/alexiskyaw/Desktop/Code/tom2/xternal/tom_module_basics/tom_analyzer/test/build_examples/analyzer_demo/bin/verify.dart"
-    packageId: pkg_1
-    mainSourceFileId: file_2
-    partFileIds:
-
-    documentation: |
-      /// Verification script that reads the generated analysis YAML
-      /// and prints statistics to prove the analyzer ran correctly.
-    annotations:
-
-    isDeprecated: false
-    classes:
-
-    enums:
-
-    mixins:
-
-    extensions:
-
-    extensionTypes:
-
-    typeAliases:
-
-    functions:
-      -
-        id: function_1
-        name: main
-        qualifiedName: "file:///Users/alexiskyaw/Desktop/Code/tom2/xternal/tom_module_basics/tom_analyzer/test/build_examples/analyzer_demo/bin/verify.dart.main"
-        libraryId: lib_1
-        sourceFileId: file_2
-        location:
-          line: 0
-          column: 0
-          offset: 193
-          length: 4
-        documentation: null
-        annotations:
-
-        isDeprecated: false
-        returnType:
-          id: type_1
-          name: void
-          qualifiedName: void
-          typeArguments:
-
-          isNullable: false
-          isDynamic: false
-          isVoid: true
-          isFunction: false
-          functionType: null
-          definitionLibraryId: null
-          isTypeParameter: false
-          typeParameterBound: null
-          resolvedElementId: null
-        typeParameters:
-
-        parameters:
-
-        isAsync: false
-        isGenerator: false
-        isExternal: false
-        isStatic: true
-    variables:
-
-    getters:
-
-    setters:
-
-    imports:
-
-    exports:
-  -
-    id: lib_3
-    name: ""
     uri: "package:analyzer_demo/sample_code.dart"
     packageId: pkg_1
-    mainSourceFileId: file_4
+    mainSourceFileId: file_2
     partFileIds:
 
     documentation: |
@@ -117,8 +42,8 @@ libraries:
         id: class_1
         name: Entity
         qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -135,7 +60,7 @@ libraries:
         isInterface: false
         isMixin: false
         superclass:
-          id: type_2
+          id: type_1
           name: Object
           qualifiedName: "dart:core.Object"
           typeArguments:
@@ -166,7 +91,7 @@ libraries:
             name: new
             qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
             declaringTypeId: class_1
-            sourceFileId: file_4
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -193,8 +118,8 @@ libraries:
             name: id
             qualifiedName: "package:analyzer_demo/sample_code.dart.id"
             declaringTypeId: class_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -205,7 +130,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_3
+              id: type_2
               name: T
               qualifiedName: T
               typeArguments:
@@ -218,7 +143,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_4
+                id: type_3
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -245,8 +170,8 @@ libraries:
             name: createdAt
             qualifiedName: "package:analyzer_demo/sample_code.dart.createdAt"
             declaringTypeId: class_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -257,7 +182,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_5
+              id: type_4
               name: DateTime
               qualifiedName: "dart:core.DateTime"
               typeArguments:
@@ -283,8 +208,8 @@ libraries:
             name: updatedAt
             qualifiedName: "package:analyzer_demo/sample_code.dart.updatedAt"
             declaringTypeId: class_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -295,7 +220,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_6
+              id: type_5
               name: DateTime
               qualifiedName: "dart:core.DateTime"
               typeArguments:
@@ -323,8 +248,8 @@ libraries:
         id: class_2
         name: Repository
         qualifiedName: "package:analyzer_demo/sample_code.dart.Repository"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -341,7 +266,7 @@ libraries:
         isInterface: false
         isMixin: false
         superclass:
-          id: type_7
+          id: type_6
           name: Object
           qualifiedName: "dart:core.Object"
           typeArguments:
@@ -364,12 +289,12 @@ libraries:
             id: typeParam_2
             name: T
             bound:
-              id: type_8
+              id: type_7
               name: Entity
               qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
               typeArguments:
                 -
-                  id: type_9
+                  id: type_8
                   name: dynamic
                   qualifiedName: dynamic
                   typeArguments:
@@ -400,7 +325,7 @@ libraries:
             name: new
             qualifiedName: "package:analyzer_demo/sample_code.dart.Repository"
             declaringTypeId: class_2
-            sourceFileId: file_4
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -425,8 +350,8 @@ libraries:
             name: findById
             qualifiedName: "package:analyzer_demo/sample_code.dart.findById"
             declaringTypeId: class_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -437,12 +362,12 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_10
+              id: type_9
               name: Future
               qualifiedName: "dart:async.Future"
               typeArguments:
                 -
-                  id: type_11
+                  id: type_10
                   name: T?
                   qualifiedName: T?
                   typeArguments:
@@ -455,12 +380,12 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_12
+                    id: type_11
                     name: Entity
                     qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
                     typeArguments:
                       -
-                        id: type_13
+                        id: type_12
                         name: dynamic
                         qualifiedName: dynamic
                         typeArguments:
@@ -500,7 +425,7 @@ libraries:
                 id: param_1
                 name: id
                 type:
-                  id: type_14
+                  id: type_13
                   name: dynamic
                   qualifiedName: dynamic
                   typeArguments:
@@ -532,8 +457,8 @@ libraries:
             name: findAll
             qualifiedName: "package:analyzer_demo/sample_code.dart.findAll"
             declaringTypeId: class_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -544,17 +469,17 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_15
+              id: type_14
               name: Future
               qualifiedName: "dart:async.Future"
               typeArguments:
                 -
-                  id: type_16
+                  id: type_15
                   name: List
                   qualifiedName: "dart:core.List"
                   typeArguments:
                     -
-                      id: type_17
+                      id: type_16
                       name: T
                       qualifiedName: T
                       typeArguments:
@@ -567,12 +492,12 @@ libraries:
                       definitionLibraryId: null
                       isTypeParameter: true
                       typeParameterBound:
-                        id: type_18
+                        id: type_17
                         name: Entity
                         qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
                         typeArguments:
                           -
-                            id: type_19
+                            id: type_18
                             name: dynamic
                             qualifiedName: dynamic
                             typeArguments:
@@ -629,8 +554,8 @@ libraries:
             name: save
             qualifiedName: "package:analyzer_demo/sample_code.dart.save"
             declaringTypeId: class_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -641,12 +566,12 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_20
+              id: type_19
               name: Future
               qualifiedName: "dart:async.Future"
               typeArguments:
                 -
-                  id: type_21
+                  id: type_20
                   name: T
                   qualifiedName: T
                   typeArguments:
@@ -659,12 +584,12 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_22
+                    id: type_21
                     name: Entity
                     qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
                     typeArguments:
                       -
-                        id: type_23
+                        id: type_22
                         name: dynamic
                         qualifiedName: dynamic
                         typeArguments:
@@ -704,7 +629,7 @@ libraries:
                 id: param_2
                 name: entity
                 type:
-                  id: type_24
+                  id: type_23
                   name: T
                   qualifiedName: T
                   typeArguments:
@@ -717,12 +642,12 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_25
+                    id: type_24
                     name: Entity
                     qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
                     typeArguments:
                       -
-                        id: type_26
+                        id: type_25
                         name: dynamic
                         qualifiedName: dynamic
                         typeArguments:
@@ -764,8 +689,8 @@ libraries:
             name: delete
             qualifiedName: "package:analyzer_demo/sample_code.dart.delete"
             declaringTypeId: class_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -776,12 +701,12 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_27
+              id: type_26
               name: Future
               qualifiedName: "dart:async.Future"
               typeArguments:
                 -
-                  id: type_28
+                  id: type_27
                   name: void
                   qualifiedName: void
                   typeArguments:
@@ -811,7 +736,7 @@ libraries:
                 id: param_3
                 name: entity
                 type:
-                  id: type_29
+                  id: type_28
                   name: T
                   qualifiedName: T
                   typeArguments:
@@ -824,12 +749,12 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_30
+                    id: type_29
                     name: Entity
                     qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
                     typeArguments:
                       -
-                        id: type_31
+                        id: type_30
                         name: dynamic
                         qualifiedName: dynamic
                         typeArguments:
@@ -875,8 +800,8 @@ libraries:
         id: class_3
         name: User
         qualifiedName: "package:analyzer_demo/sample_code.dart.User"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -893,7 +818,7 @@ libraries:
         isInterface: false
         isMixin: false
         superclass:
-          id: type_32
+          id: type_31
           name: Object
           qualifiedName: "dart:core.Object"
           typeArguments:
@@ -909,12 +834,12 @@ libraries:
           resolvedElementId: null
         interfaces:
           -
-            id: type_33
+            id: type_32
             name: Entity
             qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
             typeArguments:
               -
-                id: type_34
+                id: type_33
                 name: String
                 qualifiedName: "dart:core.String"
                 typeArguments:
@@ -939,7 +864,7 @@ libraries:
             resolvedElementId: class_1
         mixins:
           -
-            id: type_35
+            id: type_34
             name: Validatable
             qualifiedName: "package:analyzer_demo/sample_code.dart.Validatable"
             typeArguments:
@@ -954,7 +879,7 @@ libraries:
             typeParameterBound: null
             resolvedElementId: mixin_1
           -
-            id: type_36
+            id: type_35
             name: Serializable
             qualifiedName: "package:analyzer_demo/sample_code.dart.Serializable"
             typeArguments:
@@ -976,7 +901,7 @@ libraries:
             name: new
             qualifiedName: "package:analyzer_demo/sample_code.dart.User"
             declaringTypeId: class_3
-            sourceFileId: file_4
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -991,7 +916,7 @@ libraries:
                 id: param_4
                 name: id
                 type:
-                  id: type_37
+                  id: type_36
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1016,7 +941,7 @@ libraries:
                 id: param_5
                 name: email
                 type:
-                  id: type_38
+                  id: type_37
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1041,7 +966,7 @@ libraries:
                 id: param_6
                 name: name
                 type:
-                  id: type_39
+                  id: type_38
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1066,7 +991,7 @@ libraries:
                 id: param_7
                 name: createdAt
                 type:
-                  id: type_40
+                  id: type_39
                   name: DateTime
                   qualifiedName: "dart:core.DateTime"
                   typeArguments:
@@ -1091,7 +1016,7 @@ libraries:
                 id: param_8
                 name: updatedAt
                 type:
-                  id: type_41
+                  id: type_40
                   name: DateTime
                   qualifiedName: "dart:core.DateTime"
                   typeArguments:
@@ -1125,8 +1050,8 @@ libraries:
             name: hasRole
             qualifiedName: "package:analyzer_demo/sample_code.dart.hasRole"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1137,7 +1062,7 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_42
+              id: type_41
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -1158,7 +1083,7 @@ libraries:
                 id: param_9
                 name: role
                 type:
-                  id: type_43
+                  id: type_42
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1190,8 +1115,8 @@ libraries:
             name: addRole
             qualifiedName: "package:analyzer_demo/sample_code.dart.addRole"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1202,7 +1127,7 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_44
+              id: type_43
               name: void
               qualifiedName: void
               typeArguments:
@@ -1223,7 +1148,7 @@ libraries:
                 id: param_10
                 name: role
                 type:
-                  id: type_45
+                  id: type_44
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1255,8 +1180,8 @@ libraries:
             name: validate
             qualifiedName: "package:analyzer_demo/sample_code.dart.validate"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1273,7 +1198,7 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             returnType:
-              id: type_46
+              id: type_45
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -1302,8 +1227,8 @@ libraries:
             name: toJson
             qualifiedName: "package:analyzer_demo/sample_code.dart.toJson"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1320,12 +1245,12 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             returnType:
-              id: type_47
+              id: type_46
               name: Map
               qualifiedName: "dart:core.Map"
               typeArguments:
                 -
-                  id: type_48
+                  id: type_47
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1340,7 +1265,7 @@ libraries:
                   typeParameterBound: null
                   resolvedElementId: null
                 -
-                  id: type_49
+                  id: type_48
                   name: dynamic
                   qualifiedName: dynamic
                   typeArguments:
@@ -1379,8 +1304,8 @@ libraries:
             name: id
             qualifiedName: "package:analyzer_demo/sample_code.dart.id"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1397,7 +1322,7 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             type:
-              id: type_50
+              id: type_49
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -1423,8 +1348,8 @@ libraries:
             name: createdAt
             qualifiedName: "package:analyzer_demo/sample_code.dart.createdAt"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1441,7 +1366,7 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             type:
-              id: type_51
+              id: type_50
               name: DateTime
               qualifiedName: "dart:core.DateTime"
               typeArguments:
@@ -1467,8 +1392,8 @@ libraries:
             name: updatedAt
             qualifiedName: "package:analyzer_demo/sample_code.dart.updatedAt"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1485,7 +1410,7 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             type:
-              id: type_52
+              id: type_51
               name: DateTime
               qualifiedName: "dart:core.DateTime"
               typeArguments:
@@ -1511,8 +1436,8 @@ libraries:
             name: email
             qualifiedName: "package:analyzer_demo/sample_code.dart.email"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1523,7 +1448,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_53
+              id: type_52
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -1549,8 +1474,8 @@ libraries:
             name: name
             qualifiedName: "package:analyzer_demo/sample_code.dart.name"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1561,7 +1486,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_54
+              id: type_53
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -1587,8 +1512,8 @@ libraries:
             name: roles
             qualifiedName: "package:analyzer_demo/sample_code.dart.roles"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1599,12 +1524,12 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_55
+              id: type_54
               name: List
               qualifiedName: "dart:core.List"
               typeArguments:
                 -
-                  id: type_56
+                  id: type_55
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1639,8 +1564,8 @@ libraries:
             name: validationErrors
             qualifiedName: "package:analyzer_demo/sample_code.dart.validationErrors"
             declaringTypeId: class_3
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1651,12 +1576,12 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_57
+              id: type_56
               name: List
               qualifiedName: "dart:core.List"
               typeArguments:
                 -
-                  id: type_58
+                  id: type_57
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1693,8 +1618,8 @@ libraries:
         id: class_4
         name: Task
         qualifiedName: "package:analyzer_demo/sample_code.dart.Task"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -1711,7 +1636,7 @@ libraries:
         isInterface: false
         isMixin: false
         superclass:
-          id: type_59
+          id: type_58
           name: Object
           qualifiedName: "dart:core.Object"
           typeArguments:
@@ -1727,12 +1652,12 @@ libraries:
           resolvedElementId: null
         interfaces:
           -
-            id: type_60
+            id: type_59
             name: Entity
             qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
             typeArguments:
               -
-                id: type_61
+                id: type_60
                 name: int
                 qualifiedName: "dart:core.int"
                 typeArguments:
@@ -1757,7 +1682,7 @@ libraries:
             resolvedElementId: class_1
         mixins:
           -
-            id: type_62
+            id: type_61
             name: Validatable
             qualifiedName: "package:analyzer_demo/sample_code.dart.Validatable"
             typeArguments:
@@ -1779,7 +1704,7 @@ libraries:
             name: new
             qualifiedName: "package:analyzer_demo/sample_code.dart.Task"
             declaringTypeId: class_4
-            sourceFileId: file_4
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1794,7 +1719,7 @@ libraries:
                 id: param_11
                 name: id
                 type:
-                  id: type_63
+                  id: type_62
                   name: int
                   qualifiedName: "dart:core.int"
                   typeArguments:
@@ -1819,7 +1744,7 @@ libraries:
                 id: param_12
                 name: title
                 type:
-                  id: type_64
+                  id: type_63
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1844,7 +1769,7 @@ libraries:
                 id: param_13
                 name: description
                 type:
-                  id: type_65
+                  id: type_64
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -1869,7 +1794,7 @@ libraries:
                 id: param_14
                 name: priority
                 type:
-                  id: type_66
+                  id: type_65
                   name: Priority
                   qualifiedName: "package:analyzer_demo/sample_code.dart.Priority"
                   typeArguments:
@@ -1894,7 +1819,7 @@ libraries:
                 id: param_15
                 name: createdAt
                 type:
-                  id: type_67
+                  id: type_66
                   name: DateTime
                   qualifiedName: "dart:core.DateTime"
                   typeArguments:
@@ -1919,7 +1844,7 @@ libraries:
                 id: param_16
                 name: updatedAt
                 type:
-                  id: type_68
+                  id: type_67
                   name: DateTime
                   qualifiedName: "dart:core.DateTime"
                   typeArguments:
@@ -1944,7 +1869,7 @@ libraries:
                 id: param_17
                 name: dueDate
                 type:
-                  id: type_69
+                  id: type_68
                   name: DateTime
                   qualifiedName: "dart:core.DateTime"
                   typeArguments:
@@ -1978,8 +1903,8 @@ libraries:
             name: complete
             qualifiedName: "package:analyzer_demo/sample_code.dart.complete"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -1990,7 +1915,7 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_70
+              id: type_69
               name: void
               qualifiedName: void
               typeArguments:
@@ -2019,8 +1944,8 @@ libraries:
             name: validate
             qualifiedName: "package:analyzer_demo/sample_code.dart.validate"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2037,7 +1962,7 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             returnType:
-              id: type_71
+              id: type_70
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -2067,8 +1992,8 @@ libraries:
             name: id
             qualifiedName: "package:analyzer_demo/sample_code.dart.id"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2085,7 +2010,7 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             type:
-              id: type_72
+              id: type_71
               name: int
               qualifiedName: "dart:core.int"
               typeArguments:
@@ -2111,8 +2036,8 @@ libraries:
             name: createdAt
             qualifiedName: "package:analyzer_demo/sample_code.dart.createdAt"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2129,7 +2054,7 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             type:
-              id: type_73
+              id: type_72
               name: DateTime
               qualifiedName: "dart:core.DateTime"
               typeArguments:
@@ -2155,8 +2080,8 @@ libraries:
             name: updatedAt
             qualifiedName: "package:analyzer_demo/sample_code.dart.updatedAt"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2173,7 +2098,7 @@ libraries:
                 positionalArguments:
             isDeprecated: false
             type:
-              id: type_74
+              id: type_73
               name: DateTime
               qualifiedName: "dart:core.DateTime"
               typeArguments:
@@ -2199,8 +2124,8 @@ libraries:
             name: title
             qualifiedName: "package:analyzer_demo/sample_code.dart.title"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2211,7 +2136,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_75
+              id: type_74
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -2237,8 +2162,8 @@ libraries:
             name: description
             qualifiedName: "package:analyzer_demo/sample_code.dart.description"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2249,7 +2174,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_76
+              id: type_75
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -2275,8 +2200,8 @@ libraries:
             name: priority
             qualifiedName: "package:analyzer_demo/sample_code.dart.priority"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2287,7 +2212,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_77
+              id: type_76
               name: Priority
               qualifiedName: "package:analyzer_demo/sample_code.dart.Priority"
               typeArguments:
@@ -2313,8 +2238,8 @@ libraries:
             name: dueDate
             qualifiedName: "package:analyzer_demo/sample_code.dart.dueDate"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2325,7 +2250,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_78
+              id: type_77
               name: DateTime
               qualifiedName: "dart:core.DateTime"
               typeArguments:
@@ -2351,8 +2276,8 @@ libraries:
             name: isCompleted
             qualifiedName: "package:analyzer_demo/sample_code.dart.isCompleted"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2363,7 +2288,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_79
+              id: type_78
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -2389,8 +2314,8 @@ libraries:
             name: isOverdue
             qualifiedName: "package:analyzer_demo/sample_code.dart.isOverdue"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2401,7 +2326,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_80
+              id: type_79
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -2427,8 +2352,8 @@ libraries:
             name: validationErrors
             qualifiedName: "package:analyzer_demo/sample_code.dart.validationErrors"
             declaringTypeId: class_4
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2439,12 +2364,12 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_81
+              id: type_80
               name: List
               qualifiedName: "dart:core.List"
               typeArguments:
                 -
-                  id: type_82
+                  id: type_81
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -2481,8 +2406,8 @@ libraries:
         id: class_5
         name: Result
         qualifiedName: "package:analyzer_demo/sample_code.dart.Result"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -2499,7 +2424,7 @@ libraries:
         isInterface: false
         isMixin: false
         superclass:
-          id: type_83
+          id: type_82
           name: Object
           qualifiedName: "dart:core.Object"
           typeArguments:
@@ -2536,7 +2461,7 @@ libraries:
             name: success
             qualifiedName: "package:analyzer_demo/sample_code.dart.Result.success"
             declaringTypeId: class_5
-            sourceFileId: file_4
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2551,7 +2476,7 @@ libraries:
                 id: param_18
                 name: _value
                 type:
-                  id: type_84
+                  id: type_83
                   name: T?
                   qualifiedName: T?
                   typeArguments:
@@ -2564,7 +2489,7 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_85
+                    id: type_84
                     name: dynamic
                     qualifiedName: dynamic
                     typeArguments:
@@ -2598,7 +2523,7 @@ libraries:
             name: failure
             qualifiedName: "package:analyzer_demo/sample_code.dart.Result.failure"
             declaringTypeId: class_5
-            sourceFileId: file_4
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2613,7 +2538,7 @@ libraries:
                 id: param_19
                 name: _error
                 type:
-                  id: type_86
+                  id: type_85
                   name: E?
                   qualifiedName: E?
                   typeArguments:
@@ -2626,7 +2551,7 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_87
+                    id: type_86
                     name: dynamic
                     qualifiedName: dynamic
                     typeArguments:
@@ -2661,8 +2586,8 @@ libraries:
             name: map
             qualifiedName: "package:analyzer_demo/sample_code.dart.map"
             declaringTypeId: class_5
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2673,12 +2598,12 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_88
+              id: type_87
               name: Result
               qualifiedName: "package:analyzer_demo/sample_code.dart.Result"
               typeArguments:
                 -
-                  id: type_89
+                  id: type_88
                   name: U
                   qualifiedName: U
                   typeArguments:
@@ -2691,7 +2616,7 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_90
+                    id: type_89
                     name: dynamic
                     qualifiedName: dynamic
                     typeArguments:
@@ -2707,7 +2632,7 @@ libraries:
                     resolvedElementId: null
                   resolvedElementId: null
                 -
-                  id: type_91
+                  id: type_90
                   name: "E"
                   qualifiedName: "E"
                   typeArguments:
@@ -2720,7 +2645,7 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_92
+                    id: type_91
                     name: dynamic
                     qualifiedName: dynamic
                     typeArguments:
@@ -2756,7 +2681,7 @@ libraries:
                 id: param_20
                 name: transform
                 type:
-                  id: type_93
+                  id: type_92
                   name: U Function(T)
                   qualifiedName: U Function(T)
                   typeArguments:
@@ -2768,7 +2693,7 @@ libraries:
                   functionType:
                     id: functionType_1
                     returnType:
-                      id: type_94
+                      id: type_93
                       name: U
                       qualifiedName: U
                       typeArguments:
@@ -2781,7 +2706,7 @@ libraries:
                       definitionLibraryId: null
                       isTypeParameter: true
                       typeParameterBound:
-                        id: type_95
+                        id: type_94
                         name: dynamic
                         qualifiedName: dynamic
                         typeArguments:
@@ -2803,7 +2728,7 @@ libraries:
                         id: param_21
                         name: "<unnamed>"
                         type:
-                          id: type_96
+                          id: type_95
                           name: T
                           qualifiedName: T
                           typeArguments:
@@ -2816,7 +2741,7 @@ libraries:
                           definitionLibraryId: null
                           isTypeParameter: true
                           typeParameterBound:
-                            id: type_97
+                            id: type_96
                             name: dynamic
                             qualifiedName: dynamic
                             typeArguments:
@@ -2861,8 +2786,8 @@ libraries:
             name: _value
             qualifiedName: "package:analyzer_demo/sample_code.dart._value"
             declaringTypeId: class_5
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2873,7 +2798,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_98
+              id: type_97
               name: T?
               qualifiedName: T?
               typeArguments:
@@ -2886,7 +2811,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_99
+                id: type_98
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -2913,8 +2838,8 @@ libraries:
             name: _error
             qualifiedName: "package:analyzer_demo/sample_code.dart._error"
             declaringTypeId: class_5
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2925,7 +2850,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_100
+              id: type_99
               name: E?
               qualifiedName: E?
               typeArguments:
@@ -2938,7 +2863,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_101
+                id: type_100
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -2965,8 +2890,46 @@ libraries:
             name: isSuccess
             qualifiedName: "package:analyzer_demo/sample_code.dart.isSuccess"
             declaringTypeId: class_5
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
+            location:
+              line: 0
+              column: 0
+              offset: 0
+              length: 9
+            documentation: null
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_101
+              name: bool
+              qualifiedName: "dart:core.bool"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: false
+            isLate: false
+            isStatic: false
+            hasInitializer: false
+            hasGetter: true
+            hasSetter: false
+          -
+            id: field_24
+            name: isFailure
+            qualifiedName: "package:analyzer_demo/sample_code.dart.isFailure"
+            declaringTypeId: class_5
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -2999,50 +2962,12 @@ libraries:
             hasGetter: true
             hasSetter: false
           -
-            id: field_24
-            name: isFailure
-            qualifiedName: "package:analyzer_demo/sample_code.dart.isFailure"
-            declaringTypeId: class_5
-            owningLibraryId: lib_3
-            sourceFileId: file_4
-            location:
-              line: 0
-              column: 0
-              offset: 0
-              length: 9
-            documentation: null
-            annotations:
-
-            isDeprecated: false
-            type:
-              id: type_103
-              name: bool
-              qualifiedName: "dart:core.bool"
-              typeArguments:
-
-              isNullable: false
-              isDynamic: false
-              isVoid: false
-              isFunction: false
-              functionType: null
-              definitionLibraryId: null
-              isTypeParameter: false
-              typeParameterBound: null
-              resolvedElementId: null
-            isFinal: false
-            isConst: false
-            isLate: false
-            isStatic: false
-            hasInitializer: false
-            hasGetter: true
-            hasSetter: false
-          -
             id: field_25
             name: value
             qualifiedName: "package:analyzer_demo/sample_code.dart.value"
             declaringTypeId: class_5
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3053,7 +2978,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_104
+              id: type_103
               name: T
               qualifiedName: T
               typeArguments:
@@ -3066,7 +2991,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_105
+                id: type_104
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -3093,8 +3018,8 @@ libraries:
             name: error
             qualifiedName: "package:analyzer_demo/sample_code.dart.error"
             declaringTypeId: class_5
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3105,7 +3030,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_106
+              id: type_105
               name: "E"
               qualifiedName: "E"
               typeArguments:
@@ -3118,7 +3043,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_107
+                id: type_106
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -3148,8 +3073,8 @@ libraries:
         id: enum_1
         name: Weekday
         qualifiedName: "package:analyzer_demo/sample_code.dart.Weekday"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -3219,8 +3144,8 @@ libraries:
             name: values
             qualifiedName: "package:analyzer_demo/sample_code.dart.values"
             declaringTypeId: enum_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3231,12 +3156,12 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_108
+              id: type_107
               name: List
               qualifiedName: "dart:core.List"
               typeArguments:
                 -
-                  id: type_109
+                  id: type_108
                   name: Weekday
                   qualifiedName: "package:analyzer_demo/sample_code.dart.Weekday"
                   typeArguments:
@@ -3271,8 +3196,8 @@ libraries:
             name: isWeekend
             qualifiedName: "package:analyzer_demo/sample_code.dart.isWeekend"
             declaringTypeId: enum_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3283,7 +3208,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_110
+              id: type_109
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -3316,7 +3241,7 @@ libraries:
             name: new
             qualifiedName: "package:analyzer_demo/sample_code.dart.Weekday"
             declaringTypeId: enum_1
-            sourceFileId: file_4
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3334,13 +3259,13 @@ libraries:
             isConst: true
             isFactory: false
             redirectedConstructor: null
-            superConstructorInvocation: null
+            superConstructorInvocation: Enum
       -
         id: enum_2
         name: Priority
         qualifiedName: "package:analyzer_demo/sample_code.dart.Priority"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -3389,8 +3314,8 @@ libraries:
             name: values
             qualifiedName: "package:analyzer_demo/sample_code.dart.values"
             declaringTypeId: enum_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3401,12 +3326,12 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_111
+              id: type_110
               name: List
               qualifiedName: "dart:core.List"
               typeArguments:
                 -
-                  id: type_112
+                  id: type_111
                   name: Priority
                   qualifiedName: "package:analyzer_demo/sample_code.dart.Priority"
                   typeArguments:
@@ -3441,8 +3366,8 @@ libraries:
             name: level
             qualifiedName: "package:analyzer_demo/sample_code.dart.level"
             declaringTypeId: enum_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3453,7 +3378,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_113
+              id: type_112
               name: int
               qualifiedName: "dart:core.int"
               typeArguments:
@@ -3479,8 +3404,8 @@ libraries:
             name: description
             qualifiedName: "package:analyzer_demo/sample_code.dart.description"
             declaringTypeId: enum_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3491,7 +3416,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_114
+              id: type_113
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -3517,8 +3442,8 @@ libraries:
             name: isUrgent
             qualifiedName: "package:analyzer_demo/sample_code.dart.isUrgent"
             declaringTypeId: enum_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3529,7 +3454,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_115
+              id: type_114
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -3562,7 +3487,7 @@ libraries:
             name: new
             qualifiedName: "package:analyzer_demo/sample_code.dart.Priority"
             declaringTypeId: enum_2
-            sourceFileId: file_4
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3577,7 +3502,7 @@ libraries:
                 id: param_22
                 name: level
                 type:
-                  id: type_116
+                  id: type_115
                   name: int
                   qualifiedName: "dart:core.int"
                   typeArguments:
@@ -3602,7 +3527,7 @@ libraries:
                 id: param_23
                 name: description
                 type:
-                  id: type_117
+                  id: type_116
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -3629,14 +3554,14 @@ libraries:
             isConst: true
             isFactory: false
             redirectedConstructor: null
-            superConstructorInvocation: null
+            superConstructorInvocation: Enum
     mixins:
       -
         id: mixin_1
         name: Validatable
         qualifiedName: "package:analyzer_demo/sample_code.dart.Validatable"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -3648,7 +3573,7 @@ libraries:
         isDeprecated: false
         onTypes:
           -
-            id: type_118
+            id: type_117
             name: Object
             qualifiedName: "dart:core.Object"
             typeArguments:
@@ -3672,8 +3597,8 @@ libraries:
             name: validate
             qualifiedName: "package:analyzer_demo/sample_code.dart.validate"
             declaringTypeId: mixin_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3684,7 +3609,7 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_119
+              id: type_118
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -3714,8 +3639,8 @@ libraries:
             name: validationErrors
             qualifiedName: "package:analyzer_demo/sample_code.dart.validationErrors"
             declaringTypeId: mixin_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3726,12 +3651,12 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_120
+              id: type_119
               name: List
               qualifiedName: "dart:core.List"
               typeArguments:
                 -
-                  id: type_121
+                  id: type_120
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -3768,8 +3693,8 @@ libraries:
         id: mixin_2
         name: Serializable
         qualifiedName: "package:analyzer_demo/sample_code.dart.Serializable"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -3781,7 +3706,7 @@ libraries:
         isDeprecated: false
         onTypes:
           -
-            id: type_122
+            id: type_121
             name: Object
             qualifiedName: "dart:core.Object"
             typeArguments:
@@ -3805,8 +3730,8 @@ libraries:
             name: toJson
             qualifiedName: "package:analyzer_demo/sample_code.dart.toJson"
             declaringTypeId: mixin_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3817,12 +3742,12 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_123
+              id: type_122
               name: Map
               qualifiedName: "dart:core.Map"
               typeArguments:
                 -
-                  id: type_124
+                  id: type_123
                   name: String
                   qualifiedName: "dart:core.String"
                   typeArguments:
@@ -3837,7 +3762,7 @@ libraries:
                   typeParameterBound: null
                   resolvedElementId: null
                 -
-                  id: type_125
+                  id: type_124
                   name: dynamic
                   qualifiedName: dynamic
                   typeArguments:
@@ -3875,8 +3800,8 @@ libraries:
             name: fromJson
             qualifiedName: "package:analyzer_demo/sample_code.dart.fromJson"
             declaringTypeId: mixin_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -3887,7 +3812,7 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_126
+              id: type_125
               name: T
               qualifiedName: T
               typeArguments:
@@ -3900,7 +3825,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_127
+                id: type_126
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -3927,12 +3852,12 @@ libraries:
                 id: param_24
                 name: json
                 type:
-                  id: type_128
+                  id: type_127
                   name: Map
                   qualifiedName: "dart:core.Map"
                   typeArguments:
                     -
-                      id: type_129
+                      id: type_128
                       name: String
                       qualifiedName: "dart:core.String"
                       typeArguments:
@@ -3947,7 +3872,7 @@ libraries:
                       typeParameterBound: null
                       resolvedElementId: null
                     -
-                      id: type_130
+                      id: type_129
                       name: dynamic
                       qualifiedName: dynamic
                       typeArguments:
@@ -3993,8 +3918,8 @@ libraries:
         id: extension_1
         name: StringExtensions
         qualifiedName: "package:analyzer_demo/sample_code.dart.StringExtensions"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -4005,7 +3930,7 @@ libraries:
 
         isDeprecated: false
         extendedType:
-          id: type_131
+          id: type_130
           name: String
           qualifiedName: "dart:core.String"
           typeArguments:
@@ -4027,8 +3952,8 @@ libraries:
             name: capitalize
             qualifiedName: "package:analyzer_demo/sample_code.dart.capitalize"
             declaringTypeId: extension_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -4039,7 +3964,7 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_132
+              id: type_131
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -4068,8 +3993,8 @@ libraries:
             name: toTitleCase
             qualifiedName: "package:analyzer_demo/sample_code.dart.toTitleCase"
             declaringTypeId: extension_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -4080,7 +4005,7 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_133
+              id: type_132
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -4110,8 +4035,8 @@ libraries:
             name: isValidEmail
             qualifiedName: "package:analyzer_demo/sample_code.dart.isValidEmail"
             declaringTypeId: extension_1
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -4122,7 +4047,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_134
+              id: type_133
               name: bool
               qualifiedName: "dart:core.bool"
               typeArguments:
@@ -4150,8 +4075,8 @@ libraries:
         id: extension_2
         name: ListExtensions
         qualifiedName: "package:analyzer_demo/sample_code.dart.ListExtensions"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -4162,12 +4087,12 @@ libraries:
 
         isDeprecated: false
         extendedType:
-          id: type_135
+          id: type_134
           name: List
           qualifiedName: "dart:core.List"
           typeArguments:
             -
-              id: type_136
+              id: type_135
               name: T
               qualifiedName: T
               typeArguments:
@@ -4180,7 +4105,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_137
+                id: type_136
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -4217,8 +4142,8 @@ libraries:
             name: chunked
             qualifiedName: "package:analyzer_demo/sample_code.dart.chunked"
             declaringTypeId: extension_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -4229,17 +4154,17 @@ libraries:
 
             isDeprecated: false
             returnType:
-              id: type_138
+              id: type_137
               name: List
               qualifiedName: "dart:core.List"
               typeArguments:
                 -
-                  id: type_139
+                  id: type_138
                   name: List
                   qualifiedName: "dart:core.List"
                   typeArguments:
                     -
-                      id: type_140
+                      id: type_139
                       name: T
                       qualifiedName: T
                       typeArguments:
@@ -4252,7 +4177,7 @@ libraries:
                       definitionLibraryId: null
                       isTypeParameter: true
                       typeParameterBound:
-                        id: type_141
+                        id: type_140
                         name: dynamic
                         qualifiedName: dynamic
                         typeArguments:
@@ -4292,7 +4217,7 @@ libraries:
                 id: param_25
                 name: size
                 type:
-                  id: type_142
+                  id: type_141
                   name: int
                   qualifiedName: "dart:core.int"
                   typeArguments:
@@ -4325,8 +4250,8 @@ libraries:
             name: firstOrNull
             qualifiedName: "package:analyzer_demo/sample_code.dart.firstOrNull"
             declaringTypeId: extension_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -4337,7 +4262,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_143
+              id: type_142
               name: T?
               qualifiedName: T?
               typeArguments:
@@ -4350,7 +4275,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_144
+                id: type_143
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -4377,8 +4302,8 @@ libraries:
             name: lastOrNull
             qualifiedName: "package:analyzer_demo/sample_code.dart.lastOrNull"
             declaringTypeId: extension_2
-            owningLibraryId: lib_3
-            sourceFileId: file_4
+            owningLibraryId: lib_1
+            sourceFileId: file_2
             location:
               line: 0
               column: 0
@@ -4389,7 +4314,7 @@ libraries:
 
             isDeprecated: false
             type:
-              id: type_145
+              id: type_144
               name: T?
               qualifiedName: T?
               typeArguments:
@@ -4402,7 +4327,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_146
+                id: type_145
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -4434,8 +4359,8 @@ libraries:
         id: typedef_1
         name: JsonObject
         qualifiedName: "package:analyzer_demo/sample_code.dart.JsonObject"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -4446,12 +4371,12 @@ libraries:
 
         isDeprecated: false
         aliasedType:
-          id: type_147
+          id: type_146
           name: Map
           qualifiedName: "dart:core.Map"
           typeArguments:
             -
-              id: type_148
+              id: type_147
               name: String
               qualifiedName: "dart:core.String"
               typeArguments:
@@ -4466,7 +4391,7 @@ libraries:
               typeParameterBound: null
               resolvedElementId: null
             -
-              id: type_149
+              id: type_148
               name: dynamic
               qualifiedName: dynamic
               typeArguments:
@@ -4494,8 +4419,8 @@ libraries:
         id: typedef_2
         name: AsyncResult
         qualifiedName: "package:analyzer_demo/sample_code.dart.AsyncResult"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -4506,17 +4431,17 @@ libraries:
 
         isDeprecated: false
         aliasedType:
-          id: type_150
+          id: type_149
           name: Future
           qualifiedName: "dart:async.Future"
           typeArguments:
             -
-              id: type_151
+              id: type_150
               name: Result
               qualifiedName: "package:analyzer_demo/sample_code.dart.Result"
               typeArguments:
                 -
-                  id: type_152
+                  id: type_151
                   name: T
                   qualifiedName: T
                   typeArguments:
@@ -4529,7 +4454,7 @@ libraries:
                   definitionLibraryId: null
                   isTypeParameter: true
                   typeParameterBound:
-                    id: type_153
+                    id: type_152
                     name: dynamic
                     qualifiedName: dynamic
                     typeArguments:
@@ -4545,7 +4470,7 @@ libraries:
                     resolvedElementId: null
                   resolvedElementId: null
                 -
-                  id: type_154
+                  id: type_153
                   name: Exception
                   qualifiedName: "dart:core.Exception"
                   typeArguments:
@@ -4588,8 +4513,8 @@ libraries:
         id: typedef_3
         name: EntityFactory
         qualifiedName: "package:analyzer_demo/sample_code.dart.EntityFactory"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -4600,7 +4525,7 @@ libraries:
 
         isDeprecated: false
         aliasedType:
-          id: type_155
+          id: type_154
           name: "T Function(Map<String, dynamic>)"
           qualifiedName: "T Function(Map<String, dynamic>)"
           typeArguments:
@@ -4612,7 +4537,7 @@ libraries:
           functionType:
             id: functionType_2
             returnType:
-              id: type_156
+              id: type_155
               name: T
               qualifiedName: T
               typeArguments:
@@ -4625,12 +4550,12 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_157
+                id: type_156
                 name: Entity
                 qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
                 typeArguments:
                   -
-                    id: type_158
+                    id: type_157
                     name: dynamic
                     qualifiedName: dynamic
                     typeArguments:
@@ -4661,12 +4586,12 @@ libraries:
                 id: param_26
                 name: json
                 type:
-                  id: type_159
+                  id: type_158
                   name: Map
                   qualifiedName: "dart:core.Map"
                   typeArguments:
                     -
-                      id: type_160
+                      id: type_159
                       name: String
                       qualifiedName: "dart:core.String"
                       typeArguments:
@@ -4681,7 +4606,7 @@ libraries:
                       typeParameterBound: null
                       resolvedElementId: null
                     -
-                      id: type_161
+                      id: type_160
                       name: dynamic
                       qualifiedName: dynamic
                       typeArguments:
@@ -4720,12 +4645,12 @@ libraries:
             id: typeParam_9
             name: T
             bound:
-              id: type_162
+              id: type_161
               name: Entity
               qualifiedName: "package:analyzer_demo/sample_code.dart.Entity"
               typeArguments:
                 -
-                  id: type_163
+                  id: type_162
                   name: dynamic
                   qualifiedName: dynamic
                   typeArguments:
@@ -4752,11 +4677,11 @@ libraries:
             variance: null
     functions:
       -
-        id: function_2
+        id: function_1
         name: generateId
         qualifiedName: "package:analyzer_demo/sample_code.dart.generateId"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -4767,7 +4692,7 @@ libraries:
 
         isDeprecated: false
         returnType:
-          id: type_164
+          id: type_163
           name: String
           qualifiedName: "dart:core.String"
           typeArguments:
@@ -4790,11 +4715,11 @@ libraries:
         isExternal: false
         isStatic: true
       -
-        id: function_3
+        id: function_2
         name: sum
         qualifiedName: "package:analyzer_demo/sample_code.dart.sum"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -4805,7 +4730,7 @@ libraries:
 
         isDeprecated: false
         returnType:
-          id: type_165
+          id: type_164
           name: num
           qualifiedName: "dart:core.num"
           typeArguments:
@@ -4826,12 +4751,88 @@ libraries:
             id: param_27
             name: numbers
             type:
-              id: type_166
+              id: type_165
               name: List
               qualifiedName: "dart:core.List"
               typeArguments:
                 -
-                  id: type_167
+                  id: type_166
+                  name: num
+                  qualifiedName: "dart:core.num"
+                  typeArguments:
+
+                  isNullable: false
+                  isDynamic: false
+                  isVoid: false
+                  isFunction: false
+                  functionType: null
+                  definitionLibraryId: null
+                  isTypeParameter: false
+                  typeParameterBound: null
+                  resolvedElementId: null
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isRequired: true
+            isNamed: false
+            isPositional: true
+            hasDefaultValue: false
+            defaultValue: null
+            documentation: null
+            annotations:
+        isAsync: false
+        isGenerator: false
+        isExternal: false
+        isStatic: true
+      -
+        id: function_3
+        name: average
+        qualifiedName: "package:analyzer_demo/sample_code.dart.average"
+        libraryId: lib_1
+        sourceFileId: file_2
+        location:
+          line: 0
+          column: 0
+          offset: 7435
+          length: 7
+        documentation: /// Calculate the average of a list of numbers.
+        annotations:
+
+        isDeprecated: false
+        returnType:
+          id: type_167
+          name: double
+          qualifiedName: "dart:core.double"
+          typeArguments:
+
+          isNullable: false
+          isDynamic: false
+          isVoid: false
+          isFunction: false
+          functionType: null
+          definitionLibraryId: null
+          isTypeParameter: false
+          typeParameterBound: null
+          resolvedElementId: null
+        typeParameters:
+
+        parameters:
+          -
+            id: param_28
+            name: numbers
+            type:
+              id: type_168
+              name: List
+              qualifiedName: "dart:core.List"
+              typeArguments:
+                -
+                  id: type_169
                   name: num
                   qualifiedName: "dart:core.num"
                   typeArguments:
@@ -4867,86 +4868,10 @@ libraries:
         isStatic: true
       -
         id: function_4
-        name: average
-        qualifiedName: "package:analyzer_demo/sample_code.dart.average"
-        libraryId: lib_3
-        sourceFileId: file_4
-        location:
-          line: 0
-          column: 0
-          offset: 7435
-          length: 7
-        documentation: /// Calculate the average of a list of numbers.
-        annotations:
-
-        isDeprecated: false
-        returnType:
-          id: type_168
-          name: double
-          qualifiedName: "dart:core.double"
-          typeArguments:
-
-          isNullable: false
-          isDynamic: false
-          isVoid: false
-          isFunction: false
-          functionType: null
-          definitionLibraryId: null
-          isTypeParameter: false
-          typeParameterBound: null
-          resolvedElementId: null
-        typeParameters:
-
-        parameters:
-          -
-            id: param_28
-            name: numbers
-            type:
-              id: type_169
-              name: List
-              qualifiedName: "dart:core.List"
-              typeArguments:
-                -
-                  id: type_170
-                  name: num
-                  qualifiedName: "dart:core.num"
-                  typeArguments:
-
-                  isNullable: false
-                  isDynamic: false
-                  isVoid: false
-                  isFunction: false
-                  functionType: null
-                  definitionLibraryId: null
-                  isTypeParameter: false
-                  typeParameterBound: null
-                  resolvedElementId: null
-              isNullable: false
-              isDynamic: false
-              isVoid: false
-              isFunction: false
-              functionType: null
-              definitionLibraryId: null
-              isTypeParameter: false
-              typeParameterBound: null
-              resolvedElementId: null
-            isRequired: true
-            isNamed: false
-            isPositional: true
-            hasDefaultValue: false
-            defaultValue: null
-            documentation: null
-            annotations:
-        isAsync: false
-        isGenerator: false
-        isExternal: false
-        isStatic: true
-      -
-        id: function_5
         name: debounce
         qualifiedName: "package:analyzer_demo/sample_code.dart.debounce"
-        libraryId: lib_3
-        sourceFileId: file_4
+        libraryId: lib_1
+        sourceFileId: file_2
         location:
           line: 0
           column: 0
@@ -4957,12 +4882,12 @@ libraries:
 
         isDeprecated: false
         returnType:
-          id: type_171
+          id: type_170
           name: Future
           qualifiedName: "dart:async.Future"
           typeArguments:
             -
-              id: type_172
+              id: type_171
               name: T
               qualifiedName: T
               typeArguments:
@@ -4975,7 +4900,7 @@ libraries:
               definitionLibraryId: null
               isTypeParameter: true
               typeParameterBound:
-                id: type_173
+                id: type_172
                 name: dynamic
                 qualifiedName: dynamic
                 typeArguments:
@@ -5011,7 +4936,7 @@ libraries:
             id: param_29
             name: delay
             type:
-              id: type_174
+              id: type_173
               name: Duration
               qualifiedName: "dart:core.Duration"
               typeArguments:
@@ -5036,7 +4961,7 @@ libraries:
             id: param_30
             name: action
             type:
-              id: type_175
+              id: type_174
               name: "Future<T> Function()"
               qualifiedName: "Future<T> Function()"
               typeArguments:
@@ -5048,12 +4973,12 @@ libraries:
               functionType:
                 id: functionType_3
                 returnType:
-                  id: type_176
+                  id: type_175
                   name: Future
                   qualifiedName: "dart:async.Future"
                   typeArguments:
                     -
-                      id: type_177
+                      id: type_176
                       name: T
                       qualifiedName: T
                       typeArguments:
@@ -5066,7 +4991,7 @@ libraries:
                       definitionLibraryId: null
                       isTypeParameter: true
                       typeParameterBound:
-                        id: type_178
+                        id: type_177
                         name: dynamic
                         qualifiedName: dynamic
                         typeArguments:
@@ -5117,28 +5042,441 @@ libraries:
     imports:
 
     exports:
+  -
+    id: lib_3
+    name: ""
+    uri: "package:analyzer_demo/src/version.versioner.dart"
+    packageId: pkg_1
+    mainSourceFileId: file_4
+    partFileIds:
+
+    documentation: null
+    annotations:
+
+    isDeprecated: false
+    classes:
+      -
+        id: class_6
+        name: TomVersionInfo
+        qualifiedName: "package:analyzer_demo/src/version.versioner.dart.TomVersionInfo"
+        libraryId: lib_3
+        sourceFileId: file_4
+        location:
+          line: 0
+          column: 0
+          offset: 272
+          length: 14
+        documentation: |
+          /// Version information generated at build time.
+          ///
+          /// This class contains static fields and methods for accessing
+          /// version information embedded during the build process.
+        annotations:
+
+        isDeprecated: false
+        isAbstract: false
+        isSealed: false
+        isFinal: false
+        isBase: false
+        isInterface: false
+        isMixin: false
+        superclass:
+          id: type_178
+          name: Object
+          qualifiedName: "dart:core.Object"
+          typeArguments:
+
+          isNullable: false
+          isDynamic: false
+          isVoid: false
+          isFunction: false
+          functionType: null
+          definitionLibraryId: null
+          isTypeParameter: false
+          typeParameterBound: null
+          resolvedElementId: null
+        interfaces:
+
+        mixins:
+
+        typeParameters:
+
+        constructors:
+          -
+            id: ctor_9
+            name: _
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.TomVersionInfo._"
+            declaringTypeId: class_6
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 306
+              length: 16
+            documentation: null
+            annotations:
+
+            isDeprecated: false
+            parameters:
+
+            isAsync: false
+            isExternal: false
+            isStatic: false
+            isConst: false
+            isFactory: false
+            redirectedConstructor: null
+            superConstructorInvocation: Object
+        methods:
+
+        fields:
+          -
+            id: field_37
+            name: version
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.version"
+            declaringTypeId: class_6
+            owningLibraryId: lib_3
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 374
+              length: 7
+            documentation: /// Package version from pubspec.yaml
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_179
+              name: String
+              qualifiedName: "dart:core.String"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: true
+            isLate: false
+            isStatic: true
+            hasInitializer: true
+            hasGetter: true
+            hasSetter: false
+          -
+            id: field_38
+            name: buildTime
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.buildTime"
+            declaringTypeId: class_6
+            owningLibraryId: lib_3
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 460
+              length: 9
+            documentation: /// Build timestamp (ISO 8601 UTC format)
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_180
+              name: String
+              qualifiedName: "dart:core.String"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: true
+            isLate: false
+            isStatic: true
+            hasInitializer: true
+            hasGetter: true
+            hasSetter: false
+          -
+            id: field_39
+            name: gitCommit
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.gitCommit"
+            declaringTypeId: class_6
+            owningLibraryId: lib_3
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 561
+              length: 9
+            documentation: /// Git commit hash (short form)
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_181
+              name: String
+              qualifiedName: "dart:core.String"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: true
+            isLate: false
+            isStatic: true
+            hasInitializer: true
+            hasGetter: true
+            hasSetter: false
+          -
+            id: field_40
+            name: buildNumber
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.buildNumber"
+            declaringTypeId: class_6
+            owningLibraryId: lib_3
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 652
+              length: 11
+            documentation: /// Build number (increments with each build)
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_182
+              name: int
+              qualifiedName: "dart:core.int"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: true
+            isLate: false
+            isStatic: true
+            hasInitializer: true
+            hasGetter: true
+            hasSetter: false
+          -
+            id: field_41
+            name: dartSdkVersion
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.dartSdkVersion"
+            declaringTypeId: class_6
+            owningLibraryId: lib_3
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 729
+              length: 14
+            documentation: /// Dart SDK version used to build
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_183
+              name: String
+              qualifiedName: "dart:core.String"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: true
+            isLate: false
+            isStatic: true
+            hasInitializer: true
+            hasGetter: true
+            hasSetter: false
+          -
+            id: field_42
+            name: versionShort
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.versionShort"
+            declaringTypeId: class_6
+            owningLibraryId: lib_3
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 0
+              length: 12
+            documentation: null
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_184
+              name: String
+              qualifiedName: "dart:core.String"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: false
+            isLate: false
+            isStatic: true
+            hasInitializer: false
+            hasGetter: true
+            hasSetter: false
+          -
+            id: field_43
+            name: versionMedium
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.versionMedium"
+            declaringTypeId: class_6
+            owningLibraryId: lib_3
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 0
+              length: 13
+            documentation: null
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_185
+              name: String
+              qualifiedName: "dart:core.String"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: false
+            isLate: false
+            isStatic: true
+            hasInitializer: false
+            hasGetter: true
+            hasSetter: false
+          -
+            id: field_44
+            name: versionLong
+            qualifiedName: "package:analyzer_demo/src/version.versioner.dart.versionLong"
+            declaringTypeId: class_6
+            owningLibraryId: lib_3
+            sourceFileId: file_4
+            location:
+              line: 0
+              column: 0
+              offset: 0
+              length: 11
+            documentation: null
+            annotations:
+
+            isDeprecated: false
+            type:
+              id: type_186
+              name: String
+              qualifiedName: "dart:core.String"
+              typeArguments:
+
+              isNullable: false
+              isDynamic: false
+              isVoid: false
+              isFunction: false
+              functionType: null
+              definitionLibraryId: null
+              isTypeParameter: false
+              typeParameterBound: null
+              resolvedElementId: null
+            isFinal: false
+            isConst: false
+            isLate: false
+            isStatic: true
+            hasInitializer: false
+            hasGetter: true
+            hasSetter: false
+        getters:
+
+        setters:
+    enums:
+
+    mixins:
+
+    extensions:
+
+    extensionTypes:
+
+    typeAliases:
+
+    functions:
+
+    variables:
+
+    getters:
+
+    setters:
+
+    imports:
+
+    exports:
 files:
   -
     id: file_2
-    path: /Users/alexiskyaw/Desktop/Code/tom2/xternal/tom_module_basics/tom_analyzer/test/build_examples/analyzer_demo/bin/verify.dart
+    path: lib/sample_code.dart
     packageId: pkg_1
     libraryId: lib_2
     isPart: false
     partOfDirective: null
-    lines: 184
-    contentHash: b8f8ec915ad4f0f539de0bbf188fad4212556cf0130bfd4e0ff991552f91c2d1
-    modified: "2026-02-06T09:14:06.000"
+    lines: 340
+    contentHash: 7ea2f8adfdff3e12803d284605808cf919c367454dc2fc2ee0c5b4f4b2f6b743
   -
     id: file_4
-    path: /Users/alexiskyaw/Desktop/Code/tom2/xternal/tom_module_basics/tom_analyzer/test/build_examples/analyzer_demo/lib/sample_code.dart
+    path: lib/src/version.versioner.dart
     packageId: pkg_1
     libraryId: lib_4
     isPart: false
     partOfDirective: null
-    lines: 340
-    contentHash: 7ea2f8adfdff3e12803d284605808cf919c367454dc2fc2ee0c5b4f4b2f6b743
-    modified: "2026-02-06T09:14:12.000"
+    lines: 38
+    contentHash: 3dcbdf9adf4ec1a97922e7d74d51e428977475be161a3f93094c5d0d69402c8b
 errors:
 
 metadata:
-  barrelPath: /Users/alexiskyaw/Desktop/Code/tom2/xternal/tom_module_basics/tom_analyzer/test/build_examples/analyzer_demo/lib/sample_code.dart
+  barrelPath: lib/sample_code.dart

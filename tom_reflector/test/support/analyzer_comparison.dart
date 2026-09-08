@@ -53,32 +53,44 @@ Future<void> compareAnalyzerToJson({
     }
 
     for (final element in library.classes) {
-      _expectElement(classNames, element, 'class');
+      _expectElement(classNames, element, 'class', rootPath);
     }
     for (final element in library.enums) {
-      _expectElement(enumNames, element, 'enum');
+      _expectElement(enumNames, element, 'enum', rootPath);
     }
     for (final element in library.mixins) {
-      _expectElement(mixinNames, element, 'mixin');
+      _expectElement(mixinNames, element, 'mixin', rootPath);
     }
     for (final element in library.extensions) {
-      _expectElement(extensionNames, element, 'extension');
+      _expectElement(extensionNames, element, 'extension', rootPath);
     }
     for (final element in library.extensionTypes) {
-      _expectElement(extensionTypeNames, element, 'extension type');
+      _expectElement(extensionTypeNames, element, 'extension type', rootPath);
     }
     for (final element in library.typeAliases) {
-      _expectElement(typeAliasNames, element, 'type alias');
+      _expectElement(typeAliasNames, element, 'type alias', rootPath);
     }
     for (final element in library.topLevelFunctions) {
-      _expectElement(functionNames, element, 'function');
+      _expectElement(functionNames, element, 'function', rootPath);
     }
   }
 }
 
-String _qualifiedName(analyzer_elements.Element element) {
+/// The name the serializer would have written for [element].
+///
+/// A dumped qualified name is package-relative — that is what makes the dump
+/// diffable across machines — so a live name has to be put in the same form
+/// before the two can be compared. Building the expectation from the absolute
+/// URI instead would fail here on every machine, which is not the question
+/// this test asks.
+String _qualifiedName(analyzer_elements.Element element, String rootPath) {
   final libraryUri = element.library?.uri.toString() ?? '';
   final name = element.displayName;
+  for (final prefix in ['file://$rootPath/', '$rootPath/']) {
+    if (libraryUri.startsWith(prefix)) {
+      return '${libraryUri.substring(prefix.length)}.$name';
+    }
+  }
   return '$libraryUri.$name';
 }
 
@@ -86,12 +98,13 @@ void _expectElement(
   Set<String> names,
   analyzer_elements.Element element,
   String kind,
+  String rootPath,
 ) {
   final name = element.displayName;
   if (name.isEmpty) {
     return;
   }
-  final qualifiedName = _qualifiedName(element);
+  final qualifiedName = _qualifiedName(element, rootPath);
   expect(
     names,
     contains(qualifiedName),

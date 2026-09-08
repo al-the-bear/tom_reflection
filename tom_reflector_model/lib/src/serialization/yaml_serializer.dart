@@ -3,8 +3,11 @@ import 'json_serializer.dart';
 
 /// Serializes analysis results to a YAML representation.
 class YamlSerializer {
-  static String encode(AnalysisResult result) {
-    final map = JsonSerializer.toMap(result);
+  /// [workspaceRoot] carries the same meaning as on [JsonSerializer.encode]:
+  /// the enclosing multi-package tree, so a path into a sibling package is
+  /// written portably rather than as this machine's layout.
+  static String encode(AnalysisResult result, {String? workspaceRoot}) {
+    final map = JsonSerializer.toMap(result, workspaceRoot: workspaceRoot);
     return _YamlEmitter().emit(map);
   }
 }
