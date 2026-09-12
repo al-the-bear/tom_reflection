@@ -1,13 +1,54 @@
+/// Performance measurements for reflection code generation.
+///
+/// These tests MEASURE and REPORT; they do not gate on wall-clock duration.
+///
+/// SCD15 (scd15_aicx). Every timing here used to carry a threshold — eight of
+/// them, from `lessThan(2000)` to `lessThan(60000)`. The small-fixture one
+/// asserted `lessThan(5000)` and was measured at 8023 ms on an idle mbp, which
+/// is what prompted this. Measured again on 2026-09-12, the same operation on
+/// the same machine took:
+///
+///   2.0-2.5 s  run alone
+///   3.5 s      run as part of the full suite
+///   8.0 s      as recorded on 2026-09-03
+///
+/// Nothing about the analyzer changed between those numbers. The cost is
+/// dominated by SDK summary loading and by how many other test isolates
+/// `dart test` is running concurrently, so a fixed threshold cannot separate
+/// "the analyzer got slower" from "the machine was busier" — it only reports
+/// the second while appearing to report the first. Across a four-machine fleet
+/// there is no constant that is both meaningful and stable.
+///
+/// A perpetually-red performance test is worse than no performance test: it
+/// trains readers to discount red, and it costs the same triage on every
+/// baseline. So the durations are emitted as `[PERF]` lines for comparison
+/// across runs and machines, and the assertions that remain are the ones whose
+/// outcome does not depend on ambient load — type counts, generated code size,
+/// characters per type.
+///
+/// Raising a threshold to a number that passes today would reproduce the
+/// original defect with a larger constant and no new information;
+/// `performance_thresholds_guard_test.dart` fails if one comes back.
+library;
+
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 import 'package:tom_reflector/src/reflection/generator/reflection_generator.dart';
 
-/// Performance tests for reflection code generation.
+/// Emits one greppable measurement line.
 ///
-/// These tests verify that the generator performs well on larger codebases
-/// and provides metrics for analysis and generation times.
+/// `[PERF] op=<name> ms=<duration>` matches the shape the flutter corpus uses
+/// for its `[METRIC]` lines, so the same tooling habits apply: grep the run
+/// log, compare across machines, and look at trends rather than at a single
+/// number that a busy host can move by a factor of four.
+void reportPerf(String op, Duration elapsed, [Map<String, Object?> extra =
+    const {}]) {
+  final tail = extra.entries.map((e) => ' ${e.key}=${e.value}').join();
+  print('[PERF] op=$op ms=${elapsed.inMilliseconds}$tail');
+}
+
 void main() {
   group('ReflectionGenerator - Performance Tests', () {
     // Location of the large sample project - use absolute path
@@ -44,17 +85,14 @@ void main() {
 
         stopwatch.stop();
 
-        // Small fixture should analyze in under 5 seconds
-        expect(stopwatch.elapsedMilliseconds, lessThan(5000),
-            reason: 'Small fixture analysis took ${stopwatch.elapsed}');
-
-        // Should have discovered types
+        // Load-independent: the analyzer either found the fixture's types or
+        // it did not, and that answer is the same on any machine.
         expect(result.typeCount, greaterThan(0));
 
-        // Print metrics for debugging
-        print('Small fixture analysis time: ${stopwatch.elapsed}');
-        print('Types discovered: ${result.typeCount}');
-        print('Global members: ${result.globalMemberCount}');
+        reportPerf('analysis.small_fixture', stopwatch.elapsed, {
+          'types': result.typeCount,
+          'globalMembers': result.globalMemberCount,
+        });
       });
 
       test('analysis time scales reasonably with type count', () async {
@@ -81,11 +119,18 @@ void main() {
         }
 
         final avgTime = times.reduce((a, b) => a + b) / times.length;
-        print('Average analysis time (3 runs): ${avgTime.toStringAsFixed(1)}ms');
 
-        // First run may be slower due to warm-up, subsequent runs should be faster
-        expect(times.last, lessThanOrEqualTo(times.first + 1000),
-            reason: 'Analysis time should be consistent');
+        // The old assertion here was `times.last <= times.first + 1000`, meant
+        // to show warm-up making later runs faster. The 1000 ms slack is an
+        // absolute constant on a difference whose spread under concurrent test
+        // isolates comfortably exceeds it, so it measured load like the rest.
+        // Reported instead: first, last and mean are what a reader needs to see
+        // whether warm-up still helps.
+        reportPerf('analysis.repeat_x3', Duration(milliseconds: avgTime.round()), {
+          'firstMs': times.first,
+          'lastMs': times.last,
+          'runs': times.length,
+        });
       });
     },
         skip: !File(p.join(Directory.current.path, 'test', 'reflection',
@@ -115,18 +160,14 @@ void main() {
         final code = await generator.generate();
         generationWatch.stop();
 
-        // Analysis should be under 5 seconds
-        expect(analysisWatch.elapsedMilliseconds, lessThan(5000));
-
-        // Generation should be fast (under 2 seconds)
-        expect(generationWatch.elapsedMilliseconds, lessThan(2000));
-
-        // Generated code should be non-empty
+        // Load-independent: the generator produced substantial output or it
+        // did not.
         expect(code.length, greaterThan(1000));
 
-        print('Analysis time: ${analysisWatch.elapsed}');
-        print('Generation time: ${generationWatch.elapsed}');
-        print('Generated code size: ${code.length} characters');
+        reportPerf('analysis.before_generate', analysisWatch.elapsed);
+        reportPerf('generate.small_fixture', generationWatch.elapsed, {
+          'codeChars': code.length,
+        });
       });
 
       test('generated code size is proportional to type count', () async {
@@ -145,11 +186,12 @@ void main() {
         final result = await generator.analyze();
         final code = await generator.generate();
 
-        // Calculate characters per type
+        // Kept as a real assertion: this is a size ratio, not a duration. It
+        // is deterministic for a given fixture and generator, so it says
+        // something about the code on every machine equally.
         final charsPerType = code.length / (result.typeCount + 1);
         print('Characters per type: ${charsPerType.toStringAsFixed(0)}');
 
-        // Should be reasonable (not too large per type)
         expect(charsPerType, lessThan(50000),
             reason: 'Generated code per type should be reasonable');
       });
@@ -168,21 +210,18 @@ void main() {
 
           stopwatch.stop();
 
-          print('UAM Server analysis time: ${stopwatch.elapsed}');
-          print('Classes discovered: ${result.classes.length}');
-          print('Enums discovered: ${result.enums.length}');
-          print('Mixins discovered: ${result.mixins.length}');
-          print('Extensions discovered: ${result.extensions.length}');
-          print('Global functions: ${result.globalFunctions.length}');
-          print('Total types: ${result.typeCount}');
+          reportPerf('analysis.uam_server', stopwatch.elapsed, {
+            'classes': result.classes.length,
+            'enums': result.enums.length,
+            'mixins': result.mixins.length,
+            'extensions': result.extensions.length,
+            'globalFunctions': result.globalFunctions.length,
+            'types': result.typeCount,
+          });
 
           // Should discover a reasonable number of types
           expect(result.typeCount, greaterThan(0),
               reason: 'Should discover types from UAM server');
-
-          // Analysis should complete in reasonable time (under 60 seconds)
-          expect(stopwatch.elapsedMilliseconds, lessThan(60000),
-              reason: 'Large codebase analysis took ${stopwatch.elapsed}');
         });
 
         test('generates code for aa_server_start.dart', () async {
@@ -198,13 +237,10 @@ void main() {
           final code = await generator.generate();
           generationWatch.stop();
 
-          print('UAM Server analysis time: ${analysisWatch.elapsed}');
-          print('UAM Server generation time: ${generationWatch.elapsed}');
-          print('Generated code size: ${(code.length / 1024).toStringAsFixed(1)} KB');
-
-          // Generation should complete in reasonable time
-          expect(generationWatch.elapsedMilliseconds, lessThan(30000),
-              reason: 'Code generation took ${generationWatch.elapsed}');
+          reportPerf('analysis.uam_server.before_generate', analysisWatch.elapsed);
+          reportPerf('generate.uam_server', generationWatch.elapsed, {
+            'codeChars': code.length,
+          });
 
           // Generated code should be substantial for a real project
           expect(code.length, greaterThan(10000));
@@ -256,12 +292,12 @@ void main() {
         await generator.generate();
         watch2.stop();
 
-        print('First generation: ${watch1.elapsed}');
-        print('Second generation: ${watch2.elapsed}');
-
-        // Both runs should complete reasonably
-        expect(watch1.elapsedMilliseconds, lessThan(10000));
-        expect(watch2.elapsedMilliseconds, lessThan(10000));
+        // The interesting property here is the RATIO — reuse should make the
+        // second generation dramatically cheaper — but a ratio assertion needs
+        // a floor to avoid dividing by a sub-millisecond first run, and that
+        // floor is another constant chosen on one machine. Reported.
+        reportPerf('generate.first', watch1.elapsed);
+        reportPerf('generate.reused', watch2.elapsed);
       });
     });
   });
