@@ -34,6 +34,19 @@ import 'package:test/test.dart';
 /// that cannot be true on a second machine.
 final _machinePath = RegExp(r'(file://)?/(Users|home|srv)/[A-Za-z0-9_.-]+/');
 
+/// This file, which holds example machine paths as test data.
+///
+/// G-SCD13X-3 asserts the pattern still recognises the three path forms this
+/// defect was actually made of, so those strings have to appear here — and once
+/// this file is committed, the scan reads its own source and finds them.
+///
+/// The exemption is one named file rather than `test/**` on purpose: a fixture
+/// anywhere else in `test/` that names a machine is a real finding, and was one
+/// here (the build-example snapshots). Worth knowing that this only surfaced
+/// after the first commit — an untracked guard does not yet see itself, so the
+/// run that proved it green was not the run that mattered.
+const _selfPath = 'test/artifact_portability_test.dart';
+
 /// Tracked paths exempt from the rule, each for a stated reason.
 ///
 /// `tool/` holds ad-hoc exploration scripts that `analysis_options.yaml`
@@ -42,7 +55,8 @@ final _machinePath = RegExp(r'(file://)?/(Users|home|srv)/[A-Za-z0-9_.-]+/');
 /// that no longer exists. They are exempt because repairing them is a separate
 /// question — whether they should exist at all — not because naming a machine
 /// is acceptable there. See the sce todo filed with this test.
-bool _exempt(String relative) => p.split(relative).first == 'tool';
+bool _exempt(String relative) =>
+    p.split(relative).first == 'tool' || p.posix.normalize(relative) == _selfPath;
 
 /// Binary files, where a path-shaped byte run means nothing.
 const _binaryExtensions = {'.png', '.jpg', '.jpeg', '.gif', '.pdf', '.ico'};
@@ -134,6 +148,17 @@ void main() {
           scanned,
           contains('pubspec.yaml'),
           reason: 'a file that must always be in scope',
+        );
+
+        // The self-exemption must stay one file. Were it widened to `test/**`,
+        // a fixture naming a machine would stop being a finding — which is
+        // most of what this guard is for.
+        expect(
+          scanned.where((f) => p.split(f).first == 'test').length,
+          greaterThan(50),
+          reason:
+              'Almost all of test/ must remain in scope; only $_selfPath is '
+              'exempt, because G-SCD13X-3 keeps example paths as test data.',
         );
       },
     );
