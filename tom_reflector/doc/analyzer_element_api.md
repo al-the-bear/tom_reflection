@@ -1,6 +1,6 @@
 # Dart Analyzer 8.x Element API
 
-Extracted from: file:///Users/alexiskyaw/.pub-cache/hosted/pub.dev/analyzer-8.4.1/lib/dart/element/element.dart
+Extracted from: `package:analyzer/dart/element/element.dart` (analyzer 8.4.1)
 
 ## Summary
 
