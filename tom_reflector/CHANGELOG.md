@@ -1,3 +1,16 @@
+## 1.2.0
+
+### Changed — `-n` / `--dry-run` is now refused rather than silently ignored
+
+The analyzer, reflection-analyzer and reflector tools do not implement a
+dry-run mode: nothing in the package reads `args.dryRun`, so `-n` used to be
+accepted and the work done anyway, while the help advertised the flag.
+
+tom_build_base 2.12.0 makes the `NavigationFeatures.dryRun` declaration
+load-bearing, so `-n` now exits non-zero, and the help no longer offers it.
+
+Requires tom_build_base >=2.12.0.
+
 ## 1.1.0
 
 ### Removed — `lib/src/ast/`, an unreachable copier that had stopped compiling (scd12_aicx)

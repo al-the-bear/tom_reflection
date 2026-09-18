@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.5.0
+
+### Changed — `-n` / `--dry-run` is now refused rather than silently ignored
+
+The generator does not implement a dry-run mode: nothing in it reads
+`args.dryRun`, so `-n` used to be accepted and the `*.reflection.dart` files
+were written anyway, while the help advertised the flag.
+
+tom_build_base 2.12.0 makes the `NavigationFeatures.dryRun` declaration
+load-bearing, so `-n` now exits non-zero without writing, and the help no
+longer offers it.
+
+Requires tom_build_base >=2.12.0.
 ## 1.4.0
 
 - **The generated header names this generator.** Every emitted
