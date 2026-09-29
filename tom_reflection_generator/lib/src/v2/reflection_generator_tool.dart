@@ -81,7 +81,8 @@ const reflectionGeneratorOptions = <OptionDefinition>[
   ),
   OptionDefinition.multi(
     name: 'cache-only',
-    description: 'Restrict summary caching to the given package(s) (repeatable)',
+    description:
+        'Restrict summary caching to the given package(s) (repeatable)',
     valueName: 'package',
   ),
 ];
@@ -96,7 +97,8 @@ final reflectionGeneratorTool = ToolDefinition(
   description:
       'Runtime-mirror reflection code generator — emits *.reflection.dart',
   version: ReflectionGenVersionInfo.version,
-  versionString: 'Tom Reflection Generator ${ReflectionGenVersionInfo.versionLong}',
+  versionString:
+      'Tom Reflection Generator ${ReflectionGenVersionInfo.versionLong}',
   mode: ToolMode.singleCommand,
   worksWithNatures: {DartProjectFolder},
   features: const NavigationFeatures(
@@ -104,7 +106,9 @@ final reflectionGeneratorTool = ToolDefinition(
     gitTraversal: false,
     recursiveScan: true,
     interactiveMode: false,
-    dryRun: false,
+    // SCF11: `-n` previews — every output it would create or update, nothing
+    // written. It used to be refused because nothing read `args.dryRun`.
+    dryRun: true,
     jsonOutput: false,
     verbose: true,
   ),

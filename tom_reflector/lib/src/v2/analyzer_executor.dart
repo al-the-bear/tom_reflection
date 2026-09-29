@@ -6,10 +6,12 @@ library;
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
-import 'package:tom_build_base/tom_build_base.dart' show TomBuildConfig, hasTomBuildConfig;
+import 'package:tom_build_base/tom_build_base.dart'
+    show TomBuildConfig, hasTomBuildConfig;
 import 'package:tom_build_base/tom_build_base_v2.dart';
 
 import 'package:tom_reflector/tom_reflector.dart';
+import 'output_writer.dart';
 
 const _toolKey = 'tom_analyzer';
 
@@ -28,7 +30,10 @@ class AnalyzerExecutor extends CommandExecutor {
 
     // Handle --list mode
     if (args.listOnly) {
-      final relativePath = p.relative(context.path, from: context.executionRoot);
+      final relativePath = p.relative(
+        context.path,
+        from: context.executionRoot,
+      );
       print('  $relativePath');
       return ItemResult.success(path: context.path, name: context.name);
     }
@@ -45,6 +50,7 @@ class AnalyzerExecutor extends CommandExecutor {
         outputPath: outputPath,
         outputFormat: outputFormat,
         verbose: args.verbose,
+        dryRun: args.dryRun,
       );
 
       return success
@@ -80,6 +86,7 @@ Future<bool> _processProject({
   String? outputFormat,
   String? defaultBarrel,
   required bool verbose,
+  bool dryRun = false,
 }) async {
   // Load config from buildkit.yaml tom_analyzer: section
   final buildConfig = TomBuildConfig.load(dir: projectPath, toolKey: _toolKey);
@@ -89,8 +96,9 @@ Future<bool> _processProject({
     config = config.applyOverrides(barrels: [barrelOverride]);
   }
 
-  final barrel =
-      config.barrels.isNotEmpty ? config.barrels.first : defaultBarrel;
+  final barrel = config.barrels.isNotEmpty
+      ? config.barrels.first
+      : defaultBarrel;
   if (barrel == null) {
     stderr.writeln('[$projectPath] Missing barrel in buildkit.yaml.');
     return false;
@@ -123,12 +131,10 @@ Future<bool> _processProject({
       : YamlSerializer.encode(analysis, workspaceRoot: executionRoot);
 
   if (config.outputFile != null) {
-    final outputFile = File(config.outputFile!);
-    // Create the output's parent (e.g. `doc/`) — packages without authored
+    // Creates the output's parent (e.g. `doc/`) — packages without authored
     // docs have no `doc/` dir yet, and writing would otherwise fail.
-    await outputFile.parent.create(recursive: true);
-    await outputFile.writeAsString(content);
-    if (verbose) {
+    await writeOrPreview(config.outputFile!, content, dryRun: dryRun);
+    if (verbose && !dryRun) {
       final displayPath = p.relative(projectPath, from: executionRoot);
       print('  $displayPath -> ${config.outputFile}');
     }
@@ -181,6 +187,7 @@ class ReflectionAnalyzerExecutor extends CommandExecutor {
         outputFormat: outputFormat,
         defaultBarrel: defaultBarrel,
         verbose: args.verbose,
+        dryRun: args.dryRun,
       );
 
       return success
@@ -208,14 +215,10 @@ class ReflectionAnalyzerExecutor extends CommandExecutor {
 
 /// Create executor map for the analyzer tool.
 Map<String, CommandExecutor> createAnalyzerExecutors() {
-  return {
-    'default': AnalyzerExecutor(),
-  };
+  return {'default': AnalyzerExecutor()};
 }
 
 /// Create executor map for the reflection_analyzer tool.
 Map<String, CommandExecutor> createReflectionAnalyzerExecutors() {
-  return {
-    'default': ReflectionAnalyzerExecutor(),
-  };
+  return {'default': ReflectionAnalyzerExecutor()};
 }

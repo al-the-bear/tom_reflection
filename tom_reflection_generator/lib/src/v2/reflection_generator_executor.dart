@@ -83,6 +83,7 @@ class ReflectionGeneratorExecutor extends CommandExecutor {
           showCacheStatus: _flag(args, 'show-cache-status'),
           cacheOnlyPackages: _stringList(args.extraOptions['cache-only']),
           checkOnly: checkOnly,
+          dryRun: args.dryRun,
         ),
       );
 
@@ -103,7 +104,8 @@ class ReflectionGeneratorExecutor extends CommandExecutor {
         return ItemResult.failure(
           path: projectPath,
           name: context.name,
-          error: 'Reflection generation failed for ${result.failedCount} '
+          error:
+              'Reflection generation failed for ${result.failedCount} '
               'file(s) (generated ${result.processedCount}, '
               'skipped ${result.skippedCount})',
         );
@@ -117,16 +119,30 @@ class ReflectionGeneratorExecutor extends CommandExecutor {
         return ItemResult.failure(
           path: projectPath,
           name: context.name,
-          error: '${result.staleCount} generated file(s) are stale — '
+          error:
+              '${result.staleCount} generated file(s) are stale — '
               '${result.staleFiles.join(', ')}. Regenerate and commit.',
         );
       }
 
+      if (args.dryRun && !checkOnly) {
+        // SCF11: a preview, never a verdict — the files it would write are
+        // listed as it runs, and the count is the item's message.
+        return ItemResult.success(
+          path: projectPath,
+          name: context.name,
+          message:
+              '[DRY RUN] would write ${result.wouldWriteFiles.length}, '
+              'unchanged ${result.upToDateCount}, '
+              'skipped ${result.skippedCount}',
+        );
+      }
       if (checkOnly) {
         return ItemResult.success(
           path: projectPath,
           name: context.name,
-          message: 'Up to date ${result.upToDateCount}, '
+          message:
+              'Up to date ${result.upToDateCount}, '
               'skipped ${result.skippedCount}',
         );
       }
@@ -134,7 +150,8 @@ class ReflectionGeneratorExecutor extends CommandExecutor {
       return ItemResult.success(
         path: projectPath,
         name: context.name,
-        message: 'Generated ${result.processedCount}, '
+        message:
+            'Generated ${result.processedCount}, '
             'skipped ${result.skippedCount}',
       );
     } catch (e, stack) {
@@ -152,8 +169,9 @@ class ReflectionGeneratorExecutor extends CommandExecutor {
   /// sources, applying CLI-over-config precedence.
   _ResolvedTargets _resolveTargets(String projectPath, CliArgs args) {
     final cliPackage = args.extraOptions['package'] as String?;
-    final cliExtension =
-        _normalizeExtension(args.extraOptions['extension'] as String?);
+    final cliExtension = _normalizeExtension(
+      args.extraOptions['extension'] as String?,
+    );
     final cliUseAll = _flag(args, 'useAllCapabilities');
     final allMode = _flag(args, 'all');
 
@@ -165,8 +183,9 @@ class ReflectionGeneratorExecutor extends CommandExecutor {
     }
 
     final configPackage = toolOptions['package'] as String?;
-    final configExtension =
-        _normalizeExtension(toolOptions['extension'] as String?);
+    final configExtension = _normalizeExtension(
+      toolOptions['extension'] as String?,
+    );
     final configUseAll = toolOptions['use_all_capabilities'] == true;
 
     // Target source 1: explicit positional args override everything.
@@ -180,12 +199,17 @@ class ReflectionGeneratorExecutor extends CommandExecutor {
     // Target source 3: build.yaml fallback.
     String? buildYamlExtension;
     if (targets.isEmpty) {
-      final fallback = _buildYamlFallback(projectPath, args, verbose: args.verbose);
+      final fallback = _buildYamlFallback(
+        projectPath,
+        args,
+        verbose: args.verbose,
+      );
       targets = fallback.patterns;
       buildYamlExtension = fallback.extension;
     }
 
-    final outputExtension = cliExtension ??
+    final outputExtension =
+        cliExtension ??
         configExtension ??
         buildYamlExtension ??
         '.reflection.dart';

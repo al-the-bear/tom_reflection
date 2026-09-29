@@ -46,7 +46,8 @@ final reflectorTool = ToolDefinition(
     gitTraversal: false,
     recursiveScan: true,
     interactiveMode: false,
-    dryRun: false,
+    // SCF11: `-n` previews what would be written (see output_writer.dart).
+    dryRun: true,
     jsonOutput: false,
     verbose: true,
   ),

@@ -1,3 +1,16 @@
+## 1.6.0
+
+### Added — `-n` previews what a generation would write (scf11)
+
+The tool declared `dryRun: false` because nothing read `args.dryRun`, so
+tom_build_base refused `-n` (and before 2.12.0 it regenerated for real). A dry
+run now runs the whole pipeline, compares each output with what is on disk the
+way `--check` does, and lists `Would create` / `Would update` per file, ending
+`[DRY RUN] ... Nothing was written.` Unlike `--check`, a difference is not a
+failure: a preview answers "what would this do", it is not a verdict. `--check`
+wins when both are given. The analyzer summary cache under `.dart_tool/` is
+still maintained; no project file is touched.
+
 # Changelog
 
 ## 1.5.0

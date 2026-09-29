@@ -1,3 +1,14 @@
+## 1.3.0
+
+### Added — `-n` on reflector, analyzer and reflection_analyzer (scf11)
+
+All three declared `dryRun: false` — nothing read `args.dryRun`, so
+tom_build_base refused `-n`. They write files (the reflection output, the
+analysis YAML/JSON), so a preview is meaningful: every write now goes through
+`writeOrPreview`, which under `-n` prints `[DRY RUN] Would create` /
+`Would update` for each output that would change and writes nothing. Analysis
+printed to stdout is unaffected.
+
 ## 1.2.0
 
 ### Changed — `-n` / `--dry-run` is now refused rather than silently ignored

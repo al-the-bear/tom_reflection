@@ -36,6 +36,7 @@ class ReflectionGenerationOptions {
     this.showCacheStatus = false,
     this.cacheOnlyPackages = const [],
     this.checkOnly = false,
+    this.dryRun = false,
   });
 
   /// Reflection package name whose annotations trigger generation.
@@ -78,6 +79,16 @@ class ReflectionGenerationOptions {
   /// the tests never read. Costly — a check run is a full generation run — but
   /// it is the only thing that actually answers the question.
   final bool checkOnly;
+
+  /// Report what a generation would write, and write nothing (the CLI `-n`).
+  ///
+  /// Like [checkOnly] it runs the whole pipeline and compares the result with
+  /// what is on disk; unlike it, a difference is not a failure. A preview is an
+  /// answer to "what would this do", not a verdict, so the run succeeds and
+  /// lists each output it would create or update. [checkOnly] wins when both
+  /// are set. The analyzer summary cache is a tool cache under `.dart_tool/`
+  /// and is still maintained; no project file is touched.
+  final bool dryRun;
 }
 
 /// Per-file result of [processReflectionFile].
@@ -107,6 +118,10 @@ enum ReflectionFileOutcome {
   /// generated, or is missing entirely. The source and its generated
   /// counterpart have diverged; the run must exit non-zero.
   stale,
+
+  /// Dry-run only: a generation would create or rewrite this output. Nothing
+  /// was written, and it is not a failure.
+  wouldWrite,
 }
 
 /// Writes [generatedSource] to [outputPath], or in check mode compares the two.
@@ -125,12 +140,29 @@ enum ReflectionFileOutcome {
 /// A missing output counts as [ReflectionFileOutcome.stale]. A source that
 /// should have a generated counterpart and does not is drift, and the remedy is
 /// the same: run the generator.
+///
+/// With [dryRun] (and not [checkOnly]) the comparison is made the same way but
+/// reported as a preview: `Would create` / `Would update` and
+/// [ReflectionFileOutcome.wouldWrite], or [ReflectionFileOutcome.upToDate].
 ReflectionFileOutcome applyGeneratedOutput({
   required String outputPath,
   required String generatedSource,
   required bool checkOnly,
+  bool dryRun = false,
 }) {
   final output = File(outputPath);
+
+  if (dryRun && !checkOnly) {
+    if (!output.existsSync()) {
+      print('  Would create: $outputPath');
+      return ReflectionFileOutcome.wouldWrite;
+    }
+    if (output.readAsStringSync() == generatedSource) {
+      return ReflectionFileOutcome.upToDate;
+    }
+    print('  Would update: $outputPath');
+    return ReflectionFileOutcome.wouldWrite;
+  }
 
   if (!checkOnly) {
     output.writeAsStringSync(generatedSource);
@@ -160,6 +192,7 @@ class ReflectionGenerationResult {
     this.upToDateCount = 0,
     this.staleCount = 0,
     this.staleFiles = const [],
+    this.wouldWriteFiles = const [],
     this.cacheStatusShown = false,
     this.noFilesMatched = false,
     this.severeCount = 0,
@@ -188,6 +221,10 @@ class ReflectionGenerationResult {
   /// anyone what to regenerate, and the whole point of the check is to name the
   /// file that drifted.
   final List<String> staleFiles;
+
+  /// Dry-run only: the outputs a generation would create or update, relative
+  /// to the project root.
+  final List<String> wouldWriteFiles;
 
   /// True when the run only displayed cache status and generated nothing.
   final bool cacheStatusShown;
@@ -244,11 +281,15 @@ Future<ReflectionGenerationResult> generateReflection({
   final logSubscription = Logger.root.onRecord
       .where((record) => record.level >= Level.SEVERE)
       .listen((record) {
-    severeCounts.update(record.message, (count) => count + 1, ifAbsent: () {
-      stderr.writeln('  SEVERE: ${record.message}');
-      return 1;
-    });
-  });
+        severeCounts.update(
+          record.message,
+          (count) => count + 1,
+          ifAbsent: () {
+            stderr.writeln('  SEVERE: ${record.message}');
+            return 1;
+          },
+        );
+      });
   int severeTotal() => severeCounts.values.fold(0, (sum, n) => sum + n);
 
   // Summary caching stage.
@@ -308,15 +349,21 @@ Future<ReflectionGenerationResult> generateReflection({
     var upToDateCount = 0;
     final failedFiles = <String>[];
     final staleFiles = <String>[];
+    final wouldWriteFiles = <String>[];
+    final dryRun = options.dryRun && !options.checkOnly;
 
     // Build-runner-style progress so a run is observable even in non-verbose
     // mode (e.g. when nested under buildkit, where this tool's stdout is the
     // only signal the user sees).
     final total = filesToProcess.length;
     final stopwatch = Stopwatch()..start();
-    print(options.checkOnly
-        ? 'Checking reflection for $total target file(s)...'
-        : 'Generating reflection for $total target file(s)...');
+    print(
+      options.checkOnly
+          ? 'Checking reflection for $total target file(s)...'
+          : dryRun
+          ? '[DRY RUN] Previewing reflection for $total target file(s)...'
+          : 'Generating reflection for $total target file(s)...',
+    );
 
     var index = 0;
     for (final filePath in filesToProcess) {
@@ -333,6 +380,7 @@ Future<ReflectionGenerationResult> generateReflection({
         options.outputExtension,
         useAllCapabilities: options.useAllCapabilities,
         checkOnly: options.checkOnly,
+        dryRun: dryRun,
       );
       switch (outcome) {
         case ReflectionFileOutcome.generated:
@@ -351,6 +399,13 @@ Future<ReflectionGenerationResult> generateReflection({
               from: root,
             ),
           );
+        case ReflectionFileOutcome.wouldWrite:
+          wouldWriteFiles.add(
+            p.relative(
+              filePath.replaceAll('.dart', options.outputExtension),
+              from: root,
+            ),
+          );
       }
     }
 
@@ -362,26 +417,32 @@ Future<ReflectionGenerationResult> generateReflection({
       // A crash on an explicit target must be loud and must fail the run —
       // never reported as "succeeded". Write to stderr so it stands out even
       // when this tool is nested under another builder.
-      stderr.writeln('Reflection $verb FAILED after $elapsed — '
-          '$processedCount generated, $skippedCount skipped, '
-          '$failedCount failed.');
+      stderr.writeln(
+        'Reflection $verb FAILED after $elapsed — '
+        '$processedCount generated, $skippedCount skipped, '
+        '$failedCount failed.',
+      );
       for (final failed in failedFiles) {
         stderr.writeln('  FAILED: $failed');
       }
     }
 
     if (staleFiles.isNotEmpty) {
-      stderr.writeln('Reflection check FAILED after $elapsed — '
-          '${staleFiles.length} generated file(s) no longer match their '
-          'source, $upToDateCount up to date, $skippedCount skipped.');
+      stderr.writeln(
+        'Reflection check FAILED after $elapsed — '
+        '${staleFiles.length} generated file(s) no longer match their '
+        'source, $upToDateCount up to date, $skippedCount skipped.',
+      );
       for (final stale in staleFiles) {
         stderr.writeln('  STALE: $stale');
       }
       // The remedy is one command, and naming it here saves the reader working
       // out that a *check* failure is repaired by an ordinary *generate* run.
-      stderr.writeln('Regenerate with the project\'s reflection_generation.sh '
-          '(or `dart run tom_reflection_generator build`) and commit the '
-          'result.');
+      stderr.writeln(
+        'Regenerate with the project\'s reflection_generation.sh '
+        '(or `dart run tom_reflection_generator build`) and commit the '
+        'result.',
+      );
     } else if (failedCount == 0) {
       // The severe count rides on the success line rather than replacing it:
       // the files were written, and saying otherwise would be false — but a
@@ -390,13 +451,19 @@ Future<ReflectionGenerationResult> generateReflection({
       final incomplete = severeCounts.isEmpty
           ? ''
           : ', ${severeTotal()} SEVERE diagnostic(s) in '
-              '${severeCounts.length} distinct case(s) — '
-              'the generated mirror is incomplete';
-      print(options.checkOnly
-          ? 'Reflection check succeeded after $elapsed — '
-              '$upToDateCount up to date, $skippedCount skipped$incomplete.'
-          : 'Reflection generation succeeded after $elapsed — '
-              '$processedCount generated, $skippedCount skipped$incomplete.');
+                '${severeCounts.length} distinct case(s) — '
+                'the generated mirror is incomplete';
+      print(
+        options.checkOnly
+            ? 'Reflection check succeeded after $elapsed — '
+                  '$upToDateCount up to date, $skippedCount skipped$incomplete.'
+            : dryRun
+            ? '[DRY RUN] Reflection preview after $elapsed — would write '
+                  '${wouldWriteFiles.length}, $upToDateCount unchanged, '
+                  '$skippedCount skipped$incomplete. Nothing was written.'
+            : 'Reflection generation succeeded after $elapsed — '
+                  '$processedCount generated, $skippedCount skipped$incomplete.',
+      );
     }
 
     return ReflectionGenerationResult(
@@ -406,6 +473,7 @@ Future<ReflectionGenerationResult> generateReflection({
       upToDateCount: upToDateCount,
       staleCount: staleFiles.length,
       staleFiles: staleFiles,
+      wouldWriteFiles: wouldWriteFiles,
       severeCount: severeTotal(),
     );
   } finally {
@@ -449,8 +517,10 @@ Set<String> collectTargetFiles({
         if (allMode) {
           collectDartFilesFromDirectory(normalizedTarget, filesToProcess);
         } else {
-          print('Warning: $target is a directory. Use --all to process '
-              'directories recursively, or use a glob pattern.');
+          print(
+            'Warning: $target is a directory. Use --all to process '
+            'directories recursively, or use a glob pattern.',
+          );
         }
       } else if (FileSystemEntity.isFileSync(normalizedTarget)) {
         if (_isGeneratableDart(normalizedTarget)) {
@@ -487,7 +557,10 @@ bool _isGeneratableDart(String path) {
 
 /// Returns true if [s] looks like a glob pattern.
 bool isGlobPattern(String s) {
-  return s.contains('*') || s.contains('?') || s.contains('[') || s.contains('{');
+  return s.contains('*') ||
+      s.contains('?') ||
+      s.contains('[') ||
+      s.contains('{');
 }
 
 /// Recursively collects all eligible `.dart` files under [dirPath] into [files].
@@ -523,6 +596,7 @@ Future<ReflectionFileOutcome> processReflectionFile(
   String outputExtension, {
   bool useAllCapabilities = false,
   bool checkOnly = false,
+  bool dryRun = false,
 }) async {
   if (verbose) {
     print('Analyzing: $filePath');
@@ -539,7 +613,11 @@ Future<ReflectionFileOutcome> processReflectionFile(
     }
 
     // Check if the file uses reflection.
-    final usesReflection = await _usesReflection(library, resolver, packageName);
+    final usesReflection = await _usesReflection(
+      library,
+      resolver,
+      packageName,
+    );
     if (!usesReflection) {
       if (verbose) {
         print('  Skipped: Does not use @$packageName');
@@ -587,6 +665,7 @@ Future<ReflectionFileOutcome> processReflectionFile(
       outputPath: outputPath,
       generatedSource: generatedSource,
       checkOnly: checkOnly,
+      dryRun: dryRun,
     );
   } catch (e, st) {
     // A crash here (e.g. a corrupt analyzer summary in the cache throwing
@@ -708,8 +787,10 @@ String _getPackageName(String projectRoot) {
   final pubspecFile = File(p.join(projectRoot, 'pubspec.yaml'));
   if (pubspecFile.existsSync()) {
     final content = pubspecFile.readAsStringSync();
-    final match =
-        RegExp(r'^name:\s*(\S+)', multiLine: true).firstMatch(content);
+    final match = RegExp(
+      r'^name:\s*(\S+)',
+      multiLine: true,
+    ).firstMatch(content);
     if (match != null) {
       return match.group(1)!;
     }

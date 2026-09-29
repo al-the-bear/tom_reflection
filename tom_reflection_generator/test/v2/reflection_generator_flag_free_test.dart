@@ -19,6 +19,9 @@ void main() {
       expect(reflectionGeneratorTool.mode, ToolMode.singleCommand);
       expect(reflectionGeneratorTool.features.projectTraversal, isTrue);
       expect(reflectionGeneratorTool.features.gitTraversal, isFalse);
+      // SCF11: `-n` is a real preview now, so the tool advertises it; with
+      // `false` tom_build_base refuses the flag outright.
+      expect(reflectionGeneratorTool.features.dryRun, isTrue);
     });
 
     test('flag-free args scope traversal to the current project (scan .)', () {

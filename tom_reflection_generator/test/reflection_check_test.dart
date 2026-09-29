@@ -139,22 +139,93 @@ void main() {
       );
     });
 
-    test('a difference anywhere in the file counts, not just the first line', () {
-      final output = p.join(tempDir.path, 'model.reflection.dart');
-      File(output).writeAsStringSync('// header\nconst i = 55;\n// tail\n');
+    test(
+      'a difference anywhere in the file counts, not just the first line',
+      () {
+        final output = p.join(tempDir.path, 'model.reflection.dart');
+        File(output).writeAsStringSync('// header\nconst i = 55;\n// tail\n');
 
+        final outcome = applyGeneratedOutput(
+          outputPath: output,
+          generatedSource: '// header\nconst i = 51;\n// tail\n',
+          checkOnly: true,
+        );
+
+        expect(
+          outcome,
+          ReflectionFileOutcome.stale,
+          reason: 'the real defect was a single changed type index mid-file',
+        );
+      },
+    );
+  });
+
+  // SCF11: `-n` used to be refused — nothing read `args.dryRun` — and before
+  // tom_build_base 2.12.0 it regenerated for real. A preview is the check
+  // comparison reported as an answer instead of a verdict.
+  group('applyGeneratedOutput in dry-run mode', () {
+    late Directory tempDir;
+
+    setUp(() => tempDir = _makeTempDir('dryrun'));
+    tearDown(() {
+      if (tempDir.existsSync()) tempDir.deleteSync(recursive: true);
+    });
+
+    test('a missing output would be written, and is not created', () {
+      final output = p.join(tempDir.path, 'model.reflection.dart');
       final outcome = applyGeneratedOutput(
         outputPath: output,
-        generatedSource: '// header\nconst i = 51;\n// tail\n',
-        checkOnly: true,
+        generatedSource: '// generated v1\n',
+        checkOnly: false,
+        dryRun: true,
       );
+      expect(outcome, ReflectionFileOutcome.wouldWrite);
+      expect(File(output).existsSync(), isFalse);
+    });
 
+    test('a differing output would be written, and is left untouched', () {
+      final output = p.join(tempDir.path, 'model.reflection.dart');
+      File(output).writeAsStringSync('// generated v0\n');
+      final outcome = applyGeneratedOutput(
+        outputPath: output,
+        generatedSource: '// generated v1\n',
+        checkOnly: false,
+        dryRun: true,
+      );
+      expect(outcome, ReflectionFileOutcome.wouldWrite);
+      expect(File(output).readAsStringSync(), '// generated v0\n');
+    });
+
+    test('a matching output is unchanged', () {
+      final output = p.join(tempDir.path, 'model.reflection.dart');
+      File(output).writeAsStringSync('// generated v1\n');
       expect(
-        outcome,
-        ReflectionFileOutcome.stale,
-        reason: 'the real defect was a single changed type index mid-file',
+        applyGeneratedOutput(
+          outputPath: output,
+          generatedSource: '// generated v1\n',
+          checkOnly: false,
+          dryRun: true,
+        ),
+        ReflectionFileOutcome.upToDate,
       );
     });
+
+    test(
+      'check mode wins when both are asked for — a verdict, not a preview',
+      () {
+        final output = p.join(tempDir.path, 'model.reflection.dart');
+        expect(
+          applyGeneratedOutput(
+            outputPath: output,
+            generatedSource: '// generated v1\n',
+            checkOnly: true,
+            dryRun: true,
+          ),
+          ReflectionFileOutcome.stale,
+        );
+        expect(File(output).existsSync(), isFalse);
+      },
+    );
   });
 
   group('ReflectionGenerationResult', () {

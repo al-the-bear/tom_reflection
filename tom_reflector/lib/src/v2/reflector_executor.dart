@@ -7,11 +7,13 @@ library;
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
-import 'package:tom_build_base/tom_build_base.dart' show TomBuildConfig, hasTomBuildConfig;
+import 'package:tom_build_base/tom_build_base.dart'
+    show TomBuildConfig, hasTomBuildConfig;
 import 'package:tom_build_base/tom_build_base_v2.dart';
 
 import 'package:tom_reflector/tom_reflector.dart';
 import 'package:tom_reflector/src/reflection/generator/generator.dart' as gen;
+import 'output_writer.dart';
 
 const _toolKey = 'tom_reflector';
 
@@ -30,7 +32,10 @@ class ReflectorExecutor extends CommandExecutor {
 
     // Handle --list mode
     if (args.listOnly) {
-      final relativePath = p.relative(context.path, from: context.executionRoot);
+      final relativePath = p.relative(
+        context.path,
+        from: context.executionRoot,
+      );
       print('  $relativePath');
       return ItemResult.success(path: context.path, name: context.name);
     }
@@ -47,6 +52,7 @@ class ReflectorExecutor extends CommandExecutor {
         barrelOverride: barrelOverride,
         outputPath: outputPath,
         verbose: args.verbose,
+        dryRun: args.dryRun,
       );
 
       return success
@@ -80,6 +86,7 @@ Future<bool> _processProject({
   String? barrelOverride,
   String? outputPath,
   required bool verbose,
+  bool dryRun = false,
 }) async {
   // Load config from buildkit.yaml tom_reflector: section
   final buildConfig = TomBuildConfig.load(dir: projectPath, toolKey: _toolKey);
@@ -92,12 +99,14 @@ Future<bool> _processProject({
       entryPoints: entryPoints,
       outputPath: outputPath,
       verbose: verbose,
+      dryRun: dryRun,
     );
   }
 
   // Barrel-based mode (from CLI or config)
   final config = TomAnalyzerConfig.fromMap(toolOptions);
-  final barrel = barrelOverride ??
+  final barrel =
+      barrelOverride ??
       (config.barrels.isNotEmpty ? config.barrels.first : null);
 
   if (barrel == null) {
@@ -112,6 +121,7 @@ Future<bool> _processProject({
     outputPath: outputPath,
     verbose: verbose,
     executionRoot: executionRoot,
+    dryRun: dryRun,
   );
 }
 
@@ -121,6 +131,7 @@ Future<bool> _runNewReflect({
   required List<String> entryPoints,
   String? outputPath,
   required bool verbose,
+  bool dryRun = false,
 }) async {
   final config = gen.ReflectionConfig(
     entryPoints: entryPoints,
@@ -143,10 +154,8 @@ Future<bool> _runNewReflect({
   }
 
   for (final entry in result.generatedFiles.entries) {
-    final file = File(entry.key);
-    await file.parent.create(recursive: true);
-    await file.writeAsString(entry.value);
-    if (verbose) print('  Generated: ${entry.key}');
+    await writeOrPreview(entry.key, entry.value, dryRun: dryRun);
+    if (verbose && !dryRun) print('  Generated: ${entry.key}');
   }
   return true;
 }
@@ -159,6 +168,7 @@ Future<bool> _runLegacyReflect({
   String? outputPath,
   required bool verbose,
   required String executionRoot,
+  bool dryRun = false,
 }) async {
   final analyzer = TomAnalyzer();
   final analysis = await analyzer.analyzeBarrel(
@@ -178,7 +188,10 @@ Future<bool> _runLegacyReflect({
     outputFile: outputPath,
   );
 
-  await File(resolvedOutput).writeAsString(content);
+  await writeOrPreview(resolvedOutput, content, dryRun: dryRun);
+  // The preview line above is the whole report under `-n`; "Generated" would
+  // claim a write that did not happen.
+  if (dryRun) return true;
   final displayPath = p.relative(projectPath, from: executionRoot);
   if (verbose) {
     print('  $displayPath -> $resolvedOutput');
@@ -209,7 +222,5 @@ String _ensureRdartExtension(String path) {
 
 /// Create executor map for the reflector tool.
 Map<String, CommandExecutor> createReflectorExecutors() {
-  return {
-    'default': ReflectorExecutor(),
-  };
+  return {'default': ReflectorExecutor()};
 }
