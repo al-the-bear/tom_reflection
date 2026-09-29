@@ -47,16 +47,13 @@ final _machinePath = RegExp(r'(file://)?/(Users|home|srv)/[A-Za-z0-9_.-]+/');
 /// run that proved it green was not the run that mattered.
 const _selfPath = 'test/artifact_portability_test.dart';
 
-/// Tracked paths exempt from the rule, each for a stated reason.
+/// Tracked paths exempt from the rule: only this file, for the reason given at
+/// [_selfPath].
 ///
-/// `tool/` holds ad-hoc exploration scripts that `analysis_options.yaml`
-/// already excludes from analysis: not shipped, not imported by `lib/` or
-/// `test/`, and several hardcode a `Code/tom2/...` root from a workspace layout
-/// that no longer exists. They are exempt because repairing them is a separate
-/// question — whether they should exist at all — not because naming a machine
-/// is acceptable there. See the sce todo filed with this test.
-bool _exempt(String relative) =>
-    p.split(relative).first == 'tool' || p.posix.normalize(relative) == _selfPath;
+/// `tool/` is in scope like everything else. Its scripts find the workspace
+/// from their own location (`tool/workspace.dart`), so nothing there has a
+/// reason to name a machine — and a script that does cannot run anywhere else.
+bool _exempt(String relative) => p.posix.normalize(relative) == _selfPath;
 
 /// Binary files, where a path-shaped byte run means nothing.
 const _binaryExtensions = {'.png', '.jpg', '.jpeg', '.gif', '.pdf', '.ico'};
@@ -78,156 +75,152 @@ void main() {
   final packageRoot = Directory.current.path;
 
   group('SCD13: tracked artifacts are machine-independent', () {
-    test(
-      'G-SCD13X-1: no tracked file contains a machine-specific absolute path '
-      '[2026-09-12] (PASS)',
-      () {
-        final offenders = <String, int>{};
+    test('G-SCD13X-1: no tracked file contains a machine-specific absolute path '
+        '[2026-09-12] (PASS)', () {
+      final offenders = <String, int>{};
 
-        for (final relative in _trackedFiles(packageRoot)) {
-          if (_exempt(relative)) continue;
-          if (_binaryExtensions.contains(p.extension(relative).toLowerCase())) {
-            continue;
-          }
-          final file = File(p.join(packageRoot, relative));
-          if (!file.existsSync()) continue;
+      for (final relative in _trackedFiles(packageRoot)) {
+        if (_exempt(relative)) continue;
+        if (_binaryExtensions.contains(p.extension(relative).toLowerCase())) {
+          continue;
+        }
+        final file = File(p.join(packageRoot, relative));
+        if (!file.existsSync()) continue;
 
-          final String content;
-          try {
-            content = file.readAsStringSync();
-          } on FileSystemException {
-            continue; // Not text after all.
-          }
-
-          final hits = _machinePath.allMatches(content).length;
-          if (hits > 0) offenders[relative] = hits;
+        final String content;
+        try {
+          content = file.readAsStringSync();
+        } on FileSystemException {
+          continue; // Not text after all.
         }
 
+        final hits = _machinePath.allMatches(content).length;
+        if (hits > 0) offenders[relative] = hits;
+      }
+
+      expect(
+        offenders,
+        isEmpty,
+        reason:
+            'These tracked files name the machine that produced them, so '
+            'they are wrong on every other machine in the fleet:\n'
+            '${offenders.entries.map((e) => '  ${e.value} in ${e.key}').join('\n')}\n\n'
+            'A generated artifact belongs in a gitignored folder — testkit '
+            'output in testlog/, not doc/ — and a committed one must carry '
+            'package-relative or workspace-relative paths. Regenerating it '
+            'here only moves the failure to the next host.',
+      );
+    });
+
+    test('G-SCD13X-2: the scan actually reads tracked text files [2026-09-12] '
+        '(PASS)', () {
+      // Anti-vacuity. G-SCD13X-1 passes just as happily when `git ls-files`
+      // returns nothing, when every file is exempt, or when the working
+      // directory is not what the test assumes — none of which it would
+      // notice. It is a scan, so what it scanned has to be asserted.
+      final tracked = _trackedFiles(packageRoot);
+      expect(tracked, isNotEmpty, reason: 'git ls-files returned nothing');
+
+      final scanned = tracked
+          .where((f) => !_exempt(f))
+          .where(
+            (f) => !_binaryExtensions.contains(p.extension(f).toLowerCase()),
+          )
+          .where((f) => File(p.join(packageRoot, f)).existsSync())
+          .toList();
+
+      expect(
+        scanned.length,
+        greaterThan(100),
+        reason:
+            'Only ${scanned.length} files were in scope; this package tracks '
+            'several hundred. Something narrowed the scan.',
+      );
+      expect(
+        scanned,
+        contains('pubspec.yaml'),
+        reason: 'a file that must always be in scope',
+      );
+
+      // The tool scripts are scanned: they carry no machine path and must
+      // not grow one, since a script that names a machine runs nowhere else.
+      expect(
+        scanned.where((f) => p.split(f).first == 'tool'),
+        isNotEmpty,
+        reason: 'tool/ is in scope; nothing there is exempt',
+      );
+
+      // The self-exemption must stay one file. Were it widened to `test/**`,
+      // a fixture naming a machine would stop being a finding — which is
+      // most of what this guard is for.
+      expect(
+        scanned.where((f) => p.split(f).first == 'test').length,
+        greaterThan(50),
+        reason:
+            'Almost all of test/ must remain in scope; only $_selfPath is '
+            'exempt, because G-SCD13X-3 keeps example paths as test data.',
+      );
+    });
+
+    test('G-SCD13X-3: the pattern recognises the paths this defect was made of '
+        '[2026-09-12] (PASS)', () {
+      // The three forms actually found in this package's history, so a
+      // future narrowing of the pattern fails here rather than silently
+      // letting the next one through.
+      const seen = [
+        // The golden deleted by tcincb86_ahul.
+        'file:///srv/repos/al_the_bear/tom_ai/reflection/x.dart',
+        // doc/generated/dart_overview/source_info.json, Feb 2026.
+        'file:///Users/alexiskyaw/Desktop/Code/tom2/xternal/x.dart',
+        // A Linux developer checkout.
+        '/home/alexis/al_the_bear/x.dart',
+      ];
+      for (final path in seen) {
         expect(
-          offenders,
-          isEmpty,
-          reason:
-              'These tracked files name the machine that produced them, so '
-              'they are wrong on every other machine in the fleet:\n'
-              '${offenders.entries.map((e) => '  ${e.value} in ${e.key}').join('\n')}\n\n'
-              'A generated artifact belongs in a gitignored folder — testkit '
-              'output in testlog/, not doc/ — and a committed one must carry '
-              'package-relative or workspace-relative paths. Regenerating it '
-              'here only moves the failure to the next host.',
+          _machinePath.hasMatch(path),
+          isTrue,
+          reason: 'pattern no longer recognises $path',
         );
-      },
-    );
+      }
 
-    test(
-      'G-SCD13X-2: the scan actually reads tracked text files [2026-09-12] '
-      '(PASS)',
-      () {
-        // Anti-vacuity. G-SCD13X-1 passes just as happily when `git ls-files`
-        // returns nothing, when every file is exempt, or when the working
-        // directory is not what the test assumes — none of which it would
-        // notice. It is a scan, so what it scanned has to be asserted.
-        final tracked = _trackedFiles(packageRoot);
-        expect(tracked, isNotEmpty, reason: 'git ls-files returned nothing');
-
-        final scanned = tracked
-            .where((f) => !_exempt(f))
-            .where(
-              (f) => !_binaryExtensions.contains(p.extension(f).toLowerCase()),
-            )
-            .where((f) => File(p.join(packageRoot, f)).existsSync())
-            .toList();
-
+      // And does not fire on the portable forms the serializers emit.
+      for (final portable in const [
+        'package:tom_reflector/src/analyzer/analyzer_runner.dart',
+        'workspace:tom_ai/core/tom_core_kernel/lib/kernel.dart',
+        'lib/src/reflection/runtime/class_mirror.dart',
+        'dart:core',
+      ]) {
         expect(
-          scanned.length,
-          greaterThan(100),
-          reason:
-              'Only ${scanned.length} files were in scope; this package tracks '
-              'several hundred. Something narrowed the scan.',
+          _machinePath.hasMatch(portable),
+          isFalse,
+          reason: 'pattern wrongly fires on $portable',
         );
-        expect(
-          scanned,
-          contains('pubspec.yaml'),
-          reason: 'a file that must always be in scope',
-        );
+      }
+    });
 
-        // The self-exemption must stay one file. Were it widened to `test/**`,
-        // a fixture naming a machine would stop being a finding — which is
-        // most of what this guard is for.
-        expect(
-          scanned.where((f) => p.split(f).first == 'test').length,
-          greaterThan(50),
-          reason:
-              'Almost all of test/ must remain in scope; only $_selfPath is '
-              'exempt, because G-SCD13X-3 keeps example paths as test data.',
-        );
-      },
-    );
+    test('G-SCD13X-4: testkit output is not tracked under doc/ [2026-09-12] '
+        '(PASS)', () {
+      // The specific mistake that reintroduced the defect: testkit writes
+      // `last_testrun.json` and `baseline_*.csv`, both of which record the
+      // absolute path of every test file on the machine that ran them.
+      // `testlog/` is gitignored for exactly this reason; `doc/` is not.
+      final stray = _trackedFiles(packageRoot)
+          .where(
+            (f) =>
+                p.basename(f) == 'last_testrun.json' ||
+                (p.basename(f).startsWith('baseline_') &&
+                    p.extension(f) == '.csv'),
+          )
+          .toList();
 
-    test(
-      'G-SCD13X-3: the pattern recognises the paths this defect was made of '
-      '[2026-09-12] (PASS)',
-      () {
-        // The three forms actually found in this package's history, so a
-        // future narrowing of the pattern fails here rather than silently
-        // letting the next one through.
-        const seen = [
-          // The golden deleted by tcincb86_ahul.
-          'file:///srv/repos/al_the_bear/tom_ai/reflection/x.dart',
-          // doc/generated/dart_overview/source_info.json, Feb 2026.
-          'file:///Users/alexiskyaw/Desktop/Code/tom2/xternal/x.dart',
-          // A Linux developer checkout.
-          '/home/alexis/al_the_bear/x.dart',
-        ];
-        for (final path in seen) {
-          expect(
-            _machinePath.hasMatch(path),
-            isTrue,
-            reason: 'pattern no longer recognises $path',
-          );
-        }
-
-        // And does not fire on the portable forms the serializers emit.
-        for (final portable in const [
-          'package:tom_reflector/src/analyzer/analyzer_runner.dart',
-          'workspace:tom_ai/core/tom_core_kernel/lib/kernel.dart',
-          'lib/src/reflection/runtime/class_mirror.dart',
-          'dart:core',
-        ]) {
-          expect(
-            _machinePath.hasMatch(portable),
-            isFalse,
-            reason: 'pattern wrongly fires on $portable',
-          );
-        }
-      },
-    );
-
-    test(
-      'G-SCD13X-4: testkit output is not tracked under doc/ [2026-09-12] '
-      '(PASS)',
-      () {
-        // The specific mistake that reintroduced the defect: testkit writes
-        // `last_testrun.json` and `baseline_*.csv`, both of which record the
-        // absolute path of every test file on the machine that ran them.
-        // `testlog/` is gitignored for exactly this reason; `doc/` is not.
-        final stray = _trackedFiles(packageRoot)
-            .where(
-              (f) =>
-                  p.basename(f) == 'last_testrun.json' ||
-                  (p.basename(f).startsWith('baseline_') &&
-                      p.extension(f) == '.csv'),
-            )
-            .toList();
-
-        expect(
-          stray,
-          isEmpty,
-          reason:
-              'Testkit artifacts belong in the gitignored testlog/, never in '
-              'doc/ — a committed one is a photograph of one machine\'s run '
-              'that nothing updates. Found: $stray',
-        );
-      },
-    );
+      expect(
+        stray,
+        isEmpty,
+        reason:
+            'Testkit artifacts belong in the gitignored testlog/, never in '
+            'doc/ — a committed one is a photograph of one machine\'s run '
+            'that nothing updates. Found: $stray',
+      );
+    });
   });
 }
