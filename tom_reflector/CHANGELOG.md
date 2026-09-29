@@ -1,3 +1,26 @@
+## Unreleased
+
+### Changed — `tool/` runs anywhere, and `doc/` holds only what a person wrote
+
+- `analyze_uam_full`, `find_annotations` and `run_cross_reference` named a
+  workspace that no longer exists (`Code/tom2`) and failed at their first entry
+  point. They share `tool/uam_targets.dart` with `run_uam_reflection` now — one
+  list of UAM entry points, derived from the workspace root the scripts find
+  from their own location (`tool/workspace.dart`) — and each runs end to end.
+- `extract_analyzer_element_api` looked for "the newest analyzer 8.x in the pub
+  cache" and found none once the dependency moved to 10.x. It reads the
+  analyzer this package resolves instead.
+- Every tool writes its output under the workspace's untracked
+  `ztmp/tom_reflector/<name>/`, never into `doc/`. The generated files `doc/`
+  carried — the `doc/generated/` trees, three tabular dumps, the element-API
+  extraction, and `tool/uam_full_analysis.txt` — are untracked, together with
+  `doc/uam_analyzer.md`, a record of one run against the dead workspace.
+- `tool/test_analyzer.dart` is removed: it analysed the barrel of the package's
+  former name and had outlived its question.
+- `doc/tom_analyzer_design.md` opens by stating that it is the original design
+  record, where the code has diverged from it, and which documents describe the
+  package as it is.
+
 ## 1.3.0
 
 ### Added — `-n` on reflector, analyzer and reflection_analyzer (scf11)

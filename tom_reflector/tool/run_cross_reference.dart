@@ -7,6 +7,8 @@ library;
 import 'package:tom_reflector/src/reflection/generator/entry_point_analyzer.dart';
 import 'package:tom_reflector/src/reflection/generator/reflection_config.dart';
 
+import 'uam_targets.dart';
+
 void main(List<String> args) async {
   final tabularMode = args.contains('--tabular');
 
@@ -16,9 +18,7 @@ void main(List<String> args) async {
 
   // Create config for tom_uam_server with enhanced dependency tracking
   final config = ReflectionConfig.fromMap({
-    'entry_points': [
-      '/Users/alexiskyaw/Desktop/Code/tom2/uam/tom_uam_server/bin/aa_server_start.dart'
-    ],
+    'entry_points': [uamServerEntryPoint],
     'dependency_config': {
       'type_annotations': {
         'enabled': true,
@@ -106,16 +106,30 @@ void main(List<String> args) async {
   print('');
 
   // Print cross-reference
-  print('╔══════════════════════════════════════════════════════════════════════════════╗');
-  print('║                     REFLECTION CROSS-REFERENCE                              ║');
-  print('║                  (from EntryPointAnalyzer results)                          ║');
-  print('╚══════════════════════════════════════════════════════════════════════════════╝');
+  print(
+    '╔══════════════════════════════════════════════════════════════════════════════╗',
+  );
+  print(
+    '║                     REFLECTION CROSS-REFERENCE                              ║',
+  );
+  print(
+    '║                  (from EntryPointAnalyzer results)                          ║',
+  );
+  print(
+    '╚══════════════════════════════════════════════════════════════════════════════╝',
+  );
   print('');
 
   // Global Members
-  print('┌──────────────────────────────────────────────────────────────────────────────┐');
-  print('│ GLOBAL MEMBERS                                                              │');
-  print('└──────────────────────────────────────────────────────────────────────────────┘');
+  print(
+    '┌──────────────────────────────────────────────────────────────────────────────┐',
+  );
+  print(
+    '│ GLOBAL MEMBERS                                                              │',
+  );
+  print(
+    '└──────────────────────────────────────────────────────────────────────────────┘',
+  );
   print('');
 
   print('Global Functions (${result.globalFunctions.length}):');
@@ -135,14 +149,22 @@ void main(List<String> args) async {
   print('');
 
   // Classes
-  print('┌──────────────────────────────────────────────────────────────────────────────┐');
-  print('│ CLASSES                                                                     │');
-  print('└──────────────────────────────────────────────────────────────────────────────┘');
+  print(
+    '┌──────────────────────────────────────────────────────────────────────────────┐',
+  );
+  print(
+    '│ CLASSES                                                                     │',
+  );
+  print(
+    '└──────────────────────────────────────────────────────────────────────────────┘',
+  );
   print('');
 
   print('Class Summary (${result.classes.length} total):');
   print('');
-  print('  ${'Class Name'.padRight(25)} │ Ctors │ Meth  │ Flds  │ Gets  │ Sets');
+  print(
+    '  ${'Class Name'.padRight(25)} │ Ctors │ Meth  │ Flds  │ Gets  │ Sets',
+  );
   print('  ${'─' * 25}─┼───────┼───────┼───────┼───────┼───────');
 
   int totalCtors = 0;
@@ -166,15 +188,17 @@ void main(List<String> args) async {
     totalSetters += setters;
 
     final name = className.length > 25
-      ? '${className.substring(0, 22)}...'
-      : className;
+        ? '${className.substring(0, 22)}...'
+        : className;
 
     print(
-        '  ${name.padRight(25)} │ ${ctors.toString().padLeft(5)} │ ${methods.toString().padLeft(5)} │ ${fields.toString().padLeft(5)} │ ${getters.toString().padLeft(5)} │ ${setters.toString().padLeft(5)}');
+      '  ${name.padRight(25)} │ ${ctors.toString().padLeft(5)} │ ${methods.toString().padLeft(5)} │ ${fields.toString().padLeft(5)} │ ${getters.toString().padLeft(5)} │ ${setters.toString().padLeft(5)}',
+    );
   }
   print('  ${'─' * 25}─┼───────┼───────┼───────┼───────┼───────');
   print(
-      '  ${'TOTAL'.padRight(25)} │ ${totalCtors.toString().padLeft(5)} │ ${totalMethods.toString().padLeft(5)} │ ${totalFields.toString().padLeft(5)} │ ${totalGetters.toString().padLeft(5)} │ ${totalSetters.toString().padLeft(5)}');
+    '  ${'TOTAL'.padRight(25)} │ ${totalCtors.toString().padLeft(5)} │ ${totalMethods.toString().padLeft(5)} │ ${totalFields.toString().padLeft(5)} │ ${totalGetters.toString().padLeft(5)} │ ${totalSetters.toString().padLeft(5)}',
+  );
   print('');
 
   // Class details
@@ -187,7 +211,8 @@ void main(List<String> args) async {
 
     if (cls.constructors.isNotEmpty) {
       print(
-          '    Constructors: ${cls.constructors.map((c) => (c.name?.isEmpty ?? true) ? '(default)' : c.name).join(', ')}');
+        '    Constructors: ${cls.constructors.map((c) => (c.name?.isEmpty ?? true) ? '(default)' : c.name).join(', ')}',
+      );
     }
     if (cls.methods.isNotEmpty) {
       print('    Methods: ${cls.methods.map((m) => m.name).join(', ')}');
@@ -203,9 +228,15 @@ void main(List<String> args) async {
   }
 
   // Enums
-  print('┌──────────────────────────────────────────────────────────────────────────────┐');
-  print('│ ENUMS                                                                       │');
-  print('└──────────────────────────────────────────────────────────────────────────────┘');
+  print(
+    '┌──────────────────────────────────────────────────────────────────────────────┐',
+  );
+  print(
+    '│ ENUMS                                                                       │',
+  );
+  print(
+    '└──────────────────────────────────────────────────────────────────────────────┘',
+  );
   print('');
 
   print('Enums (${result.enums.length} total):');
@@ -216,9 +247,15 @@ void main(List<String> args) async {
   print('');
 
   // Mixins
-  print('┌──────────────────────────────────────────────────────────────────────────────┐');
-  print('│ MIXINS                                                                      │');
-  print('└──────────────────────────────────────────────────────────────────────────────┘');
+  print(
+    '┌──────────────────────────────────────────────────────────────────────────────┐',
+  );
+  print(
+    '│ MIXINS                                                                      │',
+  );
+  print(
+    '└──────────────────────────────────────────────────────────────────────────────┘',
+  );
   print('');
 
   print('Mixins (${result.mixins.length} total):');
@@ -234,9 +271,15 @@ void main(List<String> args) async {
   print('');
 
   // Extensions
-  print('┌──────────────────────────────────────────────────────────────────────────────┐');
-  print('│ EXTENSIONS                                                                  │');
-  print('└──────────────────────────────────────────────────────────────────────────────┘');
+  print(
+    '┌──────────────────────────────────────────────────────────────────────────────┐',
+  );
+  print(
+    '│ EXTENSIONS                                                                  │',
+  );
+  print(
+    '└──────────────────────────────────────────────────────────────────────────────┘',
+  );
   print('');
 
   print('Extensions (${result.extensions.length} total):');
@@ -254,12 +297,19 @@ void main(List<String> args) async {
   print('');
 
   // Grand totals
-  print('╔══════════════════════════════════════════════════════════════════════════════╗');
-  print('║                              GRAND TOTALS                                   ║');
-  print('╚══════════════════════════════════════════════════════════════════════════════╝');
+  print(
+    '╔══════════════════════════════════════════════════════════════════════════════╗',
+  );
+  print(
+    '║                              GRAND TOTALS                                   ║',
+  );
+  print(
+    '╚══════════════════════════════════════════════════════════════════════════════╝',
+  );
   print('');
 
-  final totalTypes = result.classes.length +
+  final totalTypes =
+      result.classes.length +
       result.enums.length +
       result.mixins.length +
       result.extensions.length;
@@ -286,10 +336,12 @@ void main(List<String> args) async {
   print('  • Setters:      $totalSetters');
   print('  ─────────────────────────');
   print(
-      '  TOTAL:          ${totalCtors + totalMethods + totalFields + totalGetters + totalSetters}');
+    '  TOTAL:          ${totalCtors + totalMethods + totalFields + totalGetters + totalSetters}',
+  );
   print('');
 
-  final grandTotal = totalTypes +
+  final grandTotal =
+      totalTypes +
       result.globalFunctions.length +
       result.globalVariables.length +
       totalCtors +
@@ -298,7 +350,11 @@ void main(List<String> args) async {
       totalGetters +
       totalSetters;
 
-  print('═══════════════════════════════════════════════════════════════════════════════');
+  print(
+    '═══════════════════════════════════════════════════════════════════════════════',
+  );
   print('                    GRAND TOTAL ELEMENTS: $grandTotal');
-  print('═══════════════════════════════════════════════════════════════════════════════');
+  print(
+    '═══════════════════════════════════════════════════════════════════════════════',
+  );
 }

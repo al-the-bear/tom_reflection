@@ -4,7 +4,8 @@
 /// For tabular output: dart run tool/run_uam_reflection.dart --tabular
 /// To keep the generated code: dart run tool/run_uam_reflection.dart --save
 ///
-/// `--save` writes to `ztmp/uam_generated.r.dart` under the workspace root,
+/// `--save` writes to `ztmp/tom_reflector/uam_reflection/uam_generated.r.dart`
+/// under the workspace root,
 /// which is scratch space and untracked. The output is a three-megabyte
 /// generated file that nothing compiles: committing it makes a snapshot of one
 /// run that no later run updates, and the workspace rule is that `doc/` holds
@@ -16,39 +17,19 @@ import 'dart:io';
 import 'package:tom_reflector/src/reflection/generator/reflection_generator.dart';
 import 'package:tom_reflector/src/reflection/generator/reflection_config.dart';
 
-/// The workspace root, derived from this script's own location rather than
-/// written down.
-///
-/// A constant absolute path is right on exactly one machine and names a
-/// directory that does not exist on any of the others, so the script fails at
-/// the first entry point with a message about a file nobody recognises. This
-/// walks up from `<workspace>/tom_ai/reflection/tom_reflector/tool/` instead,
-/// so it is correct wherever the tree is cloned.
-String get _workspaceRoot {
-  var dir = File.fromUri(Platform.script).parent.parent; // …/tom_reflector
-  for (var i = 0; i < 3; i++) {
-    dir = dir.parent; // reflection → tom_ai → workspace root
-  }
-  return dir.path;
-}
+import 'uam_targets.dart';
+import 'workspace.dart';
 
 void main(List<String> args) async {
   final tabularMode = args.contains('--tabular');
   final saveCode = args.contains('--save');
-  final baseDir = _workspaceRoot;
 
-  // Entry points from each tom_* package - same as analyze_uam_full.dart
-  final entryPoints = [
-    '$baseDir/tom_uam/tom_uam_server/bin/aa_server_start.dart',
-    '$baseDir/tom_uam/tom_uam_codespec/lib/tom_uam_codespec.dart',
-    '$baseDir/tom_ai/core/tom_core_kernel/lib/tom_core_kernel.dart',
-    '$baseDir/tom_ai/reflection/tom_reflection/lib/tom_reflection.dart',
-    '$baseDir/tom_ai/basics/tom_basics/lib/tom_basics.dart',
-    '$baseDir/tom_ai/basics/tom_crypto/lib/tom_crypto.dart',
-  ];
+  final entryPoints = uamEntryPoints;
 
   if (!tabularMode) {
-    print('Running reflection generator on tom_uam_server and all tom_* dependencies...\n');
+    print(
+      'Running reflection generator on tom_uam_server and all tom_* dependencies...\n',
+    );
   }
 
   // Create config with all entry points and enhanced dependency tracking
@@ -73,7 +54,7 @@ void main(List<String> args) async {
   // Run the reflection generator
   final generator = ReflectionGenerator(config);
   final analysisResult = await generator.analyze();
-  
+
   if (!tabularMode) {
     print('Analysis complete.');
     print('  Classes: ${analysisResult.classes.length}');
@@ -85,25 +66,27 @@ void main(List<String> args) async {
     print('');
     print('Generating reflection code...');
   }
-  
+
   final generatedCode = await generator.generate();
-  
+
   if (!tabularMode) {
     print('Generation complete.');
     print('  Generated code size: ${generatedCode.length} characters');
     print('  Generated code lines: ${generatedCode.split('\n').length}');
   }
-  
+
   // Save the generated code if requested
   if (saveCode) {
-    final outFile = File('$baseDir/ztmp/uam_generated.r.dart');
+    final outFile = File(
+      '${scratchDirectory('uam_reflection').path}/uam_generated.r.dart',
+    );
     await outFile.parent.create(recursive: true);
     await outFile.writeAsString(generatedCode);
     if (!tabularMode) {
       print('  Saved to: ${outFile.path}');
     }
   }
-  
+
   // Use analysisResult for the tabular output
   final result = analysisResult;
 

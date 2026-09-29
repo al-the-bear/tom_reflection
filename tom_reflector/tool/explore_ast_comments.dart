@@ -54,7 +54,9 @@ void main() async {
     Token? precedingComment = token.precedingComments;
     while (precedingComment != null) {
       print('  Type: ${precedingComment.type}');
-      print('  Lexeme: ${precedingComment.lexeme.substring(0, precedingComment.lexeme.length.clamp(0, 60))}...');
+      print(
+        '  Lexeme: ${precedingComment.lexeme.substring(0, precedingComment.lexeme.length.clamp(0, 60))}...',
+      );
       print('  Offset: ${precedingComment.offset}');
       print('');
       precedingComment = precedingComment.next;
@@ -76,7 +78,9 @@ void main() async {
     // 4. Show how to regenerate source code
     print('');
     print('=== SOURCE CODE REGENERATION ===');
-    final firstClass = unit.declarations.whereType<ClassDeclaration>().firstOrNull;
+    final firstClass = unit.declarations
+        .whereType<ClassDeclaration>()
+        .firstOrNull;
     if (firstClass != null) {
       print('First class: ${firstClass.name.lexeme}');
       final startOffset = firstClass.offset;
@@ -102,7 +106,9 @@ void main() async {
       print('  Offset: ${info['offset']}');
       print('  Length: ${info['length']}');
       print('  HasDocComment: ${info['hasDocComment']}');
-      print('  DocComment length: ${(info['docComment'] as String?)?.length ?? 0}');
+      print(
+        '  DocComment length: ${(info['docComment'] as String?)?.length ?? 0}',
+      );
     }
   } else {
     print('Failed to resolve: ${result.runtimeType}');
@@ -157,7 +163,9 @@ class _CommentCollectorVisitor extends RecursiveAstVisitor<void> {
       print('  Doc comment: ${docComment.tokens.length} tokens');
       if (docComment.tokens.isNotEmpty) {
         final firstLine = docComment.tokens.first.lexeme;
-        print('  First line: ${firstLine.substring(0, firstLine.length.clamp(0, 60))}...');
+        print(
+          '  First line: ${firstLine.substring(0, firstLine.length.clamp(0, 60))}...',
+        );
       }
     }
 

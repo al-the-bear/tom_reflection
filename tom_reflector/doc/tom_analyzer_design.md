@@ -1,5 +1,20 @@
 # Tom Analyzer Design Document
 
+> **This is the original design record, not a description of the current code.**
+> It was written before the implementation, under the package's former name
+> `tom_analyzer`, and is kept because it records the reasoning behind the
+> model — the intent a reader needs when a design question comes back. The code
+> has diverged from it and the document is not maintained to follow: the
+> package is `tom_reflector`; `AnalysisResult.timestamp` and
+> `FileInfo.modified` do not exist (a serialized result carries no
+> machine- or time-dependent fields, and `contentHash` answers what `modified`
+> was for); and the API shape differs in the places later sections describe.
+>
+> For what the package does now, read
+> [`analyzer_usage_guide.md`](analyzer_usage_guide.md),
+> [`reflector_usage_guide.md`](reflector_usage_guide.md) and
+> [`reflection_user_guide.md`](reflection_user_guide.md), and the source.
+
 ## Overview
 
 **tom_analyzer** is a comprehensive Dart code analysis tool that captures complete analyzer results for import barrels and generates structured object models. It serves three roles:

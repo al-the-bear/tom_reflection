@@ -29,7 +29,9 @@ dart run tool/run_uam_reflection.dart --tabular  # the dump alone
 dart run tool/run_uam_reflection.dart --save     # also write the generated code
 ```
 
-`--save` writes `ztmp/uam_generated.r.dart` under the workspace root. That is
+`--save` writes `ztmp/tom_reflector/uam_reflection/uam_generated.r.dart` under
+the workspace root — every tool under `tool/` writes its output beneath
+`ztmp/tom_reflector/`, through `tool/workspace.dart`. That is
 scratch space, and deliberately so: the file is a few megabytes of generated
 Dart that nothing in the tree compiles, so a committed copy is a photograph of
 one run that no later run updates. Read it where it lands, or regenerate it.

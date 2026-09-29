@@ -59,24 +59,23 @@ Future<void> main(List<String> args) async {
   );
 
   // Output as JSON
-  final output = {
-    'totalTypes': sortedTypes.length,
-    'types': sortedTypes,
-  };
+  final output = {'totalTypes': sortedTypes.length, 'types': sortedTypes};
 
   final outputPath = args.isNotEmpty ? args[0] : '/tmp/analyzer_ast_api.json';
-  await File(outputPath).writeAsString(
-    const JsonEncoder.withIndent('  ').convert(output),
-  );
+  await File(
+    outputPath,
+  ).writeAsString(const JsonEncoder.withIndent('  ').convert(output));
 
   print('Extracted ${sortedTypes.length} types to $outputPath');
 
   // Print summary
   print('\nType counts by kind:');
-  final abstractCount =
-      sortedTypes.values.where((t) => t['isAbstract'] == true).length;
-  final sealedCount =
-      sortedTypes.values.where((t) => t['isSealed'] == true).length;
+  final abstractCount = sortedTypes.values
+      .where((t) => t['isAbstract'] == true)
+      .length;
+  final sealedCount = sortedTypes.values
+      .where((t) => t['isSealed'] == true)
+      .length;
   final concreteCount = sortedTypes.values
       .where((t) => t['isAbstract'] != true && t['isSealed'] != true)
       .length;
@@ -92,10 +91,10 @@ Map<String, dynamic> _extractTypeInfo(InterfaceElement element) {
     'kind': element is ClassElement
         ? 'class'
         : element is MixinElement
-            ? 'mixin'
-            : element is EnumElement
-                ? 'enum'
-                : 'interface',
+        ? 'mixin'
+        : element is EnumElement
+        ? 'enum'
+        : 'interface',
     'isAbstract': element is ClassElement && element.isAbstract,
     'isSealed': element is ClassElement && element.isSealed,
   };
@@ -119,8 +118,10 @@ Map<String, dynamic> _extractTypeInfo(InterfaceElement element) {
 
   // Get mixins
   if (element is ClassElement && element.mixins.isNotEmpty) {
-    info['mixins'] =
-        element.mixins.map((m) => m.element.name).whereType<String>().toList();
+    info['mixins'] = element.mixins
+        .map((m) => m.element.name)
+        .whereType<String>()
+        .toList();
   }
 
   // Get type parameters
@@ -137,42 +138,47 @@ Map<String, dynamic> _extractTypeInfo(InterfaceElement element) {
   // Get public getters
   final getters = element.getters
       .where((g) => g.isPublic)
-      .map((g) => {
-            'name': g.name,
-            'type': _typeToString(g.returnType),
-          })
+      .map((g) => {'name': g.name, 'type': _typeToString(g.returnType)})
       .toList();
   if (getters.isNotEmpty) {
     info['getters'] = getters;
   }
 
   // Get public setters
-    final setters = element.setters
+  final setters = element.setters
       .where((s) => s.isPublic)
-      .map((s) => {
-            'name': s.displayName.replaceAll('=', ''),
-            'type': s.formalParameters.isNotEmpty
-                ? _typeToString(s.formalParameters.first.type)
-                : 'dynamic',
-          })
+      .map(
+        (s) => {
+          'name': s.displayName.replaceAll('=', ''),
+          'type': s.formalParameters.isNotEmpty
+              ? _typeToString(s.formalParameters.first.type)
+              : 'dynamic',
+        },
+      )
       .toList();
   if (setters.isNotEmpty) {
     info['setters'] = setters;
   }
 
   // Get public methods
-    final methods = element.methods
+  final methods = element.methods
       .where((m) => m.isPublic && !m.isStatic)
-      .map((m) => {
-      'name': m.name,
-            'returnType': _typeToString(m.returnType),
-            'parameters': m.formalParameters.map((p) => {
-        'name': p.name,
+      .map(
+        (m) => {
+          'name': m.name,
+          'returnType': _typeToString(m.returnType),
+          'parameters': m.formalParameters
+              .map(
+                (p) => {
+                  'name': p.name,
                   'type': _typeToString(p.type),
                   'isRequired': p.isRequired,
                   'isNamed': p.isNamed,
-                }).toList(),
-          })
+                },
+              )
+              .toList(),
+        },
+      )
       .toList();
   if (methods.isNotEmpty) {
     info['methods'] = methods;
@@ -194,8 +200,9 @@ String _typeToString(DartType type) {
     return type.element.name ?? 'T';
   }
   if (type is FunctionType) {
-    final params =
-        type.formalParameters.map((p) => _typeToString(p.type)).join(', ');
+    final params = type.formalParameters
+        .map((p) => _typeToString(p.type))
+        .join(', ');
     return '${_typeToString(type.returnType)} Function($params)';
   }
   return type.getDisplayString();

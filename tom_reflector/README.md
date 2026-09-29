@@ -258,7 +258,8 @@ its own generator emitting `*.reflection.dart`.
 - Analyzer usage & config reference: [`doc/analyzer_usage_guide.md`](doc/analyzer_usage_guide.md)
 - Implementation notes: [`doc/reflection_implementation.md`](doc/reflection_implementation.md)
 - Design (pre-rename `tom_analyzer`): [`doc/tom_analyzer_design.md`](doc/tom_analyzer_design.md)
-- Analyzer element API: [`doc/analyzer_element_api.md`](doc/analyzer_element_api.md)
+- Analyzer element API: generated on demand by `dart run tool/extract_analyzer_element_api.dart`,
+  which writes `analyzer_element_api.md` / `.json` under the workspace's `ztmp/tom_reflector/`
 
 ### Runnable samples (engine 2)
 

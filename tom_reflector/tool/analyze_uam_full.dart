@@ -7,19 +7,12 @@ library;
 import 'package:tom_reflector/src/reflection/generator/entry_point_analyzer.dart';
 import 'package:tom_reflector/src/reflection/generator/reflection_config.dart';
 
+import 'uam_targets.dart';
+
 void main(List<String> args) async {
   final tabularMode = args.contains('--tabular');
-  final baseDir = '/Users/alexiskyaw/Desktop/Code/tom2';
 
-  // Entry points from each tom_* package
-  final entryPoints = [
-    '$baseDir/uam/tom_uam_server/bin/aa_server_start.dart',
-    '$baseDir/uam/tom_uam_codespec/lib/tom_uam_codespec.dart',
-    '$baseDir/core/tom_core_kernel/lib/tom_core_kernel.dart',
-    '$baseDir/xternal/tom_module_reflection/tom_reflection/lib/tom_reflection.dart',
-    '$baseDir/xternal/tom_module_basics/tom_basics/lib/tom_basics.dart',
-    '$baseDir/xternal/tom_module_basics/tom_crypto/lib/tom_crypto.dart',
-  ];
+  final entryPoints = uamEntryPoints;
 
   if (!tabularMode) {
     print('Analyzing tom_uam_server and all tom_* dependencies...\n');

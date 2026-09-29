@@ -11,13 +11,15 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:tom_reflector/tom_reflector.dart';
 
+import 'workspace.dart';
+
 void main() async {
   print('=== Full dart_overview Source Extraction Test ===');
   print('');
 
   final basePath = Directory.current.path;
   final dartOverviewPath = p.join(basePath, 'test/dart_overview/lib');
-  final outputPath = p.join(basePath, 'doc/generated/dart_overview');
+  final outputPath = scratchDirectory('dart_overview').path;
 
   // Create output directory
   final outputDir = Directory(outputPath);
@@ -28,16 +30,19 @@ void main() async {
   // Find all Dart files in dart_overview
   final dartFiles = <String>[];
   await _collectDartFiles(Directory(dartOverviewPath), dartFiles);
-  
+
   print('Found ${dartFiles.length} Dart files in dart_overview');
   print('Output directory: $outputPath');
   print('');
 
   // Use all dart files as entry points (run_dart_overview has broken imports)
-  final entryPoints = dartFiles.where((f) => 
-    !f.contains('run_dart_overview.dart') && 
-    !f.contains('run_overview_in_d4rt.dart')
-  ).toList();
+  final entryPoints = dartFiles
+      .where(
+        (f) =>
+            !f.contains('run_dart_overview.dart') &&
+            !f.contains('run_overview_in_d4rt.dart'),
+      )
+      .toList();
   print('Using ${entryPoints.length} individual entry points');
   print('');
 
@@ -86,7 +91,7 @@ void main() async {
 
   // Save source info JSON
   print('=== Saving Generated Files ===');
-  
+
   final jsonPath = p.join(outputPath, 'source_info.json');
   final jsonContent = sourceInfo.toJsonString(pretty: true);
   File(jsonPath).writeAsStringSync(jsonContent);
@@ -114,20 +119,20 @@ void main() async {
     for (final entry in sources.entries) {
       final uri = entry.key;
       final content = entry.value as String;
-      
+
       // Convert file URI to relative path
       if (uri.startsWith('file://')) {
         final fullPath = Uri.parse(uri).toFilePath();
         if (fullPath.contains('dart_overview/lib/')) {
           final relativePath = fullPath.split('dart_overview/lib/').last;
           final outputFile = p.join(regeneratedDir.path, relativePath);
-          
+
           // Create directory structure
           final dir = Directory(p.dirname(outputFile));
           if (!dir.existsSync()) {
             dir.createSync(recursive: true);
           }
-          
+
           File(outputFile).writeAsStringSync(content);
           regeneratedFiles[relativePath] = outputFile;
           regeneratedCount++;
@@ -167,21 +172,27 @@ void main() async {
     final relativePath = entry.key;
     final regeneratedPath = entry.value;
     final originalPath = p.join(dartOverviewPath, relativePath);
-    
+
     if (File(originalPath).existsSync()) {
       final original = File(originalPath).readAsStringSync();
       final regenerated = File(regeneratedPath).readAsStringSync();
-      
+
       if (original == regenerated) {
         matches++;
-        report.writeln('| $relativePath | ${original.length} | ${regenerated.length} | ✓ |');
+        report.writeln(
+          '| $relativePath | ${original.length} | ${regenerated.length} | ✓ |',
+        );
       } else {
         mismatches++;
         final diffPos = _findFirstDifference(original, regenerated);
-        report.writeln('| $relativePath | ${original.length} | ${regenerated.length} | ✗ (diff@$diffPos) |');
+        report.writeln(
+          '| $relativePath | ${original.length} | ${regenerated.length} | ✗ (diff@$diffPos) |',
+        );
       }
     } else {
-      report.writeln('| $relativePath | N/A | ${File(regeneratedPath).lengthSync()} | - |');
+      report.writeln(
+        '| $relativePath | N/A | ${File(regeneratedPath).lengthSync()} | - |',
+      );
     }
   }
 
@@ -190,7 +201,9 @@ void main() async {
   report.writeln('');
   report.writeln('- **Matches**: $matches');
   report.writeln('- **Mismatches**: $mismatches');
-  report.writeln('- **Success rate**: ${(matches / (matches + mismatches) * 100).toStringAsFixed(1)}%');
+  report.writeln(
+    '- **Success rate**: ${(matches / (matches + mismatches) * 100).toStringAsFixed(1)}%',
+  );
 
   // Save report
   final reportPath = p.join(outputPath, 'regeneration_report.md');
@@ -200,28 +213,32 @@ void main() async {
   print('');
   print('Matches: $matches');
   print('Mismatches: $mismatches');
-  print('Success rate: ${(matches / (matches + mismatches) * 100).toStringAsFixed(1)}%');
-  
+  print(
+    'Success rate: ${(matches / (matches + mismatches) * 100).toStringAsFixed(1)}%',
+  );
+
   // Save element source info
   final elementsReport = StringBuffer();
   elementsReport.writeln('# Element Source Info');
   elementsReport.writeln('');
   elementsReport.writeln('## Classes (${result.classes.length})');
   elementsReport.writeln('');
-  
+
   for (final cls in result.classes) {
     final uri = cls.library.firstFragment.source.uri.toString();
     if (!uri.contains('dart_overview')) continue;
-    
+
     final qualifiedName = '$uri#${cls.name}';
     final info = sourceInfo.get(qualifiedName);
-    
+
     if (info != null) {
       elementsReport.writeln('### ${cls.name}');
       elementsReport.writeln('');
       elementsReport.writeln('- File: ${info.fileUri.split('/').last}');
       elementsReport.writeln('- Line: ${info.line}');
-      elementsReport.writeln('- Source length: ${info.sourceCode?.length ?? 0} chars');
+      elementsReport.writeln(
+        '- Source length: ${info.sourceCode?.length ?? 0} chars',
+      );
       if (info.docComment != null) {
         final firstLine = info.docComment!.split('\n').first;
         elementsReport.writeln('- Doc: `$firstLine`');

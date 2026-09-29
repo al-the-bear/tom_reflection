@@ -38,9 +38,15 @@ void main() async {
 
   print('Source extraction config:');
   print('  enabled: ${config.sourceExtractionConfig.enabled}');
-  print('  includeSourceCode: ${config.sourceExtractionConfig.includeSourceCode}');
-  print('  includeDocComments: ${config.sourceExtractionConfig.includeDocComments}');
-  print('  includeAllComments: ${config.sourceExtractionConfig.includeAllComments}');
+  print(
+    '  includeSourceCode: ${config.sourceExtractionConfig.includeSourceCode}',
+  );
+  print(
+    '  includeDocComments: ${config.sourceExtractionConfig.includeDocComments}',
+  );
+  print(
+    '  includeAllComments: ${config.sourceExtractionConfig.includeAllComments}',
+  );
   print('');
 
   // Analyze
@@ -77,8 +83,7 @@ void main() async {
   // Show source info for each class
   print('=== Classes with Source Info ===');
   for (final cls in result.classes) {
-    final qualifiedName =
-      '${cls.library.firstFragment.source.uri}#${cls.name}';
+    final qualifiedName = '${cls.library.firstFragment.source.uri}#${cls.name}';
     final info = sourceInfo.get(qualifiedName);
 
     print('');
@@ -141,7 +146,7 @@ void main() async {
     // Try finding it in sources
     print('Looking for source by file path...');
     for (final cls in result.classes) {
-        final qualifiedName =
+      final qualifiedName =
           '${cls.library.firstFragment.source.uri}#${cls.name}';
       final info = sourceInfo.get(qualifiedName);
       if (info != null) {

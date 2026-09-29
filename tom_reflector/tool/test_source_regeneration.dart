@@ -51,7 +51,9 @@ void main() async {
     print('Stored source size: ${storedSource.length} chars');
     print('Exact match: ${originalSource == storedSource}');
     if (originalSource != storedSource) {
-      print('MISMATCH at char: ${_findFirstDifference(originalSource, storedSource)}');
+      print(
+        'MISMATCH at char: ${_findFirstDifference(originalSource, storedSource)}',
+      );
     }
   } else {
     print('No stored source found for URI: $fileUri');
@@ -62,10 +64,10 @@ void main() async {
   print('=== Test 2: Serialization Roundtrip ===');
   final json = sourceInfo.toJsonString();
   print('JSON size: ${json.length} chars');
-  
+
   final restored = SourceInfoCollection.fromJsonString(json);
   print('Restored elements: ${restored.count}');
-  
+
   final restoredSource = restored.getSource(fileUri);
   if (restoredSource != null) {
     print('Restored source size: ${restoredSource.length} chars');
@@ -75,27 +77,31 @@ void main() async {
   // Test 3: Check individual element sources can be recovered
   print('');
   print('=== Test 3: Element Source Recovery ===');
-  
+
   // Find classes in our file
   final fileClasses = result.classes.where((cls) {
     return cls.library.firstFragment.source.uri.toString() == fileUri;
   }).toList();
-  
+
   print('Classes in test file: ${fileClasses.length}');
-  
+
   for (final cls in fileClasses) {
     final qualifiedName = '$fileUri#${cls.name}';
     final info = sourceInfo.get(qualifiedName);
-    
+
     if (info != null && info.sourceCode != null) {
       // Verify source code can be found in original
       final found = originalSource.contains(info.sourceCode!);
       final status = found ? '✓' : '✗';
-      print('  $status ${cls.name}: ${info.sourceCode!.length} chars at line ${info.line}');
-      
+      print(
+        '  $status ${cls.name}: ${info.sourceCode!.length} chars at line ${info.line}',
+      );
+
       if (!found) {
         print('    Source not found in original!');
-        print('    First 100 chars: ${info.sourceCode!.substring(0, 100.clamp(0, info.sourceCode!.length))}');
+        print(
+          '    First 100 chars: ${info.sourceCode!.substring(0, 100.clamp(0, info.sourceCode!.length))}',
+        );
       }
     } else {
       print('  - ${cls.name}: no source info');
@@ -108,17 +114,19 @@ void main() async {
   final fileFunctions = result.globalFunctions.where((fn) {
     return fn.library.firstFragment.source.uri.toString() == fileUri;
   }).toList();
-  
+
   print('Functions in test file: ${fileFunctions.length}');
-  
+
   for (final fn in fileFunctions) {
     final qualifiedName = '$fileUri#${fn.name}';
     final info = sourceInfo.get(qualifiedName);
-    
+
     if (info != null && info.sourceCode != null) {
       final found = originalSource.contains(info.sourceCode!);
       final status = found ? '✓' : '✗';
-      print('  $status ${fn.name}: ${info.sourceCode!.length} chars at line ${info.line}');
+      print(
+        '  $status ${fn.name}: ${info.sourceCode!.length} chars at line ${info.line}',
+      );
     } else {
       print('  - ${fn.name}: no source info');
     }
@@ -126,8 +134,12 @@ void main() async {
 
   print('');
   print('=== Summary ===');
-  print('File source recovery: ${storedSource != null && originalSource == storedSource ? "PASS" : "FAIL"}');
-  print('Serialization roundtrip: ${restoredSource != null && originalSource == restoredSource ? "PASS" : "FAIL"}');
+  print(
+    'File source recovery: ${storedSource != null && originalSource == storedSource ? "PASS" : "FAIL"}',
+  );
+  print(
+    'Serialization roundtrip: ${restoredSource != null && originalSource == restoredSource ? "PASS" : "FAIL"}',
+  );
   print('');
   print('Test complete.');
 }

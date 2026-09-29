@@ -8,9 +8,9 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:tom_reflector/src/reflection/generator/entry_point_analyzer.dart';
 import 'package:tom_reflector/src/reflection/generator/reflection_config.dart';
 
-void main(List<String> args) async {
-  final baseDir = '/Users/alexiskyaw/Desktop/Code/tom2';
+import 'uam_targets.dart';
 
+void main(List<String> args) async {
   // Parse args for package filter
   String? packageFilter;
   for (final arg in args) {
@@ -19,15 +19,7 @@ void main(List<String> args) async {
     }
   }
 
-  // Entry points from each tom_* package
-  final entryPoints = [
-    '$baseDir/uam/tom_uam_server/bin/aa_server_start.dart',
-    '$baseDir/uam/tom_uam_codespec/lib/tom_uam_codespec.dart',
-    '$baseDir/core/tom_core_kernel/lib/tom_core_kernel.dart',
-    '$baseDir/xternal/tom_module_reflection/tom_reflection/lib/tom_reflection.dart',
-    '$baseDir/xternal/tom_module_basics/tom_basics/lib/tom_basics.dart',
-    '$baseDir/xternal/tom_module_basics/tom_crypto/lib/tom_crypto.dart',
-  ];
+  final entryPoints = uamEntryPoints;
 
   print('Finding all annotations in tom_* packages...\n');
 
@@ -58,24 +50,49 @@ void main(List<String> args) async {
 
     // Process class members
     for (final field in cls.fields) {
-      _collectAnnotations(field, 'field', annotationUsages, packageFilter,
-          parent: cls.name);
+      _collectAnnotations(
+        field,
+        'field',
+        annotationUsages,
+        packageFilter,
+        parent: cls.name,
+      );
     }
     for (final method in cls.methods) {
-      _collectAnnotations(method, 'method', annotationUsages, packageFilter,
-          parent: cls.name);
+      _collectAnnotations(
+        method,
+        'method',
+        annotationUsages,
+        packageFilter,
+        parent: cls.name,
+      );
     }
     for (final getter in cls.getters) {
-      _collectAnnotations(getter, 'getter', annotationUsages, packageFilter,
-          parent: cls.name);
+      _collectAnnotations(
+        getter,
+        'getter',
+        annotationUsages,
+        packageFilter,
+        parent: cls.name,
+      );
     }
     for (final setter in cls.setters) {
-      _collectAnnotations(setter, 'setter', annotationUsages, packageFilter,
-          parent: cls.name);
+      _collectAnnotations(
+        setter,
+        'setter',
+        annotationUsages,
+        packageFilter,
+        parent: cls.name,
+      );
     }
     for (final ctor in cls.constructors) {
-      _collectAnnotations(ctor, 'constructor', annotationUsages, packageFilter,
-          parent: cls.name);
+      _collectAnnotations(
+        ctor,
+        'constructor',
+        annotationUsages,
+        packageFilter,
+        parent: cls.name,
+      );
     }
   }
 
@@ -83,8 +100,13 @@ void main(List<String> args) async {
   for (final e in result.enums) {
     _collectAnnotations(e, 'enum', annotationUsages, packageFilter);
     for (final value in e.fields.where((f) => f.isEnumConstant)) {
-      _collectAnnotations(value, 'enum value', annotationUsages, packageFilter,
-          parent: e.name);
+      _collectAnnotations(
+        value,
+        'enum value',
+        annotationUsages,
+        packageFilter,
+        parent: e.name,
+      );
     }
   }
 
@@ -99,23 +121,33 @@ void main(List<String> args) async {
   }
 
   // Print results
-  print('═══════════════════════════════════════════════════════════════════════════════');
+  print(
+    '═══════════════════════════════════════════════════════════════════════════════',
+  );
   print('ANNOTATIONS FOUND (${annotationUsages.length})');
-  print('═══════════════════════════════════════════════════════════════════════════════');
+  print(
+    '═══════════════════════════════════════════════════════════════════════════════',
+  );
   print('');
 
   // Sort by usage count
   final sortedAnnotations = annotationUsages.entries.toList()
-    ..sort((a, b) => b.value.elements.length.compareTo(a.value.elements.length));
+    ..sort(
+      (a, b) => b.value.elements.length.compareTo(a.value.elements.length),
+    );
 
   for (final entry in sortedAnnotations) {
     final annotation = entry.key;
     final usage = entry.value;
 
-    print('───────────────────────────────────────────────────────────────────────────────');
+    print(
+      '───────────────────────────────────────────────────────────────────────────────',
+    );
     print('@$annotation (${usage.elements.length} usages)');
     print('  Source: ${usage.sourceLibrary}');
-    print('───────────────────────────────────────────────────────────────────────────────');
+    print(
+      '───────────────────────────────────────────────────────────────────────────────',
+    );
 
     // Group by element kind
     final byKind = <String, List<AnnotatedElement>>{};
@@ -138,11 +170,17 @@ void main(List<String> args) async {
   }
 
   // Summary
-  print('═══════════════════════════════════════════════════════════════════════════════');
+  print(
+    '═══════════════════════════════════════════════════════════════════════════════',
+  );
   print('SUMMARY');
-  print('═══════════════════════════════════════════════════════════════════════════════');
+  print(
+    '═══════════════════════════════════════════════════════════════════════════════',
+  );
   print('Total annotations found: ${annotationUsages.length}');
-  print('Total usages: ${annotationUsages.values.fold<int>(0, (sum, u) => sum + u.elements.length)}');
+  print(
+    'Total usages: ${annotationUsages.values.fold<int>(0, (sum, u) => sum + u.elements.length)}',
+  );
 
   // Top 10 most used
   print('');
@@ -182,7 +220,8 @@ void _collectAnnotations(
     } else if (annotationElement is PropertyAccessorElement) {
       // Const variable annotation like @override, @deprecated
       annotationName = annotationElement.name;
-      sourceLibrary = annotationElement.library.firstFragment.source.uri.toString();
+      sourceLibrary = annotationElement.library.firstFragment.source.uri
+          .toString();
     }
 
     if (annotationName == null) continue;
@@ -197,14 +236,19 @@ void _collectAnnotations(
     );
 
     // Create qualified name
-    final qualifiedName = parent != null ? '$parent.${element.name}' : element.name ?? '<unnamed>';
+    final qualifiedName = parent != null
+        ? '$parent.${element.name}'
+        : element.name ?? '<unnamed>';
 
-    usage.elements.add(AnnotatedElement(
-      name: element.name ?? '<unnamed>',
-      qualifiedName: qualifiedName,
-      kind: kind,
-      library: element.library?.firstFragment.source.uri.toString() ?? 'unknown',
-    ));
+    usage.elements.add(
+      AnnotatedElement(
+        name: element.name ?? '<unnamed>',
+        qualifiedName: qualifiedName,
+        kind: kind,
+        library:
+            element.library?.firstFragment.source.uri.toString() ?? 'unknown',
+      ),
+    );
   }
 }
 

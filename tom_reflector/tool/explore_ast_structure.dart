@@ -12,6 +12,8 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 
+import 'workspace.dart';
+
 void main() async {
   // Simple example code
   const sourceCode = '''
@@ -70,7 +72,7 @@ class Person {
   print('');
 
   // Save both to files for comparison
-  final outputDir = Directory('doc/generated/ast_comparison');
+  final outputDir = scratchDirectory('ast_comparison');
   await outputDir.create(recursive: true);
 
   await File('${outputDir.path}/source.dart').writeAsString(sourceCode);
@@ -107,7 +109,9 @@ class AstStructureVisitor extends RecursiveAstVisitor<void> {
     _print('ClassDeclaration: ${node.name.lexeme}');
     _indent++;
     if (node.documentationComment != null) {
-      _print('DocumentationComment: "${_truncate(node.documentationComment!.toSource())}"');
+      _print(
+        'DocumentationComment: "${_truncate(node.documentationComment!.toSource())}"',
+      );
     }
     for (final member in node.members) {
       member.accept(this);
@@ -122,7 +126,9 @@ class AstStructureVisitor extends RecursiveAstVisitor<void> {
     _print('FieldDeclaration: $type $names');
     _indent++;
     if (node.documentationComment != null) {
-      _print('DocumentationComment: "${_truncate(node.documentationComment!.toSource())}"');
+      _print(
+        'DocumentationComment: "${_truncate(node.documentationComment!.toSource())}"',
+      );
     }
     _indent--;
   }
@@ -133,7 +139,9 @@ class AstStructureVisitor extends RecursiveAstVisitor<void> {
     _print('ConstructorDeclaration: $name');
     _indent++;
     if (node.documentationComment != null) {
-      _print('DocumentationComment: "${_truncate(node.documentationComment!.toSource())}"');
+      _print(
+        'DocumentationComment: "${_truncate(node.documentationComment!.toSource())}"',
+      );
     }
     _print('Parameters: ${node.parameters.toSource()}');
     _indent--;
@@ -145,7 +153,9 @@ class AstStructureVisitor extends RecursiveAstVisitor<void> {
     _print('MethodDeclaration: $returnType ${node.name.lexeme}');
     _indent++;
     if (node.documentationComment != null) {
-      _print('DocumentationComment: "${_truncate(node.documentationComment!.toSource())}"');
+      _print(
+        'DocumentationComment: "${_truncate(node.documentationComment!.toSource())}"',
+      );
     }
     _print('Parameters: ${node.parameters?.toSource() ?? '()'}');
     if (node.body is BlockFunctionBody) {
@@ -217,7 +227,9 @@ class AstSerializer {
     };
   }
 
-  Map<String, dynamic> _serializeConstructorDeclaration(ConstructorDeclaration node) {
+  Map<String, dynamic> _serializeConstructorDeclaration(
+    ConstructorDeclaration node,
+  ) {
     return {
       'type': 'ConstructorDeclaration',
       'name': node.name?.lexeme,
@@ -243,7 +255,9 @@ class AstSerializer {
       'isSetter': node.isSetter,
       'isOperator': node.isOperator,
       'typeParameters': node.typeParameters?.toSource(),
-      'parameters': node.parameters != null ? _serializeParameters(node.parameters!) : null,
+      'parameters': node.parameters != null
+          ? _serializeParameters(node.parameters!)
+          : null,
       'body': _serializeBody(node.body),
     };
   }
