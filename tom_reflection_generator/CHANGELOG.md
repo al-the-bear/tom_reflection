@@ -1,3 +1,17 @@
+## 1.7.0
+
+### Fixed — a locked package the pub cache cannot supply is named, not silently dropped (scf14)
+
+The generator reads resolved element models to decide what a type exposes. A
+package the lock names but the cache cannot supply produces no resolution
+error — the lock is satisfiable, so `dart pub get` reports success — and the
+analyzer answers `Undefined name` at each use, so a run emitted a SMALLER
+reflection capability set and exited 0. `generateReflection` now runs
+`PubCacheIntegrity.preflight` (tom_build_base >= 2.14.0) before anything reads
+a dependency's sources, the summary stage included, and stops with the report:
+which package, which version, and the remedy. Both the v2 executor and the
+legacy CLI fail the run on it. `--show-cache-status` is not gated.
+
 ## 1.6.0
 
 ### Added — `-n` previews what a generation would write (scf11)

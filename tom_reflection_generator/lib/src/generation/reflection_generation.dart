@@ -18,6 +18,7 @@ import 'package:glob/glob.dart';
 import 'package:glob/list_local_fs.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
+import 'package:tom_build_base/tom_build_base.dart' show PubCacheIntegrity;
 // runSummaryCacheStage is re-exported by this package's summary.dart
 // (which itself re-exports `package:tom_analyzer_shared`).
 import 'package:tom_reflection_generator/tom_reflection_generator.dart';
@@ -37,6 +38,7 @@ class ReflectionGenerationOptions {
     this.cacheOnlyPackages = const [],
     this.checkOnly = false,
     this.dryRun = false,
+    this.pubCachePath,
   });
 
   /// Reflection package name whose annotations trigger generation.
@@ -89,6 +91,11 @@ class ReflectionGenerationOptions {
   /// are set. The analyzer summary cache is a tool cache under `.dart_tool/`
   /// and is still maintained; no project file is touched.
   final bool dryRun;
+
+  /// The pub cache the pre-flight checks the lock against. Null means pub's
+  /// own default (`PUB_CACHE`, else the platform location); tests point it at
+  /// a fixture.
+  final String? pubCachePath;
 }
 
 /// Per-file result of [processReflectionFile].
@@ -193,6 +200,7 @@ class ReflectionGenerationResult {
     this.staleCount = 0,
     this.staleFiles = const [],
     this.wouldWriteFiles = const [],
+    this.pubCacheReport,
     this.cacheStatusShown = false,
     this.noFilesMatched = false,
     this.severeCount = 0,
@@ -244,6 +252,12 @@ class ReflectionGenerationResult {
   /// must be treated as failed (non-zero exit).
   bool get hasFailures => failedCount > 0;
 
+  /// The pub-cache pre-flight's report, when the project's lock names a
+  /// package the cache cannot supply. Nothing was generated.
+  final String? pubCacheReport;
+
+  bool get hasPubCacheProblem => pubCacheReport != null;
+
   /// Whether any committed output has drifted from its source (check mode).
   ///
   /// Independent of [hasFailures]: a crash and a stale output are different
@@ -291,6 +305,30 @@ Future<ReflectionGenerationResult> generateReflection({
         );
       });
   int severeTotal() => severeCounts.values.fold(0, (sum, n) => sum + n);
+
+  // SCF14: pub-cache pre-flight, before anything reads a dependency's sources —
+  // the summary stage below does, and the resolver after it. A locked package
+  // the cache cannot supply produces NO resolution error (the lock is
+  // satisfiable, so `dart pub get` reports success); the analyzer reports
+  // `Undefined name` at each use and the generator, which reads resolved
+  // element models to decide what a type exposes, would emit a smaller
+  // capability set rather than an error. Naming the package is the fix.
+  // `--show-cache-status` is info-only and is left alone.
+  if (!options.showCacheStatus) {
+    final report = PubCacheIntegrity.preflight(
+      projectPath: root,
+      pubCachePath: options.pubCachePath,
+    );
+    if (report != null) {
+      stderr.writeln(report);
+      await logSubscription.cancel();
+      return ReflectionGenerationResult(
+        processedCount: 0,
+        skippedCount: 0,
+        pubCacheReport: report,
+      );
+    }
+  }
 
   // Summary caching stage.
   List<String>? summaryPaths;

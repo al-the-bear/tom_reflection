@@ -240,16 +240,20 @@ Future<void> _runBuildMode(List<String> args) async {
   } else {
     if (!configFileEntity.existsSync()) {
       print('Error: Config file not found: $configPath');
-      print('Create a build.yaml file, specify a different config with '
-          '--config,');
+      print(
+        'Create a build.yaml file, specify a different config with '
+        '--config,',
+      );
       print('or provide glob patterns as arguments.');
       exit(1);
     }
 
     final root = findProjectRoot(p.dirname(configPath));
     if (root == null) {
-      print('Error: Could not find project root (no pubspec.yaml found near '
-          '$configPath).');
+      print(
+        'Error: Could not find project root (no pubspec.yaml found near '
+        '$configPath).',
+      );
       exit(1);
     }
     projectRoot = p.normalize(root);
@@ -312,11 +316,7 @@ Future<void> _runBuildMode(List<String> args) async {
     ),
   );
 
-  _reportResult(
-    result,
-    alwaysPrintSkipped: true,
-    checkOnly: options.checkOnly,
-  );
+  _reportResult(result, alwaysPrintSkipped: true, checkOnly: options.checkOnly);
 }
 
 /// Prints the summary for a completed run and exits when appropriate.
@@ -328,6 +328,16 @@ void _reportResult(
   if (result.cacheStatusShown) {
     // --show-cache-status is info-only; exit after displaying.
     exit(0);
+  }
+
+  if (result.hasPubCacheProblem) {
+    // The report was printed by the pipeline; it names the package and the
+    // remedy. Nothing was generated.
+    stderr.writeln(
+      'Reflection generation FAILED: the pub cache cannot '
+      'supply every locked package.',
+    );
+    exit(1);
   }
 
   if (result.noFilesMatched) {

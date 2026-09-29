@@ -91,6 +91,14 @@ class ReflectionGeneratorExecutor extends CommandExecutor {
         return ItemResult.success(path: projectPath, name: context.name);
       }
 
+      if (result.hasPubCacheProblem) {
+        return ItemResult.failure(
+          path: projectPath,
+          name: context.name,
+          error: result.pubCacheReport!,
+        );
+      }
+
       if (result.noFilesMatched) {
         if (verbose) {
           print('  ${context.relativePath}: no files matched targets');
