@@ -193,10 +193,65 @@ class _ReflectorDomain {
     String prefix = importCollector._getPrefix(constructor.library);
     String? constructorName = await _nameOfConstructor(constructor);
     String constructorInvocation = constructorName != null
-        ? '$prefix$constructorName(${argumentParts.join(', ')})'
+        ? '$prefix${await _withBoundTypeArguments(constructorName, constructor, importCollector)}'
+            '(${argumentParts.join(', ')})'
         : 'null';
     return ('(bool $doRunArgument) => (${parameterParts.join(', ')}) => '
         '$doRunArgument ? $constructorInvocation : null');
+  }
+
+  /// [constructorName] instantiated at its class's type-parameter bounds, when
+  /// any parameter is bounded: `NumRange` becomes `NumRange<num>`, and a named
+  /// constructor `Numbers.of` becomes `Numbers<List<num>>.of`.
+  ///
+  /// The closure a constructor is emitted as has untyped parameters, so every
+  /// argument is `dynamic`. Below Dart 3.7 inference then picks `dynamic` for a
+  /// bounded type parameter, which violates the bound, and the generated
+  /// library does not compile (TYPE_ARGUMENT_NOT_MATCHING_BOUNDS,
+  /// COULD_NOT_INFER). A generated library is analyzed at its *consumer's*
+  /// language version, so it cannot rely on 3.7's inference using bounds.
+  /// Naming the bounds explicitly compiles on every version, and the dynamic
+  /// arguments are implicitly downcast to them — which is what inference using
+  /// bounds would have chosen anyway.
+  ///
+  /// An unbounded parameter is given `dynamic`, as inference would. A class
+  /// with no bounded parameter is left as it was. A bound that names one of the
+  /// class's own type parameters (`T extends Comparable<T>`) has no closed
+  /// instantiation to spell, so such a class is left to inference too.
+  Future<String> _withBoundTypeArguments(
+    String constructorName,
+    ConstructorElement constructor,
+    _ImportCollector importCollector,
+  ) async {
+    final typeParameters = constructor.enclosingElement.typeParameters;
+    if (typeParameters.every((parameter) => parameter.bound == null)) {
+      return constructorName;
+    }
+    var arguments = <String>[];
+    for (final parameter in typeParameters) {
+      final bound = parameter.bound;
+      if (bound == null) {
+        arguments.add('dynamic');
+        continue;
+      }
+      if (!_hasNoFreeTypeVariables(bound)) return constructorName;
+      arguments.add(
+        await _typeCodeOfTypeArgument(
+          bound,
+          importCollector,
+          <String>{},
+          <FunctionType, int>{},
+          const <WarningKind>[],
+          useNameOfGenericFunctionType: false,
+        ),
+      );
+    }
+    final dot = constructorName.indexOf('.');
+    final className = dot < 0
+        ? constructorName
+        : constructorName.substring(0, dot);
+    final rest = dot < 0 ? '' : constructorName.substring(dot);
+    return '$className<${arguments.join(', ')}>$rest';
   }
 
   /// The code of the const-construction of this reflector.

@@ -1,3 +1,25 @@
+## 1.8.0
+
+### Fixed — a bounded generic's constructor closure compiles for every consumer
+
+Each constructor is emitted as a closure with untyped parameters, e.g.
+`(low, high) => b ? prefix1.NumRange(low, high) : null`. The arguments are
+therefore `dynamic`, and below Dart 3.7 inference picks `dynamic` for a
+bounded type parameter — violating `T extends num` — so the analyzer reported
+TYPE_ARGUMENT_NOT_MATCHING_BOUNDS and COULD_NOT_INFER and the generated
+library did not compile. A generated library is analyzed at its consumer's
+language version, so a package declaring `sdk: '>=3.0.0'` met the errors while
+the generator's own suite, at 3.10, never did.
+
+A class with a bounded type parameter is now instantiated at its bounds:
+`NumRange<num>(low, high)`, `Numbers<List<num>>.of(values)`, with `dynamic` for
+an unbounded parameter beside a bounded one. That compiles on every language
+version and is what inference using bounds chooses anyway. A class with no
+bounded parameter is emitted as before; so is one whose bound names its own
+type parameters (`T extends Comparable<T>`), which has no closed instantiation
+to spell. `test/bounded_generic_constructor_test.dart` analyzes the generated
+library both as generated and under a `// @dart=3.6` override.
+
 ## 1.7.0
 
 ### Fixed — a locked package the pub cache cannot supply is named, not silently dropped (scf14)
