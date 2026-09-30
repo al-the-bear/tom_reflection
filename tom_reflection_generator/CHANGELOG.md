@@ -1,3 +1,19 @@
+## 1.8.1
+
+### Fixed — a target the analysis options exclude generates again
+
+From analyzer 10.2 on, a file the project's `analysis_options.yaml` excludes
+belongs to no analysis context when only the project root is included, so
+resolving it threw "Unable to find the context" and the target failed. A
+reflection root is often exactly such a file: a workspace-wide
+`**/test/**/fixtures/**` exclude covers `tom_core_server`'s
+`test/fixtures/reflection_fixture.dart`, which stopped generating on an
+analyzer upgrade with no change to the project. The targets are now collected
+before the resolver is built and passed to it, and each is named in the
+collection's included paths, where an exclude does not reach.
+`test/excluded_target_test.dart` generates an excluded fixture with and
+without the summary cache.
+
 ## 1.8.0
 
 ### Fixed — a bounded generic's constructor closure compiles for every consumer

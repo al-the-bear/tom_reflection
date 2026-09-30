@@ -354,20 +354,26 @@ Future<ReflectionGenerationResult> generateReflection({
     }
   }
 
+  // The targets are collected before the resolver exists because the
+  // resolver has to be told about them: see `targetFiles` on
+  // `StandaloneLibraryResolver.create` — a target the analysis options exclude
+  // is otherwise in no analysis context.
+  final filesToProcess = collectTargetFiles(
+    projectRoot: root,
+    targets: targets,
+    allMode: options.allMode,
+    verbose: options.verbose,
+  );
+
   // Create the standalone resolver.
   final resolver = await StandaloneLibraryResolver.create(
     root,
     librarySummaryPaths: summaryPaths,
     sdkSummaryPath: sdkSummaryPath,
+    targetFiles: filesToProcess,
   );
 
   try {
-    final filesToProcess = collectTargetFiles(
-      projectRoot: root,
-      targets: targets,
-      allMode: options.allMode,
-      verbose: options.verbose,
-    );
 
     if (filesToProcess.isEmpty) {
       return const ReflectionGenerationResult(

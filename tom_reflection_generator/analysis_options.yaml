@@ -1,2 +1,14 @@
 # Include shared workspace analysis options
 include: ../analysis_options.yaml
+
+analyzer:
+  exclude:
+    # The shared entries, restated: a local exclude list replaces the included
+    # one rather than extending it.
+    - "**/*_generated.dart"
+    - "**/*_bridges.dart"
+    - "**/*.reflection.dart"
+    # Excluded ON PURPOSE: the target of excluded_target_test.dart, which holds
+    # that a generation target resolves even when the analysis options exclude
+    # it (a workspace-wide `**/test/**/fixtures/**` does exactly that).
+    - "test/fixtures/excluded_by_options/**"

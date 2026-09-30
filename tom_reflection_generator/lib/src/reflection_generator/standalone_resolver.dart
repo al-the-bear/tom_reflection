@@ -53,10 +53,20 @@ class StandaloneLibraryResolver implements LibraryResolver {
   /// If [sdkSummaryPath] is provided, it's used as the Dart SDK summary.
   /// If not provided but [librarySummaryPaths] is set, we look for an
   /// existing `sdk.sum` in `.dart_tool/build_resolvers/`.
+  ///
+  /// [targetFiles] are the files generation will resolve. Each is added to the
+  /// collection's included paths **by name**, beside the project root. A file
+  /// the project's analysis options `exclude:` — a test fixture under a
+  /// workspace-wide `**/test/**/fixtures/**`, typically — is otherwise in no
+  /// analysis context at all from analyzer 10.2 on, and `contextFor` throws
+  /// "Unable to find the context". Linting may skip such a file; generating
+  /// for it must not, and a file named explicitly is analyzed whatever the
+  /// excludes say.
   static Future<StandaloneLibraryResolver> create(
     String projectRoot, {
     List<String>? librarySummaryPaths,
     String? sdkSummaryPath,
+    Iterable<String> targetFiles = const [],
   }) async {
     var absolutePath = p.isAbsolute(projectRoot)
         ? projectRoot
@@ -64,6 +74,12 @@ class StandaloneLibraryResolver implements LibraryResolver {
     
     // Normalize the path (resolve .. and . components)
     absolutePath = p.normalize(absolutePath);
+
+    final includedPaths = <String>{
+      absolutePath,
+      for (final file in targetFiles)
+        p.normalize(p.isAbsolute(file) ? file : p.join(absolutePath, file)),
+    }.toList();
 
     final AnalysisContextCollection collection;
     if (librarySummaryPaths != null && librarySummaryPaths.isNotEmpty) {
@@ -77,14 +93,14 @@ class StandaloneLibraryResolver implements LibraryResolver {
       // which enables the analyzer to skip full analysis of summarized
       // packages (they are loaded as InSummarySource).
       collection = AnalysisContextCollectionImpl(
-        includedPaths: [absolutePath],
+        includedPaths: includedPaths,
         librarySummaryPaths: librarySummaryPaths,
         sdkSummaryPath: effectiveSdkSummaryPath,
         sdkPath: _resolveSdkPath(),
       );
     } else {
       collection = AnalysisContextCollection(
-        includedPaths: [absolutePath],
+        includedPaths: includedPaths,
         sdkPath: _resolveSdkPath(),
       );
     }
