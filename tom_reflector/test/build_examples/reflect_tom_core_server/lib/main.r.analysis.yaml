@@ -276793,7 +276793,7 @@ libraries:
               /// no credential skips the login and is unaffected.
               ///
               /// The rest builds the TLS [SecurityContext] (unless `noSsl`), resolves the
-              /// listen address (`host`, or any-IPv4 when empty or `listenToAnyIP`),
+              /// listen address (`host`, or any-IPv4 when empty or `listenToAnyIp`),
               /// optionally wraps the router in a [Cascade] with the configuration's
               /// pre/post handlers, then serves the assembled pipeline on the configured
               /// port (with `shared` sockets when running multiple isolates).
@@ -489990,8 +489990,8 @@ libraries:
             hasSetter: true
           -
             id: field_2482
-            name: listenToAnyIP
-            qualifiedName: "package:tom_core_server/src/tomserver/configuration/base_server_configuration.dart.listenToAnyIP"
+            name: listenToAnyIp
+            qualifiedName: "package:tom_core_server/src/tomserver/configuration/base_server_configuration.dart.listenToAnyIp"
             declaringTypeId: class_648
             owningLibraryId: lib_321
             sourceFileId: file_322
