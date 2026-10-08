@@ -171,7 +171,7 @@ tom_analyzer:
 
 ## Navigation Options
 
-Tom Analyzer uses the standard `tom_build_base` navigation system, shared across all Tom build tools. For full details on execution modes, project discovery, and all navigation flags, see the [CLI Tools Navigation Guide](../../tom_build_base/doc/cli_tools_navigation.md) and the [Build Base User Guide](../../tom_build_base/doc/build_base_user_guide.md).
+Tom Analyzer uses the standard `tom_build_base` navigation system, shared across all Tom build tools. For full details on execution modes, project discovery, and all navigation flags, see the [CLI Tools Navigation Guide](../../../basics/tom_build_base/doc/cli_tools_navigation.md) and the [Build Base User Guide](../../../basics/tom_build_base/doc/build_base_user_guide.md).
 
 ### Execution Modes
 
@@ -284,8 +284,8 @@ Same structure as YAML but in JSON format. Useful for programmatic consumption.
 
 - **Tom Reflector** — Generates `.r.dart` reflection code from analysis results. See [reflector_usage_guide.md](reflector_usage_guide.md).
 - **Tom Build Base** — Shared navigation infrastructure used by all Tom build tools.
-  - [CLI Tools Navigation Guide](../../tom_build_base/doc/cli_tools_navigation.md) — Full reference for execution modes and navigation options
-  - [Build Base User Guide](../../tom_build_base/doc/build_base_user_guide.md) — Configuration loading, project discovery, and tool creation
+  - [CLI Tools Navigation Guide](../../../basics/tom_build_base/doc/cli_tools_navigation.md) — Full reference for execution modes and navigation options
+  - [Build Base User Guide](../../../basics/tom_build_base/doc/build_base_user_guide.md) — Configuration loading, project discovery, and tool creation
 
 ```bash
 # Run reflector instead of analyzer

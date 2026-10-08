@@ -342,7 +342,7 @@ reflector -e lib/my_app.dart --output lib/generated/reflection.r.dart
 
 ## Navigation Options
 
-Tom Reflector uses the standard `tom_build_base` navigation system, shared across all Tom build tools. The options are identical to [Tom Analyzer navigation](analyzer_usage_guide.md#navigation-options). For full details on execution modes, project discovery, and all navigation flags, see the [CLI Tools Navigation Guide](../../tom_build_base/doc/cli_tools_navigation.md) and the [Build Base User Guide](../../tom_build_base/doc/build_base_user_guide.md).
+Tom Reflector uses the standard `tom_build_base` navigation system, shared across all Tom build tools. The options are identical to [Tom Analyzer navigation](analyzer_usage_guide.md#navigation-options). For full details on execution modes, project discovery, and all navigation flags, see the [CLI Tools Navigation Guide](../../../basics/tom_build_base/doc/cli_tools_navigation.md) and the [Build Base User Guide](../../../basics/tom_build_base/doc/build_base_user_guide.md).
 
 ### Quick Reference
 
@@ -434,8 +434,8 @@ reflector -e lib/my_app.dart --output lib/generated/reflection.r.dart
 
 - **Tom Analyzer** — Analyzes Dart barrel files and produces structured output. See [analyzer_usage_guide.md](analyzer_usage_guide.md).
 - **Tom Build Base** — Shared navigation infrastructure used by all Tom build tools.
-  - [CLI Tools Navigation Guide](../../tom_build_base/doc/cli_tools_navigation.md) — Full reference for execution modes and navigation options
-  - [Build Base User Guide](../../tom_build_base/doc/build_base_user_guide.md) — Configuration loading, project discovery, and tool creation
+  - [CLI Tools Navigation Guide](../../../basics/tom_build_base/doc/cli_tools_navigation.md) — Full reference for execution modes and navigation options
+  - [Build Base User Guide](../../../basics/tom_build_base/doc/build_base_user_guide.md) — Configuration loading, project discovery, and tool creation
 
 ```bash
 # Run analyzer instead of reflector

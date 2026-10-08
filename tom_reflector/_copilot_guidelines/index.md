@@ -39,8 +39,8 @@
 
 ## Related Packages
 
-- [tom_build_base](../../tom_build_base/) — Shared CLI infrastructure (navigation, project discovery)
-- [tom_analyzer_model](../../tom_analyzer_model/) — Analyzer data models
+- [tom_build_base](../../../basics/tom_build_base/) — Shared CLI infrastructure (navigation, project discovery)
+- [tom_analyzer_model](../../tom_reflector_model/) — Analyzer data models
 
 ## Dependencies
 
