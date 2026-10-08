@@ -150,14 +150,29 @@ counts them:
 
 ```text
   SEVERE: [constant.constructor.private] Cannot access private constructor ...
-Reflection generation succeeded after 5m 29s — 1 generated, 0 skipped,
-226 SEVERE diagnostic(s) in 4 distinct case(s) — the generated mirror is
+Reflection generation succeeded after 4m 43s — 1 generated, 0 skipped,
+225 SEVERE diagnostic(s) in 46 distinct case(s) — the generated mirror is
 incomplete.
 ```
 
 Each distinct message is printed once, however many elements provoke it: one
 unsupported construct used across a widget library accounts for hundreds of
 records, and printing them all would bury the rest.
+
+Each message opens with a diagnostic id in brackets. The ids that occur, and
+what each one means for the mirror:
+
+| Id | What was left out | Closable? |
+| -- | ----------------- | --------- |
+| `mixin_application.no_such_method` | A member the analyzer asked of a synthetic mixin application (`S with M`) that the generator does not implement — in practice `thisType`. | Yes: the member can be implemented. |
+| `type.reflected_type_args.unsupported_nested` | `reflectedTypeArguments` for a type whose arguments contain a record type (`(double, T)`) or a function type (`void Function()`). | Partly: a closed type can be emitted through a typedef; one that mentions a type parameter cannot, as for a bare type parameter. |
+| `constant.constructor.private` | A constant — typically a parameter's default value — built by a private constructor, e.g. Flutter's `const _UnspecifiedTextScaler()`. | No: the generated library cannot call a constructor private to another library. The mirror reports that parameter's default value as `null`. |
+| `constructor.name.private` | A constructor of a private class reached through a public type's hierarchy, e.g. `dart:core`'s `_StringStackTrace`. | No, for the same reason: the constructor is still listed, but invoking it through the mirror (`newInstance`) yields `null`. |
+
+The two private cases are a property of Dart, not of the generator, and come
+from the SDK and Flutter rather than from Tom code. They are reported anyway,
+because a default value missing from a mirror is the kind of omission that is
+only harmless when somebody knows about it.
 
 A severe does **not** fail the run. It is a statement about coverage, not about
 correctness of what was emitted, and a project may legitimately reflect over
