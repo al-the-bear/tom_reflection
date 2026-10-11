@@ -1,3 +1,19 @@
+## 1.8.2
+
+### Fixed — a Flutter mirror compiles for the web
+
+`dart:ui` is implemented twice, by the native engine and by the web engine, and
+the two do not declare the same statics: the native one has enum values
+(`ImageByteFormat.rawExtendedRgba128`, `TargetPixelFormat.rFloat32`) and a
+settable static field (`SemanticsFlags.none`) the web one lacks. A Flutter
+package's mirror reaches `dart:ui` classes through its widget and form types,
+and the generator emitted a typed static accessor for every static it saw — so
+the mirror compiled natively and failed `flutter build web` with "Member not
+found". Classes declared in `dart:ui` now get no static accessors; their
+instance accessors, emitted over `dynamic`, are unchanged. Nothing reflects a
+`dart:ui` static, so nothing is lost, and one mirror is valid on every
+platform. Found building `advanced_app_client` for the web.
+
 ## 1.8.1
 
 ### Fixed — a target the analysis options exclude generates again

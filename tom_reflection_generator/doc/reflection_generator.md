@@ -268,6 +268,12 @@ The generated file contains:
 - Type descriptors
 - Capability implementations
 
+One generated file is valid on every platform the package compiles for. That
+holds for `dart:ui` too, whose native and web implementations declare different
+statics: classes from `dart:ui` get no static accessors, because a typed
+reference to a native-only static would stop the mirror compiling for the web.
+Their instance accessors are emitted as usual.
+
 ## Capabilities
 
 Reflection capabilities control what metadata is generated:

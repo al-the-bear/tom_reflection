@@ -1053,7 +1053,12 @@ class _ReflectorDomain {
 
     var staticGettersCode = 'const {}';
     var staticSettersCode = 'const {}';
-    if (interfaceElement is! MixinApplication) {
+    // A class from a library whose static surface differs between platforms
+    // gets no static accessors: they are typed references, so one naming a
+    // member that exists on only one platform fails to compile on the other.
+    // See [_hasPlatformVariantStatics].
+    if (interfaceElement is! MixinApplication &&
+        !_hasPlatformVariantStatics(interfaceElement.library)) {
       var staticGettersCodeList = <String>[];
       for (MethodElement method in classDomain._declaredMethods) {
         if (method.isStatic) {
@@ -2566,6 +2571,24 @@ String _settingClosure(String setterName) {
   String name = setterName.substring(0, setterName.length - 1);
   return "r'$setterName': (dynamic instance, value) => instance.$name = value";
 }
+
+/// Whether [library]'s static members differ between the platforms Flutter
+/// compiles for, so that a mirror naming them cannot be compiled for all of
+/// them.
+///
+/// `dart:ui` is implemented twice — by the native engine and by the web engine
+/// — and the two do not declare the same statics: the native one has enum
+/// values (`ImageByteFormat.rawExtendedRgba128`,
+/// `TargetPixelFormat.rFloat32`) and a settable static field
+/// (`SemanticsFlags.none`) the web one lacks. Instance accessors are emitted as
+/// `(dynamic instance) => instance.name`, which compiles everywhere; a static
+/// accessor is a typed reference, so one naming a native-only member makes the
+/// generated file fail to compile for the web. Leaving these classes' statics
+/// out keeps one mirror valid on every platform. Nothing reflects a
+/// `dart:ui` static: the types are in the graph because widget and form types
+/// reach them, not because anything invokes them.
+bool _hasPlatformVariantStatics(LibraryElement library) =>
+    library.uri.toString() == 'dart:ui';
 
 // Auxiliary function used by `_generateCode`.
 Future<String> _staticGettingClosure(
