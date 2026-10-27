@@ -1,5 +1,14 @@
 ## Unreleased
 
+### Fixed — regeneration does not reflect its own previous output
+
+- The reflector analyzed every library of the package, so once
+  `lib/main.r.dart` existed the next run described it too: the output imported
+  itself and listed its own `reflectionApi`, a top-level inference cycle that
+  does not compile. `TomAnalyzer.analyzeBarrel` takes `excludePaths`, and the
+  reflector excludes the file it is about to write, so a run with and without
+  the previous output gives the same file (`REF-IDEM-1`).
+
 ### Changed — `tool/` runs anywhere, and `doc/` holds only what a person wrote
 
 - `analyze_uam_full`, `find_annotations` and `run_cross_reference` named a
