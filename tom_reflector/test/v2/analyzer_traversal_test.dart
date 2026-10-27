@@ -391,6 +391,67 @@ environment:
     });
   });
 
+  group('REF-IDEM: Reflector regeneration', () {
+    test(
+        'REF-IDEM-1: a second run does not reflect the first run\'s output',
+        () async {
+      // The analyzer collects every library of the package, and the
+      // generated `lib/main.r.dart` is one of them once it exists. Reflecting
+      // it added its own `reflectionApi` (and an import of itself) to the next
+      // output, which then did not compile (a top-level inference cycle).
+      final tempDir = await createWorkspaceTempDir('reflector_idem_');
+      try {
+        await File(p.join(tempDir.path, 'pubspec.yaml')).writeAsString('''
+name: ref_idem_test
+version: 1.0.0
+environment:
+  sdk: ^3.0.0
+''');
+        await File(p.join(tempDir.path, 'buildkit.yaml')).writeAsString('''
+tom_reflector:
+  barrels:
+    - lib/main.dart
+''');
+        await File(p.join(tempDir.path, 'lib', 'main.dart'))
+            .create(recursive: true);
+        await File(p.join(tempDir.path, 'lib', 'main.dart')).writeAsString(
+          'library;\n\nclass Widget {}\n\nfinal greeting = \'hi\';\n',
+        );
+        final pubGet = await Process.run(
+          Platform.resolvedExecutable,
+          ['pub', 'get'],
+          workingDirectory: tempDir.path,
+        );
+        expect(pubGet.exitCode, 0, reason: 'pub get: ${pubGet.stderr}');
+
+        final output = File(p.join(tempDir.path, 'lib', 'main.r.dart'));
+        final context = createTestContext(
+          path: tempDir.path,
+          executionRoot: tempDir.parent.path,
+        );
+        expect(
+          (await ReflectorExecutor().execute(context, const CliArgs()))
+              .success,
+          isTrue,
+        );
+        final first = output.readAsStringSync();
+        expect(first, contains('Widget'));
+
+        expect(
+          (await ReflectorExecutor().execute(context, const CliArgs()))
+              .success,
+          isTrue,
+        );
+        final second = output.readAsStringSync();
+        expect(second, isNot(contains('main.r.dart')),
+            reason: 'the output must not import or describe itself');
+        expect(second, equals(first));
+      } finally {
+        await tempDir.delete(recursive: true);
+      }
+    });
+  });
+
   group('REF-RUN: Reflector ToolRunner integration', () {
     test('REF-RUN-1: --help exits successfully', () async {
       final output = StringBuffer();

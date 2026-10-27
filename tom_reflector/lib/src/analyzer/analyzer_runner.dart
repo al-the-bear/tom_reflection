@@ -17,12 +17,18 @@ import 'annotation_parser.dart';
 class TomAnalyzer {
   final AnnotationParser _annotationParser = AnnotationParser();
 
+  /// Analyzes the package of [barrelPath].
+  ///
+  /// [excludePaths] are files of the package that are not collected — the
+  /// file a generator is about to write from this analysis, which would
+  /// otherwise describe its own previous output.
   Future<AnalysisResult> analyzeBarrel({
     required String barrelPath,
     String? workspaceRoot,
     bool followReExports = true,
     List<String>? followReExportPackages,
     List<String> skipReExports = const [],
+    Iterable<String> excludePaths = const [],
   }) async {
     final resolvedPath = p.normalize(p.absolute(barrelPath));
     final rootPath = workspaceRoot != null
@@ -82,6 +88,9 @@ class TomAnalyzer {
       followReExports: followReExports,
       followReExportPackages: followReExportPackages,
       skipReExports: skipReExports,
+      excludePaths: {
+        for (final path in excludePaths) p.normalize(p.absolute(path)),
+      },
     );
 
     analysisResult.packages[analysisResult.rootPackage.name] = analysisResult.rootPackage;
@@ -102,6 +111,7 @@ class TomAnalyzer {
     required bool followReExports,
     List<String>? followReExportPackages,
     List<String> skipReExports = const [],
+    Set<String> excludePaths = const {},
   }
   ) async {
     final session = context.currentSession;
@@ -111,6 +121,9 @@ class TomAnalyzer {
 
     for (final path in analyzedFiles) {
       if (!path.endsWith('.dart')) {
+        continue;
+      }
+      if (excludePaths.contains(p.normalize(path))) {
         continue;
       }
 
@@ -158,6 +171,9 @@ class TomAnalyzer {
 
     while (pendingExports.isNotEmpty) {
       final exportPath = pendingExports.removeLast();
+      if (excludePaths.contains(p.normalize(exportPath))) {
+        continue;
+      }
       final exportResult = await session.getResolvedLibrary(exportPath);
       if (exportResult is! analysis_results.ResolvedLibraryResult) {
         continue;

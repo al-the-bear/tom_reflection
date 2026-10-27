@@ -170,6 +170,11 @@ Future<bool> _runLegacyReflect({
   required String executionRoot,
   bool dryRun = false,
 }) async {
+  final resolvedOutput = _resolveReflectionOutput(
+    barrelPath: barrelPath,
+    outputFile: outputPath,
+  );
+
   final analyzer = TomAnalyzer();
   final analysis = await analyzer.analyzeBarrel(
     barrelPath: barrelPath,
@@ -177,16 +182,14 @@ Future<bool> _runLegacyReflect({
     followReExports: config.followReExports,
     followReExportPackages: config.followReExportPackages,
     skipReExports: config.skipReExports,
+    // The previous run's output sits in the package; reflecting it would make
+    // the new output describe (and import) itself.
+    excludePaths: [resolvedOutput],
   );
 
   final model = ReflectionModel.fromAnalysis(analysis);
   final generator = ReflectionGenerator();
   final content = generator.generate(model);
-
-  final resolvedOutput = _resolveReflectionOutput(
-    barrelPath: barrelPath,
-    outputFile: outputPath,
-  );
 
   await writeOrPreview(resolvedOutput, content, dryRun: dryRun);
   // The preview line above is the whole report under `-n`; "Generated" would
