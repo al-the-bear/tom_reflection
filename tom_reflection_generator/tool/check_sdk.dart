@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:analyzer/src/summary2/package_bundle_format.dart';
 
 void main() {
-  final bytes = File('/home/alexis/tac/tom_ai/core/tom_flutter_form_test/.tom/analyzer-cache/sdk@3.11.4.sum').readAsBytesSync();
+  final bytes = File('/home/alexis/tac/tom_ai/core/tom_core_samples/tom_flutter_form_test/.tom/analyzer-cache/sdk@3.11.4.sum').readAsBytesSync();
   final reader = PackageBundleReader(bytes);
   print('Libraries in SDK summary: ${reader.libraries.length}');
   print('Has SDK section: ${reader.sdk != null}');
