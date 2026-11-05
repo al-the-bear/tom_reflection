@@ -29,30 +29,35 @@ typedef CapabilityChecker =
     );
 
 // ============================================================================
-// Synthetic-element check (analyzer-10 deprecation shim)
+// Synthetic-element check
 // ============================================================================
 
 /// Whether [element] is synthetic (analyzer-generated, with no corresponding
 /// source declaration).
 ///
-/// analyzer 10 deprecated `Element.isSynthetic` in favour of the `isOriginX`
-/// flag family, but it is **not** a drop-in replacement here:
-/// - `isOriginDeclaration` is not declared on the base `Element` type (only on
-///   specific subtypes such as `ConstructorElement`), so several of this
-///   generator's call sites — which hold a statically-typed `Element` — could
-///   not call it without casts; and
-/// - this generator's local [MixinApplication] shim overrides `isSynthetic`
-///   (routing every other member through `noSuchMethod`), and real call sites
-///   (e.g. metadata extraction, class descriptors) pass a `MixinApplication`
-///   here. Dispatching through `isSynthetic` honours that override; calling
-///   `isOriginDeclaration` would hit `noSuchMethod` and return `null`.
-///
-/// `Element.isSynthetic` still works in analyzer 10 — it is implemented as
-/// `!isOriginDeclaration` and is merely deprecated, not removed. Funnelling
-/// every check through this one helper keeps a single, documented deprecation
-/// suppression and preserves the exact (virtual-dispatch) behaviour.
-// ignore: deprecated_member_use
-bool _elementIsSynthetic(Element element) => element.isSynthetic;
+/// analyzer 14 has no `Element.isSynthetic`: each element kind that can be
+/// synthesized says whether it came from a declaration with its own
+/// `isOriginDeclaration`, so the check dispatches on the kind:
+/// - this generator's local [MixinApplication] shim keeps its own `isSynthetic`
+///   (it is synthetic when it stands for an anonymous `S with M` application);
+///   it implements `ClassElementImpl` and routes every other member through
+///   `noSuchMethod`, so it is matched first;
+/// - constructors, methods, accessors, fields, top-level variables and
+///   top-level functions answer `isOriginDeclaration` on the public API;
+/// - a formal parameter answers it on its fragment (a parameter of an induced
+///   setter is synthetic), which only the implementation type exposes;
+/// - every other kind (classes, enums, mixins, ...) is always declared.
+bool _elementIsSynthetic(Element element) => switch (element) {
+  MixinApplication() => element.isSynthetic,
+  ConstructorElement() => !element.isOriginDeclaration,
+  MethodElement() => !element.isOriginDeclaration,
+  PropertyAccessorElement() => !element.isOriginDeclaration,
+  PropertyInducingElement() => !element.isOriginDeclaration,
+  TopLevelFunctionElement() => !element.isOriginDeclaration,
+  FormalParameterElement() =>
+    !(element.firstFragment as FormalParameterFragmentImpl).isOriginDeclaration,
+  _ => false,
+};
 
 // ============================================================================
 // Top-Level Element Extraction

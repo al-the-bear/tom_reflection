@@ -40,7 +40,9 @@ class MixinApplication implements ClassElementImpl {
   @override
   MetadataImpl get metadata => MetadataImpl(const []);
 
-  @override
+  /// Synthetic when it stands for an anonymous `S with M` application. Not an
+  /// analyzer member (analyzer 14 has no `Element.isSynthetic`); read through
+  /// `_elementIsSynthetic`.
   bool get isSynthetic => declaredName == null;
 
   @override
@@ -171,47 +173,20 @@ Future<DartObject?> _evaluateConstant(
     return null;
   }
 
-  LibraryFragment unitElement = currentUnit.declaredFragment!;
-  Source source = unitElement.source;
-  var libraryElement = unitElement.element as LibraryElementImpl;
+  // The analyzer evaluates the expression together with the constants it
+  // depends on, in the session of its library.
+  var result = expression.computeConstantValue();
+  if (result == null) return null;
 
-  var errorListener = RecordingDiagnosticListener();
-  var errorReporter = DiagnosticReporter(errorListener, source);
-  var declaredVariables = DeclaredVariables(); // No variables.
-
-  var evaluationEngine = ConstantEvaluationEngine(
-    declaredVariables: declaredVariables,
-    configuration: ConstantEvaluationConfiguration(),
-  );
-
-  var dependencies = <ConstantEvaluationTarget>[];
-  expression.accept(ReferenceFinder(dependencies.add));
-
-  computeConstants(
-    declaredVariables: declaredVariables,
-    constants: dependencies,
-    featureSet: libraryElement.featureSet,
-    configuration: ConstantEvaluationConfiguration(),
-  );
-
-  var visitor = ConstantVisitor(
-    evaluationEngine,
-    libraryElement,
-    errorReporter,
-  );
-
-  Constant constant = visitor.evaluateAndReportInvalidConstant(expression);
-  DartObjectImpl? dartObject = constant is DartObjectImpl ? constant : null;
-
-  if (errorListener.diagnostics.isNotEmpty) {
+  if (result.diagnostics.isNotEmpty) {
     var message = StringBuffer('Constant `$expression` has errors:\n');
-    for (Diagnostic error in errorListener.diagnostics) {
+    for (Diagnostic error in result.diagnostics) {
       message.writeln(error);
     }
     unawaited(_severe('constant.evaluate.has_errors', message.toString()));
   }
 
-  return dartObject;
+  return result.value;
 }
 
 /// Returns the result of evaluating [elementAnnotation].

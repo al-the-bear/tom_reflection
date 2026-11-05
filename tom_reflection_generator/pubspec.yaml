@@ -1,6 +1,6 @@
 name: tom_reflection_generator
 description: Standalone reflection generator (builder + CLI) for the Tom framework.
-version: 1.8.2
+version: 1.9.0
 repository: https://github.com/al-the-bear/tom_reflection
 
 environment:
@@ -8,8 +8,8 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  analyzer: ^10.0.0
-  build: ^4.0.3
+  analyzer: ^14.5.0
+  build: ">=4.0.3 <6.0.0"
   dart_style: ^3.0.0
   glob: ^2.1.2
   logging: ^1.3.0
@@ -26,7 +26,9 @@ dependencies:
   # bundles must be invalidated when a transitive dependency changes version, or
   # a stale `.sum` throws "Missing library" while linking a subclass's supertype
   # and the generator silently drops the affected classes (RCJ6).
-  tom_analyzer_shared: ">=0.7.2"
+  # Floor 0.8.0: the first release on analyzer 14, partitioning its cache under
+  # `14/` so analyzer-10 bundles are never read.
+  tom_analyzer_shared: ">=0.8.0"
   # tom_build_base provides the v2 tool framework (ToolRunner, ToolDefinition,
   # CommandExecutor) used to expose this generator as a single-command,
   # buildkit-nestable CLI tool.

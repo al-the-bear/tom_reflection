@@ -1,3 +1,24 @@
+## 1.9.0
+
+### Changed — runs on analyzer 14
+
+The generator depends on `analyzer: ^14.5.0` (from `^10.0.0`), `build`
+`>=4.0.3 <6.0.0` and `tom_analyzer_shared >=0.8.0`. Consumers on analyzer 10
+keep resolving 1.8.x.
+
+- Argument lists hold `Argument`s: a named argument is a `NamedArgument`
+  (`name: value`), no longer a `NamedExpression`; every argument's value is
+  read through `argumentExpression`.
+- A parameter's default value is read from its `defaultClause`
+  (`DefaultFormalParameter` is gone).
+- Whether an element is synthetic is read per element kind from
+  `isOriginDeclaration` (`Element.isSynthetic` is gone); the generator's own
+  `MixinApplication` keeps its `isSynthetic`.
+- A capability expression is evaluated by the analyzer's public
+  `Expression.computeConstantValue()` instead of the internal constant
+  evaluator and `ReferenceFinder`, which in analyzer 14.5 visits only the V2
+  AST and failed on the V1 nodes the generator holds.
+
 ## 1.8.2
 
 ### Fixed — a Flutter mirror compiles for the web

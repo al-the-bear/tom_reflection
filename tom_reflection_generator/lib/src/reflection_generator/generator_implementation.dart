@@ -9,7 +9,6 @@ library;
 import 'dart:async' show unawaited;
 import 'dart:developer' as developer;
 import 'dart:io';
-import 'package:analyzer/dart/analysis/declared_variables.dart';
 import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
@@ -19,13 +18,8 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/dart/element/type_system.dart';
 import 'package:analyzer/diagnostic/diagnostic.dart';
-import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/line_info.dart';
 import 'package:analyzer/source/source.dart';
-import 'package:analyzer/src/dart/constant/compute.dart';
-import 'package:analyzer/src/dart/constant/evaluation.dart';
-import 'package:analyzer/src/dart/constant/utilities.dart';
-import 'package:analyzer/src/dart/constant/value.dart';
 import 'package:analyzer/src/dart/element/element.dart';
 import 'package:analyzer/src/dart/analysis/session.dart';
 import 'package:analyzer/src/dart/element/type.dart';
@@ -1194,9 +1188,9 @@ class GeneratorImplementation {
       // Subcase: `super(..)` where 0..k arguments are accepted for some
       // k that we need not worry about here.
       var capabilities = <ec.ReflectCapability>[];
-      for (Expression argument in superInvocation.argumentList.arguments) {
+      for (Argument argument in superInvocation.argumentList.arguments) {
         ec.ReflectCapability? currentCapability =
-            await capabilityOfCollectionElement(argument);
+            await capabilityOfCollectionElement(argument.argumentExpression);
         if (currentCapability != null) capabilities.add(currentCapability);
       }
       return _Capabilities(capabilities);
@@ -1204,9 +1198,9 @@ class GeneratorImplementation {
     assert(superInvocationConstructorName.name == 'fromList');
 
     // Subcase: `super.fromList(const <..>[..])`.
-    NodeList<Expression> arguments = superInvocation.argumentList.arguments;
+    NodeList<Argument> arguments = superInvocation.argumentList.arguments;
     assert(arguments.length == 1);
-    Expression listLiteral = arguments[0];
+    Expression listLiteral = arguments[0].argumentExpression;
     var capabilities = <ec.ReflectCapability>[];
     if (listLiteral is! ListLiteral) {
       await _severe(

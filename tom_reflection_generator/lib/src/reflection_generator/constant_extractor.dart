@@ -52,6 +52,27 @@ String _formatAsMap(Iterable parts) => '{${parts.join(', ')}}';
 // Constant Code Extraction
 // ============================================================================
 
+/// Returns the source code of one [argument] of an argument list, with its
+/// value produced by [_extractConstantCode]: `value` for a positional argument,
+/// `name: value` for a named one.
+Future<String> _extractArgumentCode(
+  Argument argument,
+  _ImportCollector importCollector,
+  FileId generatedLibraryId,
+  LibraryResolver resolver,
+) async {
+  String value = await _extractConstantCode(
+    argument.argumentExpression,
+    importCollector,
+    generatedLibraryId,
+    resolver,
+  );
+  return switch (argument) {
+    NamedArgument(:var name) => '${name.lexeme}: $value',
+    _ => value,
+  };
+}
+
 /// Returns a [String] containing code that will evaluate to the same
 /// value when evaluated in the generated file as the given [expression]
 /// would evaluate to in [originatingLibrary].
@@ -193,22 +214,11 @@ Future<String> _extractConstantCode(
       // We only handle 'identical(a, b)'.
       assert(expression.target == null);
       assert(expression.methodName.token.lexeme == 'identical');
-      NodeList<Expression> arguments = expression.argumentList.arguments;
+      NodeList<Argument> arguments = expression.argumentList.arguments;
       assert(arguments.length == 2);
-      String a = await helper(arguments[0]);
-      String b = await helper(arguments[1]);
+      String a = await helper(arguments[0].argumentExpression);
+      String b = await helper(arguments[1].argumentExpression);
       return 'identical($a, $b)';
-    }
-    
-    // --- Named Expressions (used in argument lists) ---
-    if (expression is NamedExpression) {
-      String value = await _extractConstantCode(
-        expression.expression,
-        importCollector,
-        generatedLibraryId,
-        resolver,
-      );
-      return '${expression.name} $value';
     }
     
     // --- Function References ---
@@ -455,8 +465,15 @@ Future<String> _processInstanceCreation(
 
     // Process constructor arguments
     var argumentList = <String>[];
-    for (Expression argument in expression.argumentList.arguments) {
-      argumentList.add(await helper(argument));
+    for (Argument argument in expression.argumentList.arguments) {
+      argumentList.add(
+        await _extractArgumentCode(
+          argument,
+          importCollector,
+          generatedLibraryId,
+          resolver,
+        ),
+      );
     }
     String arguments = argumentList.join(', ');
 

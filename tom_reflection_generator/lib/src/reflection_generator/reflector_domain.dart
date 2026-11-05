@@ -2262,10 +2262,10 @@ class _ReflectorDomain {
     // the parameter of an induced setter; they have no default value.
     // It is also null for summary-backed elements where the full source
     // AST is not available.
-    if (parameterNode is DefaultFormalParameter &&
-        parameterNode.defaultValue != null) {
+    Expression? defaultValue = parameterNode?.defaultClause?.value;
+    if (defaultValue != null) {
       return await _extractConstantCode(
-        parameterNode.defaultValue!,
+        defaultValue,
         importCollector,
         _generatedLibraryId,
         _resolver,

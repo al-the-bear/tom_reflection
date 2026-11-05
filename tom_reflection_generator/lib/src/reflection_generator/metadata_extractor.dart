@@ -299,9 +299,9 @@ Future<String?> _processConstructorAnnotation(
   
   // Process constructor arguments
   var argumentList = <String>[];
-  for (Expression argument in arguments.arguments) {
+  for (Argument argument in arguments.arguments) {
     argumentList.add(
-      await _extractConstantCode(
+      await _extractArgumentCode(
         argument,
         importCollector,
         dataId,
