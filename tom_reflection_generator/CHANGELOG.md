@@ -1,3 +1,25 @@
+## 1.9.1
+
+### Fixed — an extension type no longer replaces the mirror of its representation type
+
+An extension type erases to its representation type at run time and has no
+`Type` of its own. The generator gave one reached through a type annotation a
+class mirror all the same; that mirror carried the representation type's `Type`
+and, registered after that type's own mirror, replaced it. `reflectType(String)`
+answered an extension type over `String`, and so did the type argument of every
+`List<String>` field — `typeArguments.first.simpleName` was the extension type's
+name. Over a reflected class, a collection field of that class read its element
+class, and so its constructor, from the extension type.
+
+Extension types are no longer covered: they are left out wherever classes enter
+a reflector's domain (annotated or quantified classes, the type-annotation,
+subtype and superclass closures), with a fine log line
+`class_domain.extension_type`. That also avoids a crash on an extension type's
+primary constructor (`PrimaryConstructorDeclarationImpl` is not a
+`FormalParameter`). `test/extension_type_test.dart` (ET-1 to ET-4) generates a
+fixture with extension types over `String` and over a reflected class and runs
+a program against its mirror.
+
 ## 1.9.0
 
 ### Changed — runs on analyzer 14

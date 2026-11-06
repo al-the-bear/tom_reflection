@@ -668,7 +668,14 @@ class GeneratorImplementation {
       InterfaceElement type,
       InterfaceElement reflector,
     ) async {
-      if (!await _isImportable(type, dataId, _resolver)) {
+      if (!_isCoverable(type)) {
+        await _fine(
+          'class_domain.extension_type',
+          'Ignoring extension type ${type.name}: it has no run-time type of '
+          'its own. Library: ${type.library.name}',
+          type,
+        );
+      } else if (!await _isImportable(type, dataId, _resolver)) {
         await _fine(
           'class_domain.unrepresentable',
           'Ignoring unrepresentable class ${type.name}. '

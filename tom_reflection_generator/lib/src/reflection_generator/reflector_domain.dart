@@ -2314,7 +2314,7 @@ class _SubtypesFixedPoint extends FixedPoint<InterfaceElement> {
     final InterfaceElement interfaceElement,
   ) async {
     Iterable<InterfaceElement>? interfaceElements = subtypes[interfaceElement];
-    return interfaceElements ?? <InterfaceElement>[];
+    return _coverable(interfaceElements ?? <InterfaceElement>[]);
   }
 }
 
@@ -2535,7 +2535,7 @@ class _AnnotationClassFixedPoint extends FixedPoint<InterfaceElement> {
         result.add(executableReturnType.element);
       }
     }
-    return result;
+    return _coverable(result);
   }
 }
 

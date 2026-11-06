@@ -221,6 +221,7 @@ class _InterfaceElementEnhancedSet implements Set<InterfaceElement> {
   @override
   bool add(InterfaceElement value) {
     assert(!_unmodifiable);
+    if (!_isCoverable(value)) return false;
     bool result = interfaceElements.add(value);
     if (result) {
       assert(!elementToDomain.containsKey(value));
@@ -434,3 +435,16 @@ class ParameterListShape {
         '$numberOfOptionalPositionalParameters, $names]';
   }
 }
+
+/// Whether [element] can be covered by a class mirror.
+///
+/// Why not an extension type: it erases to its representation type at run
+/// time and has no `Type` of its own. Its mirror would carry the
+/// representation type's `Type` and, registered after that type's own mirror,
+/// replace it: `reflectType(String)` would answer an extension type over
+/// `String`, and so would every `List<String>` type argument.
+bool _isCoverable(InterfaceElement element) => element is! ExtensionTypeElement;
+
+/// [elements] without the ones no class mirror can cover ([_isCoverable]).
+Iterable<InterfaceElement> _coverable(Iterable<InterfaceElement> elements) =>
+    elements.where(_isCoverable);
