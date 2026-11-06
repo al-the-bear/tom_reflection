@@ -41,6 +41,16 @@ keep resolving 1.8.x.
   evaluator and `ReferenceFinder`, which in analyzer 14.5 visits only the V2
   AST and failed on the V1 nodes the generator holds.
 
+## 1.8.3
+
+### Fixed — an extension type no longer replaces the mirror of its representation type
+
+The 1.9.1 fix on the analyzer-10 line, released from the branch
+`release/tom_reflection_generator-1.8.x` for consumers that cannot move to
+analyzer 14 (a Flutter package, whose SDK pins `meta` below what analyzer 14
+needs). Extension types are left out wherever classes enter a reflector's
+domain; `test/extension_type_test.dart` (ET-1 to ET-4).
+
 ## 1.8.2
 
 ### Fixed — a Flutter mirror compiles for the web
