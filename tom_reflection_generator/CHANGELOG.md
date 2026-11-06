@@ -1,3 +1,16 @@
+## 1.8.3
+
+### Fixed — an extension type no longer replaces the mirror of its representation type
+
+The 1.9.1 fix on the analyzer-10 line. An extension type erases to its
+representation type at run time and has no `Type` of its own; a mirror the
+generator gave one reached through a type annotation carried the
+representation type's `Type` and replaced that type's own mirror, so
+`reflectType(String)` answered an extension type over `String`, and so did the
+type argument of every `List<String>` field. Extension types are left out
+wherever classes enter a reflector's domain. `test/extension_type_test.dart`
+(ET-1 to ET-4).
+
 ## 1.8.2
 
 ### Fixed — a Flutter mirror compiles for the web
