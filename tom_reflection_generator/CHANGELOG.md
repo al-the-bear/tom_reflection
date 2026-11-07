@@ -1,3 +1,13 @@
+## Unreleased
+
+### Fixed — the `--check` remedy names a command that exists
+
+A `--check` that finds stale files ends by naming the remedy. It named
+`dart run tom_reflection_generator build`, which the package's own executable
+reads as a target called `build`: it warns `Target not found: build`, generates
+nothing and exits 0. The line now names `dart run tom_reflection_generator`
+with no arguments, which generates from `build.yaml`.
+
 ## 1.9.1
 
 ### Fixed — an extension type no longer replaces the mirror of its representation type

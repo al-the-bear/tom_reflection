@@ -484,8 +484,8 @@ Future<ReflectionGenerationResult> generateReflection({
       // out that a *check* failure is repaired by an ordinary *generate* run.
       stderr.writeln(
         'Regenerate with the project\'s reflection_generation.sh '
-        '(or `dart run tom_reflection_generator build`) and commit the '
-        'result.',
+        '(or `dart run tom_reflection_generator` with no arguments) and '
+        'commit the result.',
       );
     } else if (failedCount == 0) {
       // The severe count rides on the success line rather than replacing it:
