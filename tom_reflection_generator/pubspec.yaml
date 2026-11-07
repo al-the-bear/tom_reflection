@@ -28,7 +28,9 @@ dependencies:
   # and the generator silently drops the affected classes (RCJ6).
   # Floor 0.8.0: the first release on analyzer 14, partitioning its cache under
   # `14/` so analyzer-10 bundles are never read.
-  tom_analyzer_shared: ">=0.8.0"
+  # Floor 0.10.0: the cache is keyed by the analyzer's data version, so
+  # bundles another analyzer minor wrote on the same SDK are never read.
+  tom_analyzer_shared: ">=0.10.0"
   # tom_build_base provides the v2 tool framework (ToolRunner, ToolDefinition,
   # CommandExecutor) used to expose this generator as a single-command,
   # buildkit-nestable CLI tool.
