@@ -30,7 +30,11 @@ dependencies:
   # `14/` so analyzer-10 bundles are never read.
   # Floor 0.10.0: the cache is keyed by the analyzer's data version, so
   # bundles another analyzer minor wrote on the same SDK are never read.
-  tom_analyzer_shared: ">=0.10.0"
+  # Floor 0.13.0: a cached summary is complete or not cached (0.12.0), and a
+  # bundle is named by its dependency closure, so runs filling one partition
+  # at once neither truncate nor delete a bundle another run links against
+  # (both silently dropped types).
+  tom_analyzer_shared: ">=0.13.0"
   # tom_build_base provides the v2 tool framework (ToolRunner, ToolDefinition,
   # CommandExecutor) used to expose this generator as a single-command,
   # buildkit-nestable CLI tool.

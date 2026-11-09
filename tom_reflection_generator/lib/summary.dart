@@ -22,11 +22,24 @@
 /// final resolver = DependencyResolver();
 /// final deps = await resolver.resolveVersionedDependencies('/path/to/project');
 ///
+/// // The dependency closure each summary is linked against (part of its
+/// // cache file name)
+/// final fingerprints = await SummaryGenerator(
+///   cacheManager: cacheManager,
+///   dependencyResolver: resolver,
+/// ).computeDependencyFingerprints(deps);
+///
 /// // Check which summaries are missing
-/// final missing = await cacheManager.findMissingSummaries(deps);
+/// final missing = await cacheManager.findMissingSummaries(
+///   deps,
+///   fingerprints: fingerprints,
+/// );
 ///
 /// // Load available summaries
-/// final store = await cacheManager.loadSummaries(deps);
+/// final store = await cacheManager.loadSummaries(
+///   deps,
+///   fingerprints: fingerprints,
+/// );
 /// ```
 library;
 
