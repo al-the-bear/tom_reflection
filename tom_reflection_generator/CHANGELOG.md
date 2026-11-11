@@ -1,4 +1,4 @@
-## Unreleased
+## 1.9.2
 
 ### Fixed — the `--check` remedy names a command that exists
 
