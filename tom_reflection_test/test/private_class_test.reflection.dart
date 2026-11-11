@@ -3,8 +3,8 @@
 // https://github.com/al-the-bear/tom_reflection
 import 'dart:core';
 
-import 'private_class_test.dart' as prefix0;
-import 'test/private_class_library.dart' as prefix1;
+import 'private_class_library.dart' as prefix0;
+import 'private_class_test.dart' as prefix1;
 
 // ignore_for_file: camel_case_types
 // ignore_for_file: implementation_imports
@@ -19,14 +19,14 @@ import 'package:tom_reflection/generated.dart' as r;
 import 'package:tom_reflection/tom_reflection.dart' as r show Reflection;
 
 final _data = <r.Reflection, r.ReflectorData>{
-  const prefix0.PrivacyReflection(): r.ReflectorData(
+  const prefix1.PrivacyReflection(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.PublicClass>(
+      r.NonGenericClassMirrorImpl<prefix0.PublicClass>(
         r'PublicClass',
         r'test_reflection.test.private_class_library.PublicClass',
         134217735,
         0,
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         const <int>[0],
         const <int>[1, 2, 3, 4, 5, 0],
         const <int>[],
@@ -45,7 +45,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'test_reflection.test.private_class_library._PrivateClass1',
         134217767,
         1,
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         const <int>[6],
         const <int>[1, 2, 3, 4, 5, 0, 6],
         const <int>[],
@@ -64,7 +64,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'test_reflection.test.private_class_library._PrivateClass2',
         134217767,
         2,
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         const <int>[7, 8],
         const <int>[1, 2, 3, 4, 5, 7, 8],
         const <int>[],
@@ -78,12 +78,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.PublicSubclass1>(
+      r.NonGenericClassMirrorImpl<prefix0.PublicSubclass1>(
         r'PublicSubclass1',
         r'test_reflection.test.private_class_library.PublicSubclass1',
         134217735,
         3,
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         const <int>[],
         const <int>[1, 2, 3, 4, 5, 0, 6],
         const <int>[],
@@ -97,12 +97,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.PublicSubclass2>(
+      r.NonGenericClassMirrorImpl<prefix0.PublicSubclass2>(
         r'PublicSubclass2',
         r'test_reflection.test.private_class_library.PublicSubclass2',
         134217735,
         4,
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         const <int>[],
         const <int>[1, 2, 3, 4, 5, 7, 8],
         const <int>[],
@@ -127,7 +127,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         5,
         null,
         const <int>[],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -139,7 +139,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         6,
         null,
         const <int>[0],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -151,7 +151,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         7,
         null,
         const <int>[],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -163,7 +163,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[1],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -175,7 +175,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         5,
         null,
         const <int>[],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -187,7 +187,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         8,
         null,
         const <int>[],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -199,7 +199,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         5,
         null,
         const <int>[],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -211,7 +211,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         5,
         null,
         const <int>[],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -223,7 +223,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         5,
         null,
         const <int>[],
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         null,
       ),
     ],
@@ -232,7 +232,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'other',
         134348806,
         1,
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         -1,
         9,
         9,
@@ -245,7 +245,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'invocation',
         134348806,
         3,
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         -1,
         10,
         10,
@@ -256,15 +256,15 @@ final _data = <r.Reflection, r.ReflectorData>{
       ),
     ],
     <Type>[
-      prefix1.PublicClass,
+      prefix0.PublicClass,
       const r.FakeType(
         r'test_reflection.test.private_class_library._PrivateClass1',
       ),
       const r.FakeType(
         r'test_reflection.test.private_class_library._PrivateClass2',
       ),
-      prefix1.PublicSubclass1,
-      prefix1.PublicSubclass2,
+      prefix0.PublicSubclass1,
+      prefix0.PublicSubclass2,
       int,
       bool,
       String,
@@ -292,7 +292,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         Uri.parse(
           'package:tom_reflection_test/test/private_class_library.dart',
         ),
-        const prefix0.PrivacyReflection(),
+        const prefix1.PrivacyReflection(),
         const <int>[],
         {},
         {},
