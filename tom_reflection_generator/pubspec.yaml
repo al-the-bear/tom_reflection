@@ -34,12 +34,12 @@ dependencies:
   # bundle is named by its dependency closure, so runs filling one partition
   # at once neither truncate nor delete a bundle another run links against
   # (both silently dropped types).
-  tom_analyzer_shared: ">=0.13.0"
+  tom_analyzer_shared: ">=0.13.0 <1.0.0"
   # tom_build_base provides the v2 tool framework (ToolRunner, ToolDefinition,
   # CommandExecutor) used to expose this generator as a single-command,
   # buildkit-nestable CLI tool.
-  tom_build_base: ">=2.14.0"
-  tom_reflection: ">=1.0.1"
+  tom_build_base: ">=2.14.0 <3.0.0"
+  tom_reflection: ">=1.0.1 <2.0.0"
   yaml: ^3.1.2
 
 dev_dependencies:
