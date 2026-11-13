@@ -16,7 +16,10 @@ import 'package:tom_build_base/tom_build_base_v2.dart';
 import 'package:tom_reflector/src/v2/analyzer_executor.dart';
 import 'package:tom_reflector/src/v2/reflection_analyzer_tool.dart';
 
-void main(List<String> args) async {
+// Inside the shared console-markdown zone (tom_build_base), as buildkit and
+// testkit run: output renders the same, and a reader that stops early
+// (`| head -1`) ends the run quietly instead of with an unhandled EPIPE.
+Future<void> main(List<String> args) => runWithConsoleMarkdown(() async {
   final runner = ToolRunner(
     tool: reflectionAnalyzerTool,
     executors: createReflectionAnalyzerExecutors(),
@@ -27,4 +30,4 @@ void main(List<String> args) async {
   if (!result.success) {
     exitCode = 1;
   }
-}
+});
