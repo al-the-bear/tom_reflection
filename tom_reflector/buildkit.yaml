@@ -1,5 +1,11 @@
 # Tom Build Configuration for tom_reflector
 
+project_id: ANA
+name: analyzer
+description: >-
+  Dart code analyzer.
+license: BSD-3-Clause
+
 versioner:
   variable-prefix: analyzer
 

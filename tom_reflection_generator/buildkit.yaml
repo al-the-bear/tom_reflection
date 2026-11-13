@@ -4,6 +4,13 @@
 # runs before `:comp` (see buildkit_master.yaml), so the compiled binary always
 # embeds the current version, build number, git commit and build timestamp.
 # variable-prefix: reflectionGen -> generated class ReflectionGenVersionInfo.
+
+project_id: RFLG
+name: reflectgen
+description: >-
+  Reflection code generator.
+license: BSD-3-Clause
+
 versioner:
   variable-prefix: reflectionGen
 
