@@ -321,5 +321,5 @@ Tests live under `tom_reflection_generator/test/` (for example,
 ## See Also
 
 - [Reflection Generator Usage](reflection_generator.md)
-- [Compare Mirrors Utility](../../../../_doc/build_tools_old/userguides/compare_mirrors.md)
+- Compare Mirrors Utility (archived with the old build tools: `_ai/quests/tom_deploy/archived_tom_build_stack/docs/userguides/compare_mirrors.md`)
 - [Tom Reflection Package](../../tom_reflection/README.md)
