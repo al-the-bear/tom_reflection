@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../../../../../.tom/json-schema/buildkit/buildkit.schema.json
 # Buildkit configuration for tom_analyzer standalone analysis
 
 tom_analyzer:
