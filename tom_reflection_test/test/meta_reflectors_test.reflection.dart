@@ -3,13 +3,14 @@
 // https://github.com/al-the-bear/tom_reflection
 import 'dart:core';
 
-import 'meta_reflectors_definer.dart' as prefix0;
-import 'meta_reflectors_domain.dart' as prefix1;
-import 'meta_reflectors_domain_definer.dart' as prefix2;
-import 'meta_reflectors_meta.dart' as prefix3;
-import 'meta_reflectors_test.dart' as prefix4;
+import 'meta_reflectors_test.dart' as prefix0;
 
-import 'package:tom_reflection/tom_reflection.dart' as prefix5;
+import 'package:tom_reflection/tom_reflection.dart' as prefix1;
+
+import 'test/meta_reflectors_definer.dart' as prefix2;
+import 'test/meta_reflectors_domain.dart' as prefix3;
+import 'test/meta_reflectors_domain_definer.dart' as prefix4;
+import 'test/meta_reflectors_meta.dart' as prefix5;
 
 // ignore_for_file: camel_case_types
 // ignore_for_file: implementation_imports
@@ -24,7 +25,7 @@ import 'package:tom_reflection/generated.dart' as r;
 import 'package:tom_reflection/tom_reflection.dart' as r show Reflection;
 
 final _data = <r.Reflection, r.ReflectorData>{
-  const prefix3.ScopeMetaReflector(): r.ReflectorData(
+  const prefix5.ScopeMetaReflector(): r.ReflectorData(
     <m.TypeMirror>[],
     <m.DeclarationMirror>[
       r.MethodMirrorImpl(
@@ -36,7 +37,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[0],
-        const prefix3.ScopeMetaReflector(),
+        const prefix5.ScopeMetaReflector(),
         null,
       ),
     ],
@@ -45,7 +46,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'scope',
         134348806,
         0,
-        const prefix3.ScopeMetaReflector(),
+        const prefix5.ScopeMetaReflector(),
         -1,
         -1,
         -1,
@@ -63,9 +64,9 @@ final _data = <r.Reflection, r.ReflectorData>{
       r.LibraryMirrorImpl(
         r'test_reflection.test.meta_reflectors_test',
         Uri.parse('package:tom_reflection_test/test/meta_reflectors_test.dart'),
-        const prefix3.ScopeMetaReflector(),
+        const prefix5.ScopeMetaReflector(),
         const <int>[0],
-        {r'reflectionsOfScope': () => prefix4.reflectionsOfScope},
+        {r'reflectionsOfScope': () => prefix0.reflectionsOfScope},
         {},
         null,
         null,
@@ -73,14 +74,14 @@ final _data = <r.Reflection, r.ReflectorData>{
     ],
     [],
   ),
-  const prefix3.AllReflectorsMetaReflector(): r.ReflectorData(
+  const prefix5.AllReflectorsMetaReflector(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix5.Reflection>(
+      r.NonGenericClassMirrorImpl<prefix1.Reflection>(
         r'Reflection',
         r'tom_reflection.Reflection',
         134218247,
         0,
-        const prefix3.AllReflectorsMetaReflector(),
+        const prefix5.AllReflectorsMetaReflector(),
         const <int>[-1],
         null,
         null,
@@ -94,12 +95,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         {},
       ),
-      r.NonGenericClassMirrorImpl<prefix2.ReflectorUpwardsClosedToA>(
+      r.NonGenericClassMirrorImpl<prefix4.ReflectorUpwardsClosedToA>(
         r'ReflectorUpwardsClosedToA',
         r'test_reflection.test.meta_reflectors_domain_definer.ReflectorUpwardsClosedToA',
         134217735,
         1,
-        const prefix3.AllReflectorsMetaReflector(),
+        const prefix5.AllReflectorsMetaReflector(),
         const <int>[-1],
         null,
         null,
@@ -108,7 +109,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix2.ReflectorUpwardsClosedToA() : null,
+              () => b ? prefix4.ReflectorUpwardsClosedToA() : null,
         },
         -1,
         -1,
@@ -116,12 +117,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         {},
       ),
-      r.NonGenericClassMirrorImpl<prefix2.ReflectorUpwardsClosedUntilA>(
+      r.NonGenericClassMirrorImpl<prefix4.ReflectorUpwardsClosedUntilA>(
         r'ReflectorUpwardsClosedUntilA',
         r'test_reflection.test.meta_reflectors_domain_definer.ReflectorUpwardsClosedUntilA',
         134217735,
         2,
-        const prefix3.AllReflectorsMetaReflector(),
+        const prefix5.AllReflectorsMetaReflector(),
         const <int>[-1],
         null,
         null,
@@ -130,7 +131,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix2.ReflectorUpwardsClosedUntilA() : null,
+              () => b ? prefix4.ReflectorUpwardsClosedUntilA() : null,
         },
         -1,
         -1,
@@ -138,12 +139,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         {},
       ),
-      r.NonGenericClassMirrorImpl<prefix0.Reflector>(
+      r.NonGenericClassMirrorImpl<prefix2.Reflector>(
         r'Reflector',
         r'test_reflection.test.meta_reflectors_definer.Reflector',
         134217735,
         3,
-        const prefix3.AllReflectorsMetaReflector(),
+        const prefix5.AllReflectorsMetaReflector(),
         const <int>[-1],
         null,
         null,
@@ -152,7 +153,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix0.Reflector() : null,
+              () => b ? prefix2.Reflector() : null,
         },
         -1,
         -1,
@@ -160,12 +161,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         {},
       ),
-      r.NonGenericClassMirrorImpl<prefix0.Reflector2>(
+      r.NonGenericClassMirrorImpl<prefix2.Reflector2>(
         r'Reflector2',
         r'test_reflection.test.meta_reflectors_definer.Reflector2',
         134217735,
         4,
-        const prefix3.AllReflectorsMetaReflector(),
+        const prefix5.AllReflectorsMetaReflector(),
         const <int>[-1],
         null,
         null,
@@ -174,7 +175,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix0.Reflector2() : null,
+              () => b ? prefix2.Reflector2() : null,
         },
         -1,
         -1,
@@ -182,12 +183,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         {},
       ),
-      r.NonGenericClassMirrorImpl<prefix0.ReflectorUpwardsClosed>(
+      r.NonGenericClassMirrorImpl<prefix2.ReflectorUpwardsClosed>(
         r'ReflectorUpwardsClosed',
         r'test_reflection.test.meta_reflectors_definer.ReflectorUpwardsClosed',
         134217735,
         5,
-        const prefix3.AllReflectorsMetaReflector(),
+        const prefix5.AllReflectorsMetaReflector(),
         const <int>[-1],
         null,
         null,
@@ -196,7 +197,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix0.ReflectorUpwardsClosed() : null,
+              () => b ? prefix2.ReflectorUpwardsClosed() : null,
         },
         -1,
         -1,
@@ -204,12 +205,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         {},
       ),
-      r.NonGenericClassMirrorImpl<prefix3.ScopeMetaReflector>(
+      r.NonGenericClassMirrorImpl<prefix5.ScopeMetaReflector>(
         r'ScopeMetaReflector',
         r'test_reflection.test.meta_reflectors_meta.ScopeMetaReflector',
         134217735,
         6,
-        const prefix3.AllReflectorsMetaReflector(),
+        const prefix5.AllReflectorsMetaReflector(),
         const <int>[-1],
         null,
         null,
@@ -218,7 +219,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix3.ScopeMetaReflector() : null,
+              () => b ? prefix5.ScopeMetaReflector() : null,
         },
         -1,
         -1,
@@ -226,12 +227,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         {},
       ),
-      r.NonGenericClassMirrorImpl<prefix3.AllReflectorsMetaReflector>(
+      r.NonGenericClassMirrorImpl<prefix5.AllReflectorsMetaReflector>(
         r'AllReflectorsMetaReflector',
         r'test_reflection.test.meta_reflectors_meta.AllReflectorsMetaReflector',
         134217735,
         7,
-        const prefix3.AllReflectorsMetaReflector(),
+        const prefix5.AllReflectorsMetaReflector(),
         const <int>[-1],
         null,
         null,
@@ -240,7 +241,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix3.AllReflectorsMetaReflector() : null,
+              () => b ? prefix5.AllReflectorsMetaReflector() : null,
         },
         -1,
         -1,
@@ -252,14 +253,14 @@ final _data = <r.Reflection, r.ReflectorData>{
     null,
     null,
     <Type>[
-      prefix5.Reflection,
-      prefix2.ReflectorUpwardsClosedToA,
-      prefix2.ReflectorUpwardsClosedUntilA,
-      prefix0.Reflector,
-      prefix0.Reflector2,
-      prefix0.ReflectorUpwardsClosed,
-      prefix3.ScopeMetaReflector,
-      prefix3.AllReflectorsMetaReflector,
+      prefix1.Reflection,
+      prefix4.ReflectorUpwardsClosedToA,
+      prefix4.ReflectorUpwardsClosedUntilA,
+      prefix2.Reflector,
+      prefix2.Reflector2,
+      prefix2.ReflectorUpwardsClosed,
+      prefix5.ScopeMetaReflector,
+      prefix5.AllReflectorsMetaReflector,
     ],
     8,
     {},
@@ -271,23 +272,23 @@ final _data = <r.Reflection, r.ReflectorData>{
       const [0, 0, null],
     ],
   ),
-  const prefix0.Reflector(): r.ReflectorData(
+  const prefix2.Reflector(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.M1>(
+      r.NonGenericClassMirrorImpl<prefix3.M1>(
         r'M1',
         r'test_reflection.test.meta_reflectors_domain.M1',
         134217735,
         0,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[0, 2, 3, 6],
         const <int>[7, 8, 9, 10, 11, 2, 4, 5],
         const <int>[3],
         -1,
-        {r'staticFoo': () => prefix1.M1.staticFoo},
+        {r'staticFoo': () => prefix3.M1.staticFoo},
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M1() : null,
+              () => b ? prefix3.M1() : null,
         },
         0,
         0,
@@ -295,12 +296,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M2>(
+      r.NonGenericClassMirrorImpl<prefix3.M2>(
         r'M2',
         r'test_reflection.test.meta_reflectors_domain.M2',
         134217735,
         1,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[12],
         const <int>[7, 8, 9, 10, 11],
         const <int>[],
@@ -309,7 +310,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M2() : null,
+              () => b ? prefix3.M2() : null,
         },
         0,
         1,
@@ -317,12 +318,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M3>(
+      r.NonGenericClassMirrorImpl<prefix3.M3>(
         r'M3',
         r'test_reflection.test.meta_reflectors_domain.M3',
         134217735,
         2,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[13],
         const <int>[7, 8, 9, 10, 11],
         const <int>[],
@@ -331,7 +332,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M3() : null,
+              () => b ? prefix3.M3() : null,
         },
         0,
         2,
@@ -339,24 +340,24 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'A',
         r'test_reflection.test.meta_reflectors_domain.A',
         134217735,
         3,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[1, 14, 15, 16, 19],
         const <int>[7, 8, 9, 10, 11, 14, 17, 18],
         const <int>[15, 16],
         -1,
         {
-          r'staticFoo': () => prefix1.A.staticFoo,
-          r'staticBar': () => prefix1.A.staticBar,
+          r'staticFoo': () => prefix3.A.staticFoo,
+          r'staticBar': () => prefix3.A.staticBar,
         },
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.A() : null,
+              () => b ? prefix3.A() : null,
         },
         0,
         3,
@@ -364,12 +365,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'B',
         r'test_reflection.test.meta_reflectors_domain.B',
         134217735,
         4,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[20],
         const <int>[7, 8, 9, 10, 11, 2, 4, 5],
         const <int>[],
@@ -378,7 +379,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.B() : null,
+              () => b ? prefix3.B() : null,
         },
         0,
         4,
@@ -386,12 +387,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.C>(
+      r.NonGenericClassMirrorImpl<prefix3.C>(
         r'C',
         r'test_reflection.test.meta_reflectors_domain.C',
         134217735,
         5,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[21],
         const <int>[7, 8, 9, 10, 11, 2, 4, 5],
         const <int>[],
@@ -400,7 +401,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.C() : null,
+              () => b ? prefix3.C() : null,
         },
         0,
         5,
@@ -408,12 +409,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.D>(
+      r.NonGenericClassMirrorImpl<prefix3.D>(
         r'D',
         r'test_reflection.test.meta_reflectors_domain.D',
         134217735,
         6,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[22],
         const <int>[7, 8, 9, 10, 11, 2, 4, 5],
         const <int>[],
@@ -422,7 +423,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.D() : null,
+              () => b ? prefix3.D() : null,
         },
         0,
         6,
@@ -430,12 +431,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         7,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[0, 2],
         const <int>[7, 8, 9, 10, 11, 2, 4, 5],
         const <int>[],
@@ -449,12 +450,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         134218311,
         8,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[],
         const <int>[7, 8, 9, 10, 11, 2, 4, 5],
         const <int>[],
@@ -468,12 +469,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         134218311,
         9,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[],
         const <int>[7, 8, 9, 10, 11, 2, 4, 5],
         const <int>[],
@@ -487,12 +488,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         10,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[0, 2],
         const <int>[7, 8, 9, 10, 11, 2, 4, 5],
         const <int>[],
@@ -512,7 +513,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'field',
         67141637,
         0,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         -1,
         -1,
         -1,
@@ -523,7 +524,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'field',
         67141637,
         3,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         -1,
         -1,
         -1,
@@ -539,7 +540,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -551,11 +552,11 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[0],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
-      r.ImplicitGetterMirrorImpl(const prefix0.Reflector(), 0, 4),
-      r.ImplicitSetterMirrorImpl(const prefix0.Reflector(), 0, 5),
+      r.ImplicitGetterMirrorImpl(const prefix2.Reflector(), 0, 4),
+      r.ImplicitSetterMirrorImpl(const prefix2.Reflector(), 0, 5),
       r.MethodMirrorImpl(
         r'',
         64,
@@ -565,7 +566,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -577,7 +578,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[2],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -589,7 +590,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -601,7 +602,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[3],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -613,7 +614,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -625,7 +626,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -637,7 +638,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -649,7 +650,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -661,7 +662,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -673,7 +674,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[4],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -685,11 +686,11 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
-      r.ImplicitGetterMirrorImpl(const prefix0.Reflector(), 1, 17),
-      r.ImplicitSetterMirrorImpl(const prefix0.Reflector(), 1, 18),
+      r.ImplicitGetterMirrorImpl(const prefix2.Reflector(), 1, 17),
+      r.ImplicitSetterMirrorImpl(const prefix2.Reflector(), 1, 18),
       r.MethodMirrorImpl(
         r'',
         64,
@@ -699,7 +700,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -711,7 +712,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -723,7 +724,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -735,7 +736,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         null,
       ),
     ],
@@ -744,7 +745,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'x',
         67141638,
         3,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         -1,
         -1,
         -1,
@@ -757,7 +758,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'value',
         67141702,
         5,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         -1,
         -1,
         -1,
@@ -770,7 +771,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'other',
         134348806,
         7,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         -1,
         -1,
         -1,
@@ -783,7 +784,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'invocation',
         134348806,
         9,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         -1,
         -1,
         -1,
@@ -796,7 +797,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'x',
         67141638,
         15,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         -1,
         -1,
         -1,
@@ -809,7 +810,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'value',
         67141702,
         18,
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         -1,
         -1,
         -1,
@@ -820,13 +821,13 @@ final _data = <r.Reflection, r.ReflectorData>{
       ),
     ],
     <Type>[
-      prefix1.M1,
-      prefix1.M2,
-      prefix1.M3,
-      prefix1.A,
-      prefix1.B,
-      prefix1.C,
-      prefix1.D,
+      prefix3.M1,
+      prefix3.M2,
+      prefix3.M3,
+      prefix3.A,
+      prefix3.B,
+      prefix3.C,
+      prefix3.D,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
       ),
@@ -858,7 +859,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         Uri.parse(
           'package:tom_reflection_test/test/meta_reflectors_domain.dart',
         ),
-        const prefix0.Reflector(),
+        const prefix2.Reflector(),
         const <int>[],
         {},
         {},
@@ -868,28 +869,28 @@ final _data = <r.Reflection, r.ReflectorData>{
     ],
     [],
   ),
-  const prefix0.Reflector2(): r.ReflectorData(
+  const prefix2.Reflector2(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.M1>(
+      r.NonGenericClassMirrorImpl<prefix3.M1>(
         r'M1',
         r'test_reflection.test.meta_reflectors_domain.M1',
         134217735,
         0,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
         -1,
-        {r'staticFoo': () => prefix1.M1.staticFoo},
+        {r'staticFoo': () => prefix3.M1.staticFoo},
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M1() : null,
+              () => b ? prefix3.M1() : null,
         },
         0,
         0,
         const <int>[],
-        const <Object>[const prefix1.P()],
+        const <Object>[const prefix3.P()],
         {
           r'==': 1,
           r'toString': 0,
@@ -902,12 +903,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'staticFoo': 1,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M2>(
+      r.NonGenericClassMirrorImpl<prefix3.M2>(
         r'M2',
         r'test_reflection.test.meta_reflectors_domain.M2',
         134217735,
         1,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -916,7 +917,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M2() : null,
+              () => b ? prefix3.M2() : null,
         },
         0,
         1,
@@ -930,12 +931,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'runtimeType': 0,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M3>(
+      r.NonGenericClassMirrorImpl<prefix3.M3>(
         r'M3',
         r'test_reflection.test.meta_reflectors_domain.M3',
         134217735,
         2,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -944,7 +945,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M3() : null,
+              () => b ? prefix3.M3() : null,
         },
         0,
         2,
@@ -958,12 +959,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'runtimeType': 0,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'B',
         r'test_reflection.test.meta_reflectors_domain.B',
         134217735,
         3,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -972,7 +973,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.B() : null,
+              () => b ? prefix3.B() : null,
         },
         0,
         3,
@@ -989,12 +990,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'field=': 1,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.C>(
+      r.NonGenericClassMirrorImpl<prefix3.C>(
         r'C',
         r'test_reflection.test.meta_reflectors_domain.C',
         134217735,
         4,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -1003,7 +1004,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.C() : null,
+              () => b ? prefix3.C() : null,
         },
         0,
         4,
@@ -1020,12 +1021,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'field=': 1,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.D>(
+      r.NonGenericClassMirrorImpl<prefix3.D>(
         r'D',
         r'test_reflection.test.meta_reflectors_domain.D',
         134217735,
         5,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -1034,7 +1035,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.D() : null,
+              () => b ? prefix3.D() : null,
         },
         0,
         5,
@@ -1051,12 +1052,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'field=': 1,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         6,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -1079,12 +1080,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'field=': 1,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         134218311,
         7,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -1107,12 +1108,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'field=': 1,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         134218311,
         8,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -1135,12 +1136,12 @@ final _data = <r.Reflection, r.ReflectorData>{
           r'field=': 1,
         },
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         9,
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -1167,12 +1168,12 @@ final _data = <r.Reflection, r.ReflectorData>{
     null,
     null,
     <Type>[
-      prefix1.M1,
-      prefix1.M2,
-      prefix1.M3,
-      prefix1.B,
-      prefix1.C,
-      prefix1.D,
+      prefix3.M1,
+      prefix3.M2,
+      prefix3.M3,
+      prefix3.B,
+      prefix3.C,
+      prefix3.D,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
       ),
@@ -1204,7 +1205,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         Uri.parse(
           'package:tom_reflection_test/test/meta_reflectors_domain.dart',
         ),
-        const prefix0.Reflector2(),
+        const prefix2.Reflector2(),
         const <int>[-1],
         {},
         {},
@@ -1217,14 +1218,14 @@ final _data = <r.Reflection, r.ReflectorData>{
       const [1, 0, null],
     ],
   ),
-  const prefix0.ReflectorUpwardsClosed(): r.ReflectorData(
+  const prefix2.ReflectorUpwardsClosed(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.C>(
+      r.NonGenericClassMirrorImpl<prefix3.C>(
         r'C',
         r'test_reflection.test.meta_reflectors_domain.C',
         134217735,
         0,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[2],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -1233,7 +1234,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.C() : null,
+              () => b ? prefix3.C() : null,
         },
         -1,
         0,
@@ -1241,12 +1242,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.D>(
+      r.NonGenericClassMirrorImpl<prefix3.D>(
         r'D',
         r'test_reflection.test.meta_reflectors_domain.D',
         134217735,
         1,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[11],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -1255,7 +1256,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.D() : null,
+              () => b ? prefix3.D() : null,
         },
         -1,
         1,
@@ -1263,12 +1264,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'B',
         r'test_reflection.test.meta_reflectors_domain.B',
         134217735,
         2,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[12],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -1277,7 +1278,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.B() : null,
+              () => b ? prefix3.B() : null,
         },
         -1,
         2,
@@ -1285,12 +1286,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M2>(
+      r.NonGenericClassMirrorImpl<prefix3.M2>(
         r'M2',
         r'test_reflection.test.meta_reflectors_domain.M2',
         134217735,
         3,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[13],
         const <int>[3, 4, 5, 6, 7],
         const <int>[],
@@ -1299,7 +1300,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M2() : null,
+              () => b ? prefix3.M2() : null,
         },
         -1,
         3,
@@ -1307,12 +1308,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         134218311,
         4,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -1326,12 +1327,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M3>(
+      r.NonGenericClassMirrorImpl<prefix3.M3>(
         r'M3',
         r'test_reflection.test.meta_reflectors_domain.M3',
         134217735,
         5,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[14],
         const <int>[3, 4, 5, 6, 7],
         const <int>[],
@@ -1340,7 +1341,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M3() : null,
+              () => b ? prefix3.M3() : null,
         },
         -1,
         5,
@@ -1348,12 +1349,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         134218311,
         6,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -1367,24 +1368,24 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'A',
         r'test_reflection.test.meta_reflectors_domain.A',
         134217735,
         7,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[1, 15, 16, 17, 20],
         const <int>[3, 4, 5, 6, 7, 15, 18, 19],
         const <int>[16, 17],
         11,
         {
-          r'staticFoo': () => prefix1.A.staticFoo,
-          r'staticBar': () => prefix1.A.staticBar,
+          r'staticFoo': () => prefix3.A.staticFoo,
+          r'staticBar': () => prefix3.A.staticBar,
         },
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.A() : null,
+              () => b ? prefix3.A() : null,
         },
         -1,
         7,
@@ -1392,21 +1393,21 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M1>(
+      r.NonGenericClassMirrorImpl<prefix3.M1>(
         r'M1',
         r'test_reflection.test.meta_reflectors_domain.M1',
         134217735,
         8,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[0, 8, 21, 22],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[21],
         11,
-        {r'staticFoo': () => prefix1.M1.staticFoo},
+        {r'staticFoo': () => prefix3.M1.staticFoo},
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M1() : null,
+              () => b ? prefix3.M1() : null,
         },
         -1,
         8,
@@ -1414,12 +1415,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         9,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[0, 8],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -1433,12 +1434,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         10,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[0, 8],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -1457,7 +1458,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'dart.core.Object',
         134217735,
         11,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         const <int>[3, 4, 5, 23, 24, 25, 6, 7, 26],
         const <int>[3, 4, 5, 6, 7],
         const <int>[23, 24, 25],
@@ -1484,7 +1485,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'field',
         67141637,
         8,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -1495,7 +1496,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'field',
         67141637,
         7,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -1511,7 +1512,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1523,7 +1524,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[0],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1535,7 +1536,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1547,7 +1548,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[1],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1559,7 +1560,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1571,7 +1572,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1583,11 +1584,11 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
-      r.ImplicitGetterMirrorImpl(const prefix0.ReflectorUpwardsClosed(), 0, 9),
-      r.ImplicitSetterMirrorImpl(const prefix0.ReflectorUpwardsClosed(), 0, 10),
+      r.ImplicitGetterMirrorImpl(const prefix2.ReflectorUpwardsClosed(), 0, 9),
+      r.ImplicitSetterMirrorImpl(const prefix2.ReflectorUpwardsClosed(), 0, 10),
       r.MethodMirrorImpl(
         r'',
         64,
@@ -1597,7 +1598,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1609,7 +1610,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1621,7 +1622,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1633,7 +1634,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1645,7 +1646,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1657,7 +1658,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[3],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1669,11 +1670,11 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
-      r.ImplicitGetterMirrorImpl(const prefix0.ReflectorUpwardsClosed(), 1, 18),
-      r.ImplicitSetterMirrorImpl(const prefix0.ReflectorUpwardsClosed(), 1, 19),
+      r.ImplicitGetterMirrorImpl(const prefix2.ReflectorUpwardsClosed(), 1, 18),
+      r.ImplicitSetterMirrorImpl(const prefix2.ReflectorUpwardsClosed(), 1, 19),
       r.MethodMirrorImpl(
         r'',
         64,
@@ -1683,7 +1684,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1695,7 +1696,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[5],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1707,7 +1708,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1740,7 +1741,7 @@ final _data = <r.Reflection, r.ReflectorData>{
           24,
           25,
         ],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1752,7 +1753,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[26],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1764,7 +1765,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[27],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -1776,7 +1777,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         null,
       ),
     ],
@@ -1785,7 +1786,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'other',
         134348806,
         3,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1798,7 +1799,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'invocation',
         134348806,
         5,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -1811,7 +1812,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'value',
         67141702,
         10,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -1824,7 +1825,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'x',
         67141638,
         16,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -1837,7 +1838,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'value',
         67141702,
         19,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -1850,7 +1851,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'x',
         67141638,
         21,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -1863,7 +1864,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object1',
         67239942,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1876,7 +1877,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object2',
         67239942,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1889,7 +1890,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object3',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1902,7 +1903,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object4',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1915,7 +1916,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object5',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1928,7 +1929,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object6',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1941,7 +1942,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object7',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1954,7 +1955,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object8',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1967,7 +1968,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object9',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1980,7 +1981,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object10',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -1993,7 +1994,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object11',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2006,7 +2007,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object12',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2019,7 +2020,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object13',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2032,7 +2033,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object14',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2045,7 +2046,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object15',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2058,7 +2059,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object16',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2071,7 +2072,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object17',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2084,7 +2085,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object18',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2097,7 +2098,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object19',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2110,7 +2111,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'object20',
         67246086,
         23,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         11,
         -1,
         -1,
@@ -2123,7 +2124,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'objects',
         151126022,
         24,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -2136,7 +2137,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'objects',
         151126022,
         25,
-        const prefix0.ReflectorUpwardsClosed(),
+        const prefix2.ReflectorUpwardsClosed(),
         -1,
         -1,
         -1,
@@ -2147,19 +2148,19 @@ final _data = <r.Reflection, r.ReflectorData>{
       ),
     ],
     <Type>[
-      prefix1.C,
-      prefix1.D,
-      prefix1.B,
-      prefix1.M2,
+      prefix3.C,
+      prefix3.D,
+      prefix3.B,
+      prefix3.M2,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
       ),
-      prefix1.M3,
+      prefix3.M3,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
       ),
-      prefix1.A,
-      prefix1.M1,
+      prefix3.A,
+      prefix3.M1,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
       ),
@@ -2183,14 +2184,14 @@ final _data = <r.Reflection, r.ReflectorData>{
     null,
     [],
   ),
-  const prefix2.ReflectorUpwardsClosedToA(): r.ReflectorData(
+  const prefix4.ReflectorUpwardsClosedToA(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.C>(
+      r.NonGenericClassMirrorImpl<prefix3.C>(
         r'C',
         r'test_reflection.test.meta_reflectors_domain.C',
         134217735,
         0,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[2],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -2199,7 +2200,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.C() : null,
+              () => b ? prefix3.C() : null,
         },
         -1,
         0,
@@ -2207,12 +2208,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.D>(
+      r.NonGenericClassMirrorImpl<prefix3.D>(
         r'D',
         r'test_reflection.test.meta_reflectors_domain.D',
         134217735,
         1,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[11],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -2221,7 +2222,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.D() : null,
+              () => b ? prefix3.D() : null,
         },
         -1,
         1,
@@ -2229,12 +2230,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'B',
         r'test_reflection.test.meta_reflectors_domain.B',
         134217735,
         2,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[12],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -2243,7 +2244,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.B() : null,
+              () => b ? prefix3.B() : null,
         },
         -1,
         2,
@@ -2251,12 +2252,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M2>(
+      r.NonGenericClassMirrorImpl<prefix3.M2>(
         r'M2',
         r'test_reflection.test.meta_reflectors_domain.M2',
         134217735,
         3,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[13],
         const <int>[3, 4, 5, 6, 7],
         const <int>[],
@@ -2265,7 +2266,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M2() : null,
+              () => b ? prefix3.M2() : null,
         },
         -1,
         3,
@@ -2273,12 +2274,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         134218311,
         4,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -2292,12 +2293,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M3>(
+      r.NonGenericClassMirrorImpl<prefix3.M3>(
         r'M3',
         r'test_reflection.test.meta_reflectors_domain.M3',
         134217735,
         5,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[14],
         const <int>[3, 4, 5, 6, 7],
         const <int>[],
@@ -2306,7 +2307,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M3() : null,
+              () => b ? prefix3.M3() : null,
         },
         -1,
         5,
@@ -2314,12 +2315,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         134218311,
         6,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -2333,24 +2334,24 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'A',
         r'test_reflection.test.meta_reflectors_domain.A',
         134217735,
         7,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[1, 15, 16, 17, 20],
         const <int>[3, 4, 5, 6, 7, 15, 18, 19],
         const <int>[16, 17],
         -1,
         {
-          r'staticFoo': () => prefix1.A.staticFoo,
-          r'staticBar': () => prefix1.A.staticBar,
+          r'staticFoo': () => prefix3.A.staticFoo,
+          r'staticBar': () => prefix3.A.staticBar,
         },
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.A() : null,
+              () => b ? prefix3.A() : null,
         },
         -1,
         7,
@@ -2358,21 +2359,21 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.M1>(
+      r.NonGenericClassMirrorImpl<prefix3.M1>(
         r'M1',
         r'test_reflection.test.meta_reflectors_domain.M1',
         134217735,
         8,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[0, 8, 21, 22],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[21],
         -1,
-        {r'staticFoo': () => prefix1.M1.staticFoo},
+        {r'staticFoo': () => prefix3.M1.staticFoo},
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.M1() : null,
+              () => b ? prefix3.M1() : null,
         },
         -1,
         8,
@@ -2380,12 +2381,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         9,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[0, 8],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -2399,12 +2400,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         10,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         const <int>[0, 8],
         const <int>[3, 4, 5, 6, 7, 8, 9, 10],
         const <int>[],
@@ -2424,7 +2425,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'field',
         67141637,
         8,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         -1,
         -1,
         -1,
@@ -2435,7 +2436,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'field',
         67141637,
         7,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         -1,
         -1,
         -1,
@@ -2451,7 +2452,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2463,7 +2464,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[0],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2475,7 +2476,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2487,7 +2488,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[1],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2499,7 +2500,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2511,7 +2512,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2523,16 +2524,16 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.ImplicitGetterMirrorImpl(
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         0,
         9,
       ),
       r.ImplicitSetterMirrorImpl(
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         0,
         10,
       ),
@@ -2545,7 +2546,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2557,7 +2558,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2569,7 +2570,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2581,7 +2582,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2593,7 +2594,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2605,7 +2606,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[3],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2617,16 +2618,16 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.ImplicitGetterMirrorImpl(
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         1,
         18,
       ),
       r.ImplicitSetterMirrorImpl(
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         1,
         19,
       ),
@@ -2639,7 +2640,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2651,7 +2652,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[5],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2663,7 +2664,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         null,
       ),
     ],
@@ -2672,7 +2673,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'other',
         134348806,
         3,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         -1,
         -1,
         -1,
@@ -2685,7 +2686,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'invocation',
         134348806,
         5,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         -1,
         -1,
         -1,
@@ -2698,7 +2699,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'value',
         67141702,
         10,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         -1,
         -1,
         -1,
@@ -2711,7 +2712,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'x',
         67141638,
         16,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         -1,
         -1,
         -1,
@@ -2724,7 +2725,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'value',
         67141702,
         19,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         -1,
         -1,
         -1,
@@ -2737,7 +2738,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'x',
         67141638,
         21,
-        const prefix2.ReflectorUpwardsClosedToA(),
+        const prefix4.ReflectorUpwardsClosedToA(),
         -1,
         -1,
         -1,
@@ -2748,19 +2749,19 @@ final _data = <r.Reflection, r.ReflectorData>{
       ),
     ],
     <Type>[
-      prefix1.C,
-      prefix1.D,
-      prefix1.B,
-      prefix1.M2,
+      prefix3.C,
+      prefix3.D,
+      prefix3.B,
+      prefix3.M2,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
       ),
-      prefix1.M3,
+      prefix3.M3,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
       ),
-      prefix1.A,
-      prefix1.M1,
+      prefix3.A,
+      prefix3.M1,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
       ),
@@ -2783,14 +2784,14 @@ final _data = <r.Reflection, r.ReflectorData>{
     null,
     [],
   ),
-  const prefix2.ReflectorUpwardsClosedUntilA(): r.ReflectorData(
+  const prefix4.ReflectorUpwardsClosedUntilA(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.C>(
+      r.NonGenericClassMirrorImpl<prefix3.C>(
         r'C',
         r'test_reflection.test.meta_reflectors_domain.C',
         134217735,
         0,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         const <int>[1],
         const <int>[2, 3, 4, 5, 6, 7, 8, 9],
         const <int>[],
@@ -2799,7 +2800,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.C() : null,
+              () => b ? prefix3.C() : null,
         },
         -1,
         -1,
@@ -2807,12 +2808,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.D>(
+      r.NonGenericClassMirrorImpl<prefix3.D>(
         r'D',
         r'test_reflection.test.meta_reflectors_domain.D',
         134217735,
         1,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         const <int>[10],
         const <int>[2, 3, 4, 5, 6, 7, 8, 9],
         const <int>[],
@@ -2821,7 +2822,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.D() : null,
+              () => b ? prefix3.D() : null,
         },
         -1,
         -1,
@@ -2829,12 +2830,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'B',
         r'test_reflection.test.meta_reflectors_domain.B',
         134217735,
         2,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         const <int>[11],
         const <int>[2, 3, 4, 5, 6, 7, 8, 9],
         const <int>[],
@@ -2843,7 +2844,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              () => b ? prefix1.B() : null,
+              () => b ? prefix3.B() : null,
         },
         -1,
         -1,
@@ -2851,12 +2852,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
         134218311,
         3,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         const <int>[],
         const <int>[2, 3, 4, 5, 6, 7, 8, 9],
         const <int>[],
@@ -2870,12 +2871,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.B>(
+      r.NonGenericClassMirrorImpl<prefix3.B>(
         r'test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2, test_reflection.test.meta_reflectors_domain.M3',
         134218311,
         4,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         const <int>[],
         const <int>[2, 3, 4, 5, 6, 7, 8, 9],
         const <int>[],
@@ -2889,12 +2890,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         5,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         const <int>[0, 7],
         const <int>[2, 3, 4, 5, 6, 7, 8, 9],
         const <int>[],
@@ -2908,12 +2909,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         null,
       ),
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix3.A>(
         r'test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.A with test_reflection.test.meta_reflectors_domain.M1',
         134218311,
         6,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         const <int>[0, 7],
         const <int>[2, 3, 4, 5, 6, 7, 8, 9],
         const <int>[],
@@ -2933,7 +2934,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'field',
         67141637,
         -1,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         -1,
         -1,
         -1,
@@ -2949,7 +2950,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2961,7 +2962,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[0],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2973,7 +2974,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2985,7 +2986,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[1],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -2997,7 +2998,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -3009,7 +3010,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -3021,16 +3022,16 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
       r.ImplicitGetterMirrorImpl(
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         0,
         8,
       ),
       r.ImplicitSetterMirrorImpl(
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         0,
         9,
       ),
@@ -3043,7 +3044,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
       r.MethodMirrorImpl(
@@ -3055,7 +3056,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         null,
       ),
     ],
@@ -3064,7 +3065,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'other',
         134348806,
         2,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         -1,
         -1,
         -1,
@@ -3077,7 +3078,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'invocation',
         134348806,
         4,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         -1,
         -1,
         -1,
@@ -3090,7 +3091,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'value',
         67141702,
         9,
-        const prefix2.ReflectorUpwardsClosedUntilA(),
+        const prefix4.ReflectorUpwardsClosedUntilA(),
         -1,
         -1,
         -1,
@@ -3101,9 +3102,9 @@ final _data = <r.Reflection, r.ReflectorData>{
       ),
     ],
     <Type>[
-      prefix1.C,
-      prefix1.D,
-      prefix1.B,
+      prefix3.C,
+      prefix3.D,
+      prefix3.B,
       const r.FakeType(
         r'test_reflection.test.meta_reflectors_domain.test_reflection.test.meta_reflectors_domain.B with test_reflection.test.meta_reflectors_domain.M2',
       ),
