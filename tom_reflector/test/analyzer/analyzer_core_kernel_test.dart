@@ -40,14 +40,14 @@ void main() {
 String _findWorkspaceRoot() {
   var current = Directory.current;
   while (true) {
-    final candidate = File(p.join(current.path, 'tom_workspace.yaml'));
+    final candidate = File(p.join(current.path, 'buildkit_master.yaml'));
     if (candidate.existsSync()) {
       return current.path;
     }
     final parent = current.parent;
     if (parent.path == current.path) {
       throw StateError(
-        'Unable to locate workspace root containing tom_workspace.yaml',
+        'Unable to locate workspace root containing buildkit_master.yaml',
       );
     }
     current = parent;
