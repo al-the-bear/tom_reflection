@@ -261,17 +261,20 @@ Future<void> main() async {
 }
 ```
 
-### 9.2 Using with tom_build
+### 9.2 Running the CLI from Code
+
+A tool that drives the generator the way the command line does calls the CLI
+entry point with the same arguments:
 
 ```dart
-import 'package:tom_build/tom_build.dart';
+import 'package:tom_reflection_generator/cli.dart';
 
-final runner = ReflectionGeneratorRunner('/path/to/project');
-final result = await runner.generate();
-
-print('Generated: ${result.filesGenerated}');
-print('Errors: ${result.errors}');
+Future<void> main() async {
+  await runReflectionGeneratorCli(['build']);
+}
 ```
+
+buildkit runs the generator as a nested tool; see the buildkit user guide.
 
 ---
 
