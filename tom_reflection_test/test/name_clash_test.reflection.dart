@@ -3,8 +3,8 @@
 // https://github.com/al-the-bear/tom_reflection
 import 'dart:core';
 
-import 'name_clash_lib.dart' as prefix0;
-import 'name_clash_test.dart' as prefix1;
+import 'name_clash_test.dart' as prefix0;
+import 'test/name_clash_lib.dart' as prefix1;
 
 // ignore_for_file: camel_case_types
 // ignore_for_file: implementation_imports
@@ -19,14 +19,14 @@ import 'package:tom_reflection/generated.dart' as r;
 import 'package:tom_reflection/tom_reflection.dart' as r show Reflection;
 
 final _data = <r.Reflection, r.ReflectorData>{
-  const prefix0.Reflector(): r.ReflectorData(
+  const prefix1.Reflector(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.C>(
+      r.NonGenericClassMirrorImpl<prefix0.C>(
         r'C',
         r'test_reflection.test.name_clash_test.C',
         134217735,
         0,
-        const prefix0.Reflector(),
+        const prefix1.Reflector(),
         const <int>[-1],
         null,
         null,
@@ -40,12 +40,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
         {},
       ),
-      r.NonGenericClassMirrorImpl<prefix0.C>(
+      r.NonGenericClassMirrorImpl<prefix1.C>(
         r'C',
         r'test_reflection.test.name_clash_lib.C',
         134217735,
         1,
-        const prefix0.Reflector(),
+        const prefix1.Reflector(),
         const <int>[-1],
         null,
         null,
@@ -62,7 +62,7 @@ final _data = <r.Reflection, r.ReflectorData>{
     ],
     null,
     null,
-    <Type>[prefix1.C, prefix0.C],
+    <Type>[prefix0.C, prefix1.C],
     2,
     {},
     {},

@@ -3,8 +3,8 @@
 // https://github.com/al-the-bear/tom_reflection
 import 'dart:core';
 
-import 'parameter_mirrors_lib.dart' as prefix0;
-import 'parameter_mirrors_test.dart' as prefix1;
+import 'parameter_mirrors_test.dart' as prefix0;
+import 'test/parameter_mirrors_lib.dart' as prefix1;
 
 // ignore_for_file: camel_case_types
 // ignore_for_file: implementation_imports
@@ -19,14 +19,14 @@ import 'package:tom_reflection/generated.dart' as r;
 import 'package:tom_reflection/tom_reflection.dart' as r show Reflection;
 
 final _data = <r.Reflection, r.ReflectorData>{
-  const prefix1.Reflector(): r.ReflectorData(
+  const prefix0.Reflector(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.A>(
+      r.NonGenericClassMirrorImpl<prefix0.A>(
         r'A',
         r'test_reflection.test.parameter_mirrors_test.A',
         134217735,
         0,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const <int>[0, 1, 2, 3, 4, 7],
         const <int>[8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6],
         const <int>[],
@@ -35,12 +35,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         {},
         {
           r'': (bool b) =>
-              ({x = 42}) => b ? prefix1.A(x: x) : null,
+              ({x = 42}) => b ? prefix0.A(x: x) : null,
         },
         -1,
         -1,
         const <int>[-1],
-        const <Object>[const prefix1.Reflector()],
+        const <Object>[const prefix0.Reflector()],
         null,
       ),
     ],
@@ -49,7 +49,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'x',
         67141637,
         0,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -65,7 +65,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
       r.MethodMirrorImpl(
@@ -77,7 +77,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[0],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
       r.MethodMirrorImpl(
@@ -89,7 +89,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[1, 2, 3],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
       r.MethodMirrorImpl(
@@ -101,11 +101,11 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[4, 5, 6],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
-      r.ImplicitGetterMirrorImpl(const prefix1.Reflector(), 0, 5),
-      r.ImplicitSetterMirrorImpl(const prefix1.Reflector(), 0, 6),
+      r.ImplicitGetterMirrorImpl(const prefix0.Reflector(), 0, 5),
+      r.ImplicitSetterMirrorImpl(const prefix0.Reflector(), 0, 6),
       r.MethodMirrorImpl(
         r'',
         0,
@@ -115,7 +115,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[7],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
       r.MethodMirrorImpl(
@@ -127,7 +127,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[9],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
       r.MethodMirrorImpl(
@@ -139,7 +139,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
       r.MethodMirrorImpl(
@@ -151,7 +151,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[10],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
       r.MethodMirrorImpl(
@@ -163,7 +163,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
       r.MethodMirrorImpl(
@@ -175,7 +175,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         null,
         const <int>[],
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         const [],
       ),
     ],
@@ -184,7 +184,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'a',
         134348806,
         2,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -197,7 +197,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'a',
         134348806,
         3,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -210,7 +210,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'b',
         67244038,
         3,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -223,12 +223,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'c',
         134354950,
         3,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
         null,
-        const <Object>[const prefix1.C()],
+        const <Object>[const prefix0.C()],
         'ten',
         null,
       ),
@@ -236,7 +236,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'a',
         134348806,
         4,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -249,12 +249,12 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'b',
         67252230,
         4,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         0,
         -1,
         -1,
         null,
-        const <Object>[const prefix0.D(3)],
+        const <Object>[const prefix1.D(3)],
         null,
         #b,
       ),
@@ -262,20 +262,20 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'c',
         134363142,
         4,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
         null,
         const [],
-        const prefix1.C(),
+        const prefix0.C(),
         #c,
       ),
       r.ParameterMirrorImpl(
         r'x',
         67156998,
         7,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -288,7 +288,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'value',
         67141702,
         6,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -301,7 +301,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'other',
         134348806,
         8,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -314,7 +314,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         r'invocation',
         134348806,
         10,
-        const prefix1.Reflector(),
+        const prefix0.Reflector(),
         -1,
         -1,
         -1,
@@ -324,7 +324,7 @@ final _data = <r.Reflection, r.ReflectorData>{
         null,
       ),
     ],
-    <Type>[prefix1.A],
+    <Type>[prefix0.A],
     1,
     {
       r'==': (dynamic instance) =>
