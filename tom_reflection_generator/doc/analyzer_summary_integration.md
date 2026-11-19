@@ -1,7 +1,5 @@
 # Analyzer Summary Integration
 
-<!-- docspec: tom-specs/1.0 -->
-
 ## Overview
 
 This document specifies the integration of Dart analyzer summary caching into the `tom_reflection_generator`. The goal is to dramatically reduce analysis time by pre-generating and caching binary summaries for stable dependencies (pub.dev packages, Flutter SDK, Dart SDK).
