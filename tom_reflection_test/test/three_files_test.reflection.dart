@@ -3,8 +3,8 @@
 // https://github.com/al-the-bear/tom_reflection
 import 'dart:core';
 
-import 'test/three_files_dir/three_files_aux.dart' as prefix0;
-import 'test/three_files_meta.dart' as prefix1;
+import 'three_files_dir/three_files_aux.dart' as prefix0;
+import 'three_files_meta.dart' as prefix1;
 import 'three_files_test.dart' as prefix2;
 
 // ignore_for_file: camel_case_types

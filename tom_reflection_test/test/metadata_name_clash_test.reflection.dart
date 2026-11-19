@@ -3,8 +3,8 @@
 // https://github.com/al-the-bear/tom_reflection
 import 'dart:core';
 
-import 'metadata_name_clash_test.dart' as prefix0;
-import 'test/metadata_name_clash_lib.dart' as prefix1;
+import 'metadata_name_clash_lib.dart' as prefix0;
+import 'metadata_name_clash_test.dart' as prefix1;
 
 // ignore_for_file: camel_case_types
 // ignore_for_file: implementation_imports
@@ -19,14 +19,14 @@ import 'package:tom_reflection/generated.dart' as r;
 import 'package:tom_reflection/tom_reflection.dart' as r show Reflection;
 
 final _data = <r.Reflection, r.ReflectorData>{
-  const prefix0.Reflector(): r.ReflectorData(
+  const prefix1.Reflector(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix0.C>(
+      r.NonGenericClassMirrorImpl<prefix1.C>(
         r'C',
         r'test_reflection.test.metadata_name_clash_test.C',
         134217735,
         0,
-        const prefix0.Reflector(),
+        const prefix1.Reflector(),
         const <int>[-1],
         null,
         null,
@@ -37,27 +37,27 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         -1,
         const <int>[-1],
-        const <Object>[prefix0.reflector, const prefix0.Bar()],
+        const <Object>[prefix1.reflector, const prefix1.Bar()],
         {},
       ),
     ],
     null,
     null,
-    <Type>[prefix0.C],
+    <Type>[prefix1.C],
     1,
     {},
     {},
     null,
     [],
   ),
-  const prefix1.Reflector2(): r.ReflectorData(
+  const prefix0.Reflector2(): r.ReflectorData(
     <m.TypeMirror>[
-      r.NonGenericClassMirrorImpl<prefix1.D>(
+      r.NonGenericClassMirrorImpl<prefix0.D>(
         r'D',
         r'test_reflection.test.metadata_name_clash_lib.D',
         134217735,
         0,
-        const prefix1.Reflector2(),
+        const prefix0.Reflector2(),
         const <int>[-1],
         null,
         null,
@@ -68,13 +68,13 @@ final _data = <r.Reflection, r.ReflectorData>{
         -1,
         -1,
         const <int>[-1],
-        const <Object>[prefix1.reflector2, const prefix1.Bar()],
+        const <Object>[prefix0.reflector2, const prefix0.Bar()],
         {},
       ),
     ],
     null,
     null,
-    <Type>[prefix1.D],
+    <Type>[prefix0.D],
     1,
     {},
     {},
