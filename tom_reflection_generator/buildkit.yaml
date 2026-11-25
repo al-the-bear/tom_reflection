@@ -16,6 +16,9 @@ versioner:
   variable-prefix: reflectionGen
 
 compiler:
+  # The release executables (tom_binaries/tom/<platform>/; buildkit :skill-build-binaries --list).
+  executables:
+    reflectiongenerator: {release: true}
   compiles:
     # macOS ARM64 - compile for self; with --all-platforms also linux-x64 (bigbeast builds it natively)
     - pipeline:
